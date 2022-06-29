@@ -3,6 +3,7 @@ import os
 from sklearn.model_selection import train_test_split
 import numpy as np
 from pyfiglet import Figlet
+import time
 
 
 class dataset():
@@ -15,6 +16,7 @@ class dataset():
     width = 0
     class_dict = {}
     tensor = {}
+    stand_by_time = 0
     statusGray = 0
     statusRGB = 0
 
@@ -73,6 +75,11 @@ class dataset():
         if self.width == 0 or self.width < 0:
             raise TypeError('Frame WIDTH must be greather than 0')
 
+        # Waiting time in shooting loop
+        self.stand_by_time = float(input('num. of waiting time (in sec.) between every frame: '))
+        if self.stand_by_time < 0:
+            raise TypeError('waiting time must be grater than 0...')
+
     
     # ---------------
     # grayscale images 
@@ -84,6 +91,8 @@ class dataset():
 
         camera = cv2.VideoCapture(self.index)
 
+        # Index for files name 
+        i = 0
         for folder in self.label:
           
             count = 0
@@ -93,7 +102,7 @@ class dataset():
                 print("Wrong Input...press 'b'")
 
             while count < self.num:
-
+                
                 status, frame = camera.read()
 
                 if not status:
@@ -105,12 +114,17 @@ class dataset():
 
                 gray = cv2.resize(gray, (self.width, self.height))
 
-                cv2.imwrite(folder+'/img'+str(count)+'.png',gray)
+                cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', gray)
+                
 
                 count=count+1
 
+                time.sleep(self.stand_by_time)
+
                 if cv2.waitKey(1) == ord('q'):
                     break
+
+            i += 1
 
         camera.release()
         cv2.destroyAllWindows()
@@ -126,6 +140,8 @@ class dataset():
 
         camera = cv2.VideoCapture(self.index)
 
+        # Index for files name 
+        i = 0
         for folder in self.label:
 
             count = 0
@@ -148,12 +164,16 @@ class dataset():
 
                 frame = cv2.resize(frame, (self.width, self.height))
 
-                cv2.imwrite(folder+'/img'+str(count)+'.png', frame)
+                cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', frame)
 
                 count=count+1
 
+                time.sleep(self.stand_by_time)
+
                 if cv2.waitKey(1) == ord('q'):
                     break
+            
+            i += 1
 
         camera.release()
         cv2.destroyAllWindows()
@@ -248,6 +268,7 @@ if __name__ == '__main__':
     data = dataset()
     data.Init()
     #data.Gray()
+    #data.Rgb()
     #data.CompressAll()
     data.VarControl()
 
