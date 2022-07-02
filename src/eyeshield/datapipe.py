@@ -19,6 +19,7 @@ class dataset():
     stand_by_time = 0
     statusGray = 0
     statusRGB = 0
+    perc = 0
 
     # --------------------
     # init image parameters
@@ -184,6 +185,11 @@ class dataset():
 
 
     def CompressTrainTest(self):
+        print('\n')
+        print('--- DATASET SETTING ---')
+        self.perc = float(input('percentage of images in train dataset: '))
+        if self.perc <= 0:
+            raise TypeError('percentage value must be greater than 0...')
         # index for image type 
         i = 0
         # X
@@ -215,7 +221,7 @@ class dataset():
             i += 1
         # create dataset (mnist style)
         self.tensor['X'] = self.tensor['X'].astype('uint8')
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=0.2, random_state=123)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=self.perc, random_state=123)
         np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
 
 
@@ -273,8 +279,9 @@ if __name__ == '__main__':
 
     data = dataset()
     data.Init()
-    #data.Gray()
+    data.Gray()
     #data.Rgb()
+    data.CompressTrainTest()
     #data.CompressAll()
     data.VarControl()
 
