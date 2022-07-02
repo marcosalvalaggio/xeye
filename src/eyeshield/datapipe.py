@@ -21,7 +21,7 @@ class dataset():
     statusRGB = 0
 
     # --------------------
-    # init image parameter
+    # init image parameters
     # --------------------
     def Init(self):
 
@@ -31,7 +31,7 @@ class dataset():
         else: #windows
             os.system('cls')
         
-        # welcome lines:
+        # Welcome lines:
         title = Figlet(font='slant')
         print(title.renderText('DataPipe'))
         print('Just answer the questions and than start making DL model based on your own dataset.')
@@ -41,10 +41,10 @@ class dataset():
         print('--- CAMERA SETTING ---')
         self.index = int(input('Select index of the camera that you want to use for crate the dataset: '))
         if self.index == -1:
-            raise TypeError('Insert valid camera index')
+            raise TypeError('Insert valid camera index...')
         camera = cv2.VideoCapture(self.index)
         if camera.isOpened() == False:
-            raise TypeError('Insert valid camera index')
+            raise TypeError('Insert valid camera index...')
 
         # set how many type of images do you want to collect
         self.label = []
@@ -52,9 +52,9 @@ class dataset():
         print('--- IMAGE SETTING ---')
         n = int(input('How many types of images do you want to scan: '))
         if n == 0: # informarsi sul raise error 
-            raise TypeError('Number of images must be greather than 0')
+            raise TypeError('Number of images types must be greather than 0')
         for i in range(0,n):
-            l = str(input('Name of image type ' + str(i+1) + '-th: '))
+            l = str(input(f"Name of image type ({i+1}): "))
             self.label.append(l)
         # folder building
         for lab in self.label:
@@ -128,7 +128,7 @@ class dataset():
 
         camera.release()
         cv2.destroyAllWindows()
-        # modifica stati 
+        # set status
         self.statusGray = 1
         self.statusRGB = 0
 
@@ -177,27 +177,30 @@ class dataset():
 
         camera.release()
         cv2.destroyAllWindows()
-        # modifica stati 
+        # Set status 
         self.statusGray = 0
         self.statusRGB = 1
     
 
 
     def CompressTrainTest(self):
+        # index for image type 
         i = 0
+        # X
         if self.statusGray == 1:
             self.tensor['X'] = np.empty((0,self.height,self.width))
         else:
             self.tensor['X'] = np.empty((0,self.height,self.width,3))
-        # imposto 
+        # y 
         self.tensor['y'] = np.empty((0))
+        # (append) loop 
         for lab in self.label:
             j = 0
             if self.statusGray == 1:
                 self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
             else:
                 self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
-            # loop 
+            # loop for convert image format  
             for file in os.listdir(lab):
                 if self.statusGray == 1:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
@@ -206,31 +209,34 @@ class dataset():
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
-            # creo tensore unico 
+            # unique final tensors 
             self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
             self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i+1, self.num, axis = 0))
             i += 1
-        # create the dataset (mnist style)
+        # create dataset (mnist style)
         self.tensor['X'] = self.tensor['X'].astype('uint8')
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=0.2, random_state=123)
         np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
 
 
     def CompressAll(self):
+        # index for image type 
         i = 0
+        # X
         if self.statusGray == 1:
             self.tensor['X'] = np.empty((0,self.height,self.width))
         else:
             self.tensor['X'] = np.empty((0,self.height,self.width,3))
-        # imposto 
+        # y 
         self.tensor['y'] = np.empty((0))
+        # (append) loop 
         for lab in self.label:
             j = 0
             if self.statusGray == 1:
                 self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
             else:
                 self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
-            # loop 
+            # loop for convert image format
             for file in os.listdir(lab):
                 if self.statusGray == 1:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
@@ -239,11 +245,11 @@ class dataset():
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
-            # creo tensore unico 
+            # unique final tensors 
             self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
             self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i+1, self.num, axis = 0))
             i += 1
-        # create the dataset (mnist style)
+        # create dataset (mnist style)
         self.tensor['X'] = self.tensor['X'].astype('uint8')
         np.savez('datasetall.npz', x = self.tensor['X'], y = self.tensor['y'])
 
