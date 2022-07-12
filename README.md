@@ -1,4 +1,9 @@
 # Introduction
 
-Xeye is a python package for create in automatic and frendly way, using just your pc and a usb camera (even with your integreted pc camera), dataset for build deep learning model in order to develop computer vision application. 
+Xeye is a package for create in frendly way dataset for build computer vision application based on inferencial results of deep learning models. Xeye is born for these main reasons:
+
+* Create dataset using only a laptop and its integrated camera (or alternatively an external usb camera);
+* Create dataset already structured like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist);
+
+
 
