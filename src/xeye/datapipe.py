@@ -6,7 +6,7 @@ from pyfiglet import Figlet
 import time
 
 
-class dataset():
+class dataset:
 
     # inizialized variable
     index = 0
@@ -24,7 +24,7 @@ class dataset():
     # --------------------
     # init image parameters
     # --------------------
-    def Init(self):
+    def init(self):
 
         # clear terminal 
         if(os.name == 'posix'): #unix
@@ -85,7 +85,7 @@ class dataset():
     # ---------------
     # grayscale images 
     #----------------
-    def Gray(self):
+    def gray(self):
         
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -137,7 +137,7 @@ class dataset():
     # -----------
     # rgb imges
     # -----------
-    def Rgb(self):
+    def rgb(self):
 
         camera = cv2.VideoCapture(self.index)
 
@@ -184,7 +184,7 @@ class dataset():
     
 
 
-    def CompressTrainTest(self):
+    def compressTrainTest(self):
         print('\n')
         print('--- DATASET SETTING ---')
         self.perc = float(input('percentage of images in train dataset: '))
@@ -225,7 +225,7 @@ class dataset():
         np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
 
 
-    def CompressAll(self):
+    def compressAll(self):
         # index for image type 
         i = 0
         # X
@@ -264,7 +264,7 @@ class dataset():
     # ------------------
     # control function 
     # ------------------
-    def VarControl(self):
+    def varControl(self):
         print(self.index)
         print(self.label)
         print(self.num)
@@ -278,9 +278,9 @@ class dataset():
 if __name__ == '__main__':
 
     data = dataset()
-    data.Init()
-    data.Gray()
+    data.init()
+    data.gray()
     #data.Rgb()
-    data.CompressTrainTest()
+    data.compressTrainTest()
     #data.CompressAll()
-    data.VarControl()
+    data.varControl()
