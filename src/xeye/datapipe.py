@@ -1,3 +1,4 @@
+from tkinter import image_types
 import cv2 
 import os
 from sklearn.model_selection import train_test_split
@@ -51,10 +52,10 @@ class dataset:
         self.label = []
         print('\n')
         print('--- IMAGE SETTING ---')
-        n = int(input('How many types of images do you want to scan: '))
-        if n == 0: # informarsi sul raise error 
+        img_types = int(input('How many types of images do you want to scan: '))
+        if img_types == 0: # informarsi sul raise error 
             raise TypeError('Number of images types must be greather than 0')
-        for i in range(0,n):
+        for i in range(0,img_types):
             l = str(input(f"Name of image type ({i+1}): "))
             self.label.append(l)
         # folder building
@@ -264,16 +265,19 @@ class dataset:
     # ------------------
     # control function 
     # ------------------
+
     def varControl(self):
-        print(self.index)
-        print(self.label)
-        print(self.num)
-        print(self.height)
-        print(self.width)
-        print(self.standby_time)
-        print(self.perc)
-        print(self.statusGray)
-        print(self.statusRGB)
+        print('\n')
+        print('--- PARAMETERS CONTROL ---')
+        print(f'camera index: {self.index}')
+        print(f'labels of images types: {self.label}')
+        print(f'num. of images for types: {self.num}')
+        print(f'single frame HEIGHT: {self.height}')
+        print(f'single frame WIDTH: {self.width}')
+        print(f'waiting time between frames: {self.standby_time}')
+        print(f'percentage of images in train dataset: {self.perc}')
+        print(f'statusGray: {self.statusGray}')
+        print(f'statusRGB: {self.statusRGB}')
 
 
 
