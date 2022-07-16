@@ -22,3 +22,9 @@ First of all, load the module datapipe from the package:
 from xeye import datapipe as dp
 ```
 
+then initialize the instance like this 
+
+```python
+data = dp.dataset()
+```
+
