@@ -1,4 +1,3 @@
-from tkinter import image_types
 import cv2 
 import os
 from sklearn.model_selection import train_test_split
@@ -215,7 +214,7 @@ class dataset:
                 if self.statusGray == 1:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
-                    img = cv2.imread(lab + '/' + file, cv2.COLOR_BGR2RGB)
+                    img = cv2.imread(lab + '/' + file)
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
@@ -251,7 +250,7 @@ class dataset:
                 if self.statusGray == 1:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
-                    img = cv2.imread(lab + '/' + file, cv2.COLOR_BGR2RGB)
+                    img = cv2.imread(lab + '/' + file)
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
@@ -284,6 +283,244 @@ class dataset:
 
 
 
+class dataset2:
+    def __init__(self, index, img_types, label, num, height, width, stand_by_time, perc):
+    # inizialized variable
+        self.index = index
+        self.img_types = img_types
+        self.label = label
+        self.num = num
+        self.height = height
+        self.width = width
+        self.class_dict = {}
+        self.tensor = {}
+        self.standby_time = stand_by_time
+        self.statusGray = 0
+        self.statusRGB = 0
+        self.perc = 1
+
+    def init(self):
+
+        # clear terminal 
+        if(os.name == 'posix'): #unix
+            os.system('clear')
+        else: #windows
+            os.system('cls')
+        
+        # camera setting
+        if self.index == -1:
+            raise TypeError('Insert valid camera index...')
+        camera = cv2.VideoCapture(self.index)
+        if camera.isOpened() == False:
+            raise TypeError('Insert valid camera index...')
+
+        # set how many type of images do you want to collect
+        if self.img_types == 0: # informarsi sul raise error 
+            raise TypeError('Number of images types must be greather than 0')
+        # folder building
+        if self.label == []:
+            raise TypeError('Not valid names for images types...')
+        if len(self.label) != img_types:
+            raise TypeError("You must have a number of labels equal to the number of images types selected...")
+        for lab in self.label:
+            if not os.path.exists(lab):
+                os.mkdir(lab)
+
+        # number of frames 
+        if self.num == 0 or self.num < 0:
+            raise TypeError('You cant inizialize frames number equal or below zero...')
+        
+
+        # Image shaping phase
+        if self.height == 0 or self.height < 0:
+            raise TypeError('Frame HEIGHT must be greather than 0')
+        if self.width == 0 or self.width < 0:
+            raise TypeError('Frame WIDTH must be greather than 0')
+
+        # Waiting time in shooting loop
+        if self.standby_time < 0:
+            raise TypeError('waiting time must be grater than 0...')
+
+        if self.perc <= 0:
+            raise TypeError('percentage value must be greater than 0...')
+
+
+    # ---------------
+    # grayscale images 
+    #----------------
+    def gray(self):
+        
+        camera = cv2.VideoCapture(self.index)
+
+        # Index for files name 
+        i = 0
+        for folder in self.label:
+          
+            count = 0
+
+            while count < self.num:
+                
+                status, frame = camera.read()
+
+                if not status:
+                    print("frame doesn't been captured")
+                    break
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+                cv2.imshow("Camera View",gray)
+
+                gray = cv2.resize(gray, (self.width, self.height))
+
+                cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', gray)
+                
+
+                count=count+1
+
+                time.sleep(self.standby_time)
+
+                if cv2.waitKey(1) == ord('q'):
+                    break
+
+            i += 1
+
+        camera.release()
+        cv2.destroyAllWindows()
+        # set status
+        self.statusGray = 1
+        self.statusRGB = 0
+
+
+    # -----------
+    # rgb imges
+    # -----------
+    def rgb(self):
+
+        camera = cv2.VideoCapture(self.index)
+
+        # Index for files name 
+        i = 0
+        for folder in self.label:
+
+            count = 0
+
+            while count < self.num:
+
+                status, frame = camera.read()
+
+                if not status:
+                    print("frame doesn't been captured")
+                    break
+
+                cv2.imshow("Camera View", frame)
+
+                frame = cv2.resize(frame, (self.width, self.height))
+
+                cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', frame)
+
+                count=count+1
+
+                time.sleep(self.standby_time)
+
+                if cv2.waitKey(1) == ord('q'):
+                    break
+            
+            i += 1
+
+        camera.release()
+        cv2.destroyAllWindows()
+        # Set status 
+        self.statusGray = 0
+        self.statusRGB = 1
+
+
+    def compressTrainTest(self):
+        # index for image type 
+        i = 0
+        # X
+        if self.statusGray == 1:
+            self.tensor['X'] = np.empty((0,self.height,self.width))
+        else:
+            self.tensor['X'] = np.empty((0,self.height,self.width,3))
+        # y 
+        self.tensor['y'] = np.empty((0))
+        # (append) loop 
+        for lab in self.label:
+            j = 0
+            if self.statusGray == 1:
+                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
+            else:
+                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
+            # loop for convert image format  
+            for file in os.listdir(lab):
+                if self.statusGray == 1:
+                    img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
+                else:
+                    img = cv2.imread(lab + '/' + file)
+                # save in tensor class 
+                self.class_dict['t'+str(i)][j] = img
+                j += 1
+            # unique final tensors 
+            self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
+            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i+1, self.num, axis = 0))
+            i += 1
+        # create dataset (mnist style)
+        self.tensor['X'] = self.tensor['X'].astype('uint8')
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=self.perc, random_state=123)
+        np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
+
+
+    def compressAll(self):
+        # index for image type 
+        i = 0
+        # X
+        if self.statusGray == 1:
+            self.tensor['X'] = np.empty((0,self.height,self.width))
+        else:
+            self.tensor['X'] = np.empty((0,self.height,self.width,3))
+        # y 
+        self.tensor['y'] = np.empty((0))
+        # (append) loop 
+        for lab in self.label:
+            j = 0
+            if self.statusGray == 1:
+                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
+            else:
+                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
+            # loop for convert image format
+            for file in os.listdir(lab):
+                if self.statusGray == 1:
+                    img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
+                else:
+                    img = cv2.imread(lab + '/' + file)
+                # save in tensor class 
+                self.class_dict['t'+str(i)][j] = img
+                j += 1
+            # unique final tensors 
+            self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
+            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i+1, self.num, axis = 0))
+            i += 1
+        # create dataset (mnist style)
+        self.tensor['X'] = self.tensor['X'].astype('uint8')
+        np.savez('datasetall.npz', x = self.tensor['X'], y = self.tensor['y'])
+
+
+
+    def varControl(self):
+        print('\n')
+        print('--- PARAMETERS CONTROL ---')
+        print(f'camera index: {self.index}')
+        print(f'num. of images types: {self.img_types}')
+        print(f'labels of images types: {self.label}')
+        print(f'num. of images for types: {self.num}')
+        print(f'single frame HEIGHT: {self.height}')
+        print(f'single frame WIDTH: {self.width}')
+        print(f'waiting time between frames: {self.standby_time}')
+        print(f'percentage of images in train dataset: {self.perc}')
+        print(f'statusGray: {self.statusGray}')
+        print(f'statusRGB: {self.statusRGB}')
+
+
+
 if __name__ == '__main__':
 
     data = dataset()
@@ -293,3 +530,22 @@ if __name__ == '__main__':
     data.compressTrainTest()
     #data.CompressAll()
     data.varControl()
+
+    ### test 2
+    index = 0
+    img_types = 1
+    label = ['test']
+    num = 20
+    height = 100
+    width = 100
+    standby_time = 0
+    perc = 0.2
+
+    # class call 
+    data = dataset2(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time, perc = perc)
+    data.init()
+    data.varControl()
+    #data.gray()
+    data.rgb()
+    data.compressAll()
+    data.compressTrainTest()
