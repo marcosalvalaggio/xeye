@@ -140,6 +140,9 @@ class dataset:
     # -----------
     def rgb(self):
 
+        print('\n')
+        print('--- START TAKING PHOTOS ---')
+
         camera = cv2.VideoCapture(self.index)
 
         # Index for files name 
