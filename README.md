@@ -4,7 +4,7 @@ Xeye is a package for create dataset for computer vision application based on in
 
 * Create dataset using only a laptop and its integrated camera (or alternatively an external usb camera);
 * Create dataset already structured like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist);
-* Create dataset that can be use with [Tensorflow](https://www.tensorflow.org/) or [Pytorch](https://pytorch.org/).
+* Create dataset that can be use for build models with [Tensorflow](https://www.tensorflow.org/) or [Pytorch](https://pytorch.org/).
 
 ## Installation
 
@@ -21,3 +21,4 @@ First of all, load the module datapipe from the package:
 ```python
 from xeye import datapipe as dp
 ```
+

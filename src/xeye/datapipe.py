@@ -320,7 +320,7 @@ class dataset2:
         # folder building
         if self.label == []:
             raise TypeError('Not valid names for images types...')
-        if len(self.label) != img_types:
+        if len(self.label) != self.img_types:
             raise TypeError("You must have a number of labels equal to the number of images types selected...")
         for lab in self.label:
             if not os.path.exists(lab):
@@ -526,12 +526,13 @@ if __name__ == '__main__':
     data = dataset()
     data.init()
     data.gray()
-    #data.Rgb()
+    #data.rgb()
     data.compressTrainTest()
     #data.CompressAll()
     data.varControl()
 
-    ### test 2
+    '''
+    ### test with dataset 2 
     index = 0
     img_types = 1
     label = ['test']
@@ -549,3 +550,4 @@ if __name__ == '__main__':
     data.rgb()
     data.compressAll()
     data.compressTrainTest()
+    '''
