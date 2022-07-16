@@ -16,7 +16,7 @@ class dataset:
     width = 0
     class_dict = {}
     tensor = {}
-    stand_by_time = 0
+    standby_time = 0
     statusGray = 0
     statusRGB = 0
     perc = 0
@@ -77,8 +77,8 @@ class dataset:
             raise TypeError('Frame WIDTH must be greather than 0')
 
         # Waiting time in shooting loop
-        self.stand_by_time = float(input('num. of waiting time (in sec.) between every frame: '))
-        if self.stand_by_time < 0:
+        self.standby_time = float(input('num. of waiting time (in sec.) between every frame: '))
+        if self.standby_time < 0:
             raise TypeError('waiting time must be grater than 0...')
 
     
@@ -120,7 +120,7 @@ class dataset:
 
                 count=count+1
 
-                time.sleep(self.stand_by_time)
+                time.sleep(self.standby_time)
 
                 if cv2.waitKey(1) == ord('q'):
                     break
@@ -169,7 +169,7 @@ class dataset:
 
                 count=count+1
 
-                time.sleep(self.stand_by_time)
+                time.sleep(self.standby_time)
 
                 if cv2.waitKey(1) == ord('q'):
                     break
@@ -270,6 +270,8 @@ class dataset:
         print(self.num)
         print(self.height)
         print(self.width)
+        print(self.standby_time)
+        print(self.perc)
         print(self.statusGray)
         print(self.statusRGB)
 
