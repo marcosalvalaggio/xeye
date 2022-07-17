@@ -40,7 +40,7 @@ class dataset:
 
         # camera setting control 
         print('--- CAMERA SETTING ---')
-        self.index = int(input('Select index of the camera that you want to use for crate the dataset: '))
+        self.index = int(input('Select index of the camera that you want to use for create the dataset: '))
         if self.index == -1:
             raise TypeError('Insert valid camera index...')
         camera = cv2.VideoCapture(self.index)
