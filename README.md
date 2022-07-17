@@ -49,3 +49,17 @@ in more detail the questions refer to:
 * **Single frame HEIGHT**: frame height values.
 * **Single frame WIDTH**: frame width values.
 * **num. of waiting time (in sec.) between every frame**: e.g 0.2 cause a waiting time of 0.2 seconds between every shoot.
+
+After having set the parameters you can invoke the function for start shooting images. Datapipe module provides two different formats for images:
+
+* Grayscale image with the **gray()** function;
+* Color image with the **rgb()** function.
+  
+Let's produce a dataset based on grayscale images with the gray() function:
+
+```python
+data.gray()
+```
+![](img/3.png)
+
+On the directory of the script, you can find the folders that contain the images produced by the **gray()** function (e.g. keyboard folder and mouse folder). 
