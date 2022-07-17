@@ -27,4 +27,15 @@ then initialize the instance like this
 ```python
 data = dp.dataset()
 ```
+set the parameters related to the images with the **init** function
 
+```python
+data.init()
+```
+the execution of this function cause the starting of the user interface in terminal
+
+![](img/1.png)
+
+the **init** function arise multiple questions that set the parameters values
+
+![](img/2.png)
