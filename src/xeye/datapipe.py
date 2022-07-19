@@ -284,6 +284,7 @@ class dataset:
 
 
 class dataset2:
+    
     def __init__(self, index, img_types, label, num, height, width, stand_by_time, perc):
     # inizialized variable
         self.index = index
@@ -526,9 +527,9 @@ if __name__ == '__main__':
     data = dataset()
     data.init()
     data.gray()
-    #data.rgb()
+    data.rgb()
     data.compressTrainTest()
-    #data.CompressAll()
+    data.compressAll()
     data.varControl()
 
     '''
@@ -546,7 +547,7 @@ if __name__ == '__main__':
     data = dataset2(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time, perc = perc)
     data.init()
     data.varControl()
-    #data.gray()
+    data.gray()
     data.rgb()
     data.compressAll()
     data.compressTrainTest()
