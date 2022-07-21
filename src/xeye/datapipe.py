@@ -81,6 +81,36 @@ class dataset:
         if self.standby_time < 0:
             raise TypeError('waiting time must be grater than 0...')
 
+
+    # --------------------
+    # preview 
+    # --------------------    
+    def preview(self):
+
+        camera = cv2.VideoCapture(self.index)
+
+        while(True):
+
+            status, frame = camera.read()
+
+            if not status:
+                print("frame doesn't been captured")
+                break
+            
+            font = cv2.FONT_HERSHEY_COMPLEX
+            text = 'click on image window and then press [q] on keyboard to quit preview'
+            cv2.putText(frame,text,(0,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
+
+            cv2.imshow("Camera PreView", frame)
+
+            if cv2.waitKey(1) == ord('q'):
+                break
+
+        camera.release()
+        cv2.destroyAllWindows()
+
+
+
     
     # ---------------
     # grayscale images 
@@ -346,6 +376,36 @@ class dataset2:
             raise TypeError('percentage value must be greater than 0...')
 
 
+
+    # --------------------
+    # preview 
+    # --------------------    
+    def preview(self):
+
+        camera = cv2.VideoCapture(self.index)
+
+        while(True):
+
+            status, frame = camera.read()
+
+            if not status:
+                print("frame doesn't been captured")
+                break
+            
+            font = cv2.FONT_HERSHEY_COMPLEX
+            text = 'click on image window and then press [q] on keyboard to quit preview'
+            cv2.putText(frame,text,(0,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
+
+            cv2.imshow("Camera PreView", frame)
+
+            if cv2.waitKey(1) == ord('q'):
+                break
+
+        camera.release()
+        cv2.destroyAllWindows()
+
+
+
     # ---------------
     # grayscale images 
     #----------------
@@ -524,12 +584,14 @@ class dataset2:
 
 if __name__ == '__main__':
 
+    
     data = dataset()
     data.init()
+    data.preview()
     data.gray()
-    data.rgb()
+    #data.rgb()
     data.compressTrainTest()
-    data.compressAll()
+    #data.compressAll()
     data.varControl()
 
     '''
@@ -546,6 +608,7 @@ if __name__ == '__main__':
     # class call 
     data = dataset2(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time, perc = perc)
     data.init()
+    data.preview()
     data.varControl()
     data.gray()
     data.rgb()
