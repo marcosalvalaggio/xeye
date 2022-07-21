@@ -63,3 +63,35 @@ data.gray()
 ![](img/3.png)
 
 On the directory of the script, you can find the folders that contain the images produced by the **gray()** function (e.g. keyboard folder and mouse folder). 
+
+$\dots$
+
+Images collected in the folders can be used for build dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist). The first approch to achive this result is calling the **compressTrainTest(**) function:
+
+```python
+data.compressTrainTest()
+```
+that produce on the terminal the following output
+
+![](img/4.png)
+
+in which you can select the portion of images to use in train set and in test set (writing a values between [0,1]). So the function produce a **.npz** files formed by this specific tensors:
+
+* Train set:
+  * **X_train**: matrices/tensors of every single images in train set;
+  * **y_train**: classes (ordinal values) associated to every single images in train set.
+* Test set:
+  * **X_test**: matrices/tensors of every single images in test set;
+  * **y_test**: classes (ordinal values) associated to every single images in test set.
+
+An alternative approch is represent by the use of the function **compressAll**
+
+```python
+data.compressAll()
+```
+
+in which the images is grouped in a unique tensor that contain all the frames produced before. 
+
+* Unique tensor:
+  * **X**: matricies/tensors of every single images produced;
+  * **y**: classes (ordinal values) associated to every single images produced.
