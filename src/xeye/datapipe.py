@@ -2,7 +2,6 @@ import cv2
 import os
 from sklearn.model_selection import train_test_split
 import numpy as np
-from pyfiglet import Figlet
 import time
 
 
@@ -32,12 +31,7 @@ class dataset:
         else: #windows
             os.system('cls')
         
-        # Welcome lines:
-        title = Figlet(font='slant')
-        print(title.renderText('DataPipe'))
-        print('Just answer the questions and than start making DL model based on your own dataset.')
-        print('\n')
-
+        
         # camera setting control 
         print('--- CAMERA SETTING ---')
         self.index = int(input('Select index of the camera that you want to use for create the dataset: '))
@@ -50,7 +44,7 @@ class dataset:
         # set how many type of images do you want to collect
         self.label = []
         print('\n')
-        print('--- IMAGE SETTING ---')
+        print('--- IMAGE SETTINGS ---')
         img_types = int(input('How many types of images do you want to scan: '))
         if img_types == 0: # informarsi sul raise error 
             raise TypeError('Number of images types must be greather than 0')
