@@ -214,7 +214,7 @@ class dataset:
     def compressTrainTest(self):
         print('\n')
         print('--- DATASET SETTING ---')
-        self.perc = float(input('percentage of images in train dataset: '))
+        self.perc = float(input('percentage of images in test dataset: '))
         if self.perc <= 0:
             raise TypeError('percentage value must be greater than 0...')
         # index for image type 

@@ -32,13 +32,27 @@ set the parameters related to the images with the **init** function
 ```python
 data.init()
 ```
-the execution of this function cause the starting of the user interface in terminal
+the execution of this function cause the starting of the user interface in **terminal** 
 
-![](img/1.png)
 
-the **init** function arise multiple questions that set the parameters values
+```console
+--- CAMERA SETTING ---
+Select index of the camera that you want to use for create the dataset: 0
+``` 
 
-![](img/2.png)
+the **init()** function arise multiple questions that set the parameters values
+
+
+```console
+--- IMAGE SETTINGS ---
+How many types of images do you want to scan: 2
+Name of image type (1): keyboard
+Name of image type (2): mouse
+How many frames do you want to shoot for every image type:20
+Single frame HEIGHT: 720
+Single frame WIDTH:  720
+num. of waiting time (in sec.) between every frame: 0
+``` 
 
 in more detail the questions refer to:
 
@@ -55,14 +69,22 @@ After having set the parameters you can invoke the function for start shooting i
 * Grayscale image with the **gray()** function;
 * Color image with the **rgb()** function.
   
-Let's produce a dataset based on grayscale images with the gray() function:
+Let's produce a dataset based on rgb images with the rgb() function:
 
 ```python
-data.gray()
+data.rgb()
 ```
-![](img/3.png)
+in terminal press b to start making photos for the image types passed to the **init()** function 
 
-On the directory of the script, you can find the folders that contain the images produced by the **gray()** function (e.g. keyboard folder and mouse folder). 
+```console
+--- START TAKING PHOTOS ---
+Press 'b' on keyboard to start data collection for image type keyboard
+b
+Press 'b' on keyboard to start data collection for image type mouse
+b
+``` 
+
+On the directory of the script, you can find the folders that contain the images produced by the **rbg()** function (e.g. keyboard folder and mouse folder). 
 
 $\dots$
 
@@ -71,9 +93,13 @@ Images collected in the folders can be used for build dataset like the [mnist](h
 ```python
 data.compressTrainTest()
 ```
-that produce on the terminal the following output
 
-![](img/4.png)
+that produce the following output in the terminal window 
+
+```console
+--- DATASET SETTING ---
+percentage of images in test dataset: 0.2
+``` 
 
 in which you can select the portion of images to use in train set and in test set (writing a values between [0,1]). So the function produce a **.npz** files formed by this specific tensors:
 
