@@ -34,7 +34,7 @@ class dataset:
         
         # camera setting control 
         print('--- CAMERA SETTING ---')
-        self.index = int(input('Select index of the camera that you want to use for create the dataset: '))
+        self.index = int(input('Select the index of the camera that you want to use for creating the dataset:'))
         if self.index == -1:
             raise TypeError('Insert valid camera index...')
         camera = cv2.VideoCapture(self.index)
@@ -45,7 +45,7 @@ class dataset:
         self.label = []
         print('\n')
         print('--- IMAGE SETTINGS ---')
-        img_types = int(input('How many types of images do you want to scan: '))
+        img_types = int(input('Num. of types of images to scan: '))
         if img_types == 0: # informarsi sul raise error 
             raise TypeError('Number of images types must be greather than 0')
         for i in range(0,img_types):
@@ -57,7 +57,7 @@ class dataset:
                 os.mkdir(lab)
 
         # number of frames 
-        self.num = int(input('How many frames do you want to shoot for every image type: '))
+        self.num = int(input('Num. of frames to shoot for every image type: '))
         if self.num == 0 or self.num < 0:
             raise TypeError('You cant inizialize frames number equal or below zero...')
         
@@ -121,7 +121,7 @@ class dataset:
         for folder in self.label:
           
             count = 0
-            print("Press 'b' on keyboard to start data collection for image type "+folder)
+            print("Press [b] on keyboard to start data collection of image type: "+folder)
             userinput = input()
             if userinput != 'b':
                 print("Wrong Input...press 'b'")
@@ -174,7 +174,7 @@ class dataset:
 
             count = 0
 
-            print("Press 'b' on keyboard to start data collection for image type "+folder)
+            print("Press [b] on keyboard to start data collection of image type: "+folder)
             userinput = input()
             if userinput != 'b':
                 print("Wrong Input...press 'b'")
@@ -214,7 +214,7 @@ class dataset:
     def compressTrainTest(self):
         print('\n')
         print('--- DATASET SETTING ---')
-        self.perc = float(input('percentage of images in test dataset: '))
+        self.perc = float(input('percentage of images in the test set: '))
         if self.perc <= 0:
             raise TypeError('percentage value must be greater than 0...')
         # index for image type 
