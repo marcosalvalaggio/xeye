@@ -92,7 +92,7 @@ class dataset:
                 break
             
             font = cv2.FONT_HERSHEY_COMPLEX
-            text = 'click on image window and then press [q] on keyboard to quit preview'
+            text = 'click on the image window and then press [q] on the keyboard to quit preview'
             cv2.putText(frame,text,(0,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
 
             cv2.imshow("Camera PreView", frame)
@@ -387,7 +387,7 @@ class dataset2:
                 break
             
             font = cv2.FONT_HERSHEY_COMPLEX
-            text = 'click on image window and then press [q] on keyboard to quit preview'
+            text = 'click on the image window and then press [q] on the keyboard to quit preview'
             cv2.putText(frame,text,(0,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
 
             cv2.imshow("Camera PreView", frame)
