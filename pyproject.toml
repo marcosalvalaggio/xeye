@@ -21,7 +21,6 @@ dependencies = [
     "opencv-python",
     "numpy",
     "scikit-learn",
-    "pyfiglet",
 ]
 
 [project.urls]
