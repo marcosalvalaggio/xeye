@@ -56,7 +56,7 @@ num. of waiting time (in sec.) between every frame: 0
 
 in more detail the questions refer to:
 
-* **Select index of the camera that you want to use for create the dataset**: generally 0 for inernal camera, 1 for usb external camera.
+* **Select index of the camera that you want to use for create the dataset**: generally 0 for inernal camera, 1 for usb external camer.
 * **How many types of images do you want to scan**: answer 2 if you want to create a dataset with 2 objects (e.g. keyboard and mouse)...answer with the number of objects types that you want to include in your dataset.
 * **Name of image type**: insert the name for every specif object that you you want to include in the dataset. The **init** function create a named folder for every images types to include. 
 * **How many frames do you want to shoot for every image type**: select the number of images do you want to shoot and save in every object folder that compose the dataset. 
@@ -161,7 +161,7 @@ data.rgb()
 data.compressTrainTest()
 ```
 
-The parameters passed to the dataset2:
+The parameters passed to the class dataset2:
 
 * **index**: generally 0 for inernal camera, 1 for usb external camera.
 * **img_types**: number of objects types that you want to include in your dataset.
@@ -170,4 +170,11 @@ The parameters passed to the dataset2:
 * **height**: frame height values.
 * **width**: frame width values.
 * **standby_time**: e.g 0.2 cause a waiting time of 0.2 seconds between every shoot.
-* **perc**: portion of images to use in test set
+* **perc**: portion of images to use in test set (writing a values between [0,1]).
+
+
+### Other useful functions
+With both classes you can call the functions: 
+
+* **preview**: open camera stream for check the framing. 
+* **varControl**: print the values of the parameters set with the init function. 
