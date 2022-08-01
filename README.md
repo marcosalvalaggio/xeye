@@ -78,9 +78,9 @@ in the terminal press [b] to make photos for the image types passed to the **ini
 
 ```console
 --- START TAKING PHOTOS ---
-Press [b] on keyboard to start data collection of image type keyboard
-b
-Press [b] on keyboard to start data collection of image type mouse
+Press [b] on keyboard to start data collection of image type [keyboard]
+b]
+Press [b] on keyboard to start data collection of image type [mouse]
 b
 ``` 
 
@@ -124,6 +124,10 @@ in which the images is grouped in a unique tensor that containes all the frames 
   * **X**: matricies/tensors of every single images produced;
   * **y**: classes (ordinal values) associated to every single images produced.
 
+### Other useful functions
+
+* **preview**: open camera stream to check the framing. 
+* **varControl**: print the values of the parameters set with the init function. 
 
 #### Xeye script example 
 
@@ -133,8 +137,10 @@ Example of code in order to use the **dataset()** class:
 from xeye import datapipe as dp
 data = dp.dataset()
 data.init()
+data.preview()
 data.rgb()
 data.compressTrainTest()
+data.varControl()
 ```
 
 ## Static API 
@@ -172,9 +178,3 @@ The parameters passed to the class dataset2:
 * **standby_time**: e.g 0.2 cause a waiting time of 0.2 seconds between every shoot.
 * **perc**: portion of images to use in the test set (write a value between [0,1]).
 
-
-### Other useful functions
-With both classes you can call the functions: 
-
-* **preview**: open camera stream to check the framing. 
-* **varControl**: print the values of the parameters set with the init function. 
