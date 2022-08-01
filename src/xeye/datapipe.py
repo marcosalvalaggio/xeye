@@ -34,7 +34,7 @@ class dataset:
         
         # camera setting control 
         print('--- CAMERA SETTING ---')
-        self.index = int(input('Select the index of the camera that you want to use for creating the dataset:'))
+        self.index = int(input('Select the index of the camera that you want to use for creating the dataset: '))
         if self.index == -1:
             raise TypeError('Insert valid camera index...')
         camera = cv2.VideoCapture(self.index)
@@ -121,7 +121,7 @@ class dataset:
         for folder in self.label:
           
             count = 0
-            print("Press [b] on keyboard to start data collection of image type: "+folder)
+            print(f'Press [b] on keyboard to start data collection of image type: [{folder}]')
             userinput = input()
             if userinput != 'b':
                 print("Wrong Input...press 'b'")
@@ -174,7 +174,7 @@ class dataset:
 
             count = 0
 
-            print("Press [b] on keyboard to start data collection of image type: "+folder)
+            print(f'Press [b] on keyboard to start data collection of image type: [{folder}]')
             userinput = input()
             if userinput != 'b':
                 print("Wrong Input...press 'b'")
