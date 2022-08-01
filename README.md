@@ -131,7 +131,7 @@ in which the images is grouped in a unique tensor that containes all the frames 
 
 #### Xeye script example 
 
-Example of code in order to use the **dataset()** class:
+Example of script in order to use the **dataset()** class:
 
 ```python
 from xeye import datapipe as dp
