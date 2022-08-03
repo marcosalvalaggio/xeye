@@ -86,7 +86,6 @@ b
 
 On the directory of the script, you can find the folders that contain the images produced by the **rbg()** function (e.g. keyboard folder and mouse folder). 
 
-$\dots$
 
 Images collected in the folders can be used for building dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist). The first approch to achive this result is calling the **compressTrainTest()** function:
 
