@@ -582,9 +582,9 @@ if __name__ == '__main__':
     data = dataset()
     data.init()
     data.preview()
-    data.gray()
+    #data.gray()
     #data.rgb()
-    data.compressTrainTest()
+    #data.compressTrainTest()
     #data.compressAll()
     data.varControl()
 

@@ -37,7 +37,7 @@ the execution of this function causes the starting of the user interface in **te
 
 ```console
 --- CAMERA SETTING ---
-Select the index of the camera that you want to use for creating the dataset: 0
+Select the index of the camera that you want to use for creating the dataset: 1
 ``` 
 
 the **init()** function arises multiple questions that set the parameters values
@@ -48,7 +48,7 @@ the **init()** function arises multiple questions that set the parameters values
 Num. of types of images to scan: 2
 Name of image type (1): keyboard
 Name of image type (2): mouse
-Num. of frames to shoot for every image type: 20
+Num. of frames to shoot for every image type: 10
 Single frame HEIGHT: 720
 Single frame WIDTH:  720
 num. of waiting time (in sec.) between every frame: 0
@@ -127,7 +127,21 @@ in which the images is grouped in a unique tensor that containes all the frames 
 ### Other useful functions
 
 * **preview**: open camera stream to check the framing. 
+  ![](img/1.png)
 * **varControl**: print the values of the parameters set with the init function. 
+```console
+--- PARAMETERS CONTROL ---
+camera index: 1
+num. of images types: 2
+labels of images types: ['keyboard', 'mouse']
+num. of images for types: 20
+Single frame HEIGHT: 720
+Single frame WIDTH:  720
+waiting time between frames: 0.0
+percentage of images in train dataset: 0.2
+statusGray: 1
+statusRGB: 0
+``` 
 
 #### Xeye script example 
 
