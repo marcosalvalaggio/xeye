@@ -79,7 +79,7 @@ in the terminal press [b] to make photos for the image types passed to the **ini
 ```console
 --- START TAKING PHOTOS ---
 Press [b] on keyboard to start data collection of image type [keyboard]
-b]
+b
 Press [b] on keyboard to start data collection of image type [mouse]
 b
 ``` 
@@ -163,7 +163,7 @@ A faster way to use the datapipe module is represented by **dataset2()** class. 
 # Load datapipe module
 from xeye import datapipe as dp
 
-# define parameters as the previus init() function 
+# define parameters values
 index = 0
 img_types = 2
 label = ['keyboard', 'mouse']
