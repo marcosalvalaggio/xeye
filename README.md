@@ -100,7 +100,7 @@ that produces the following output in the terminal window
 percentage of images in the test set: 0.2
 ``` 
 
-in which you can select the portion of images to use in the train set and in the test set (write a value between [0,1]). By doing so, the function produces a **.npz** file formed by these specific tensors:
+in which you can select the portion of images to use in the train set and in the test set (write a value between (0,1)). By doing so, the function produces a **.npz** file formed by these specific tensors:
 
 * Train set:
   * **X_train**: matrices/tensors of every single images in the train set;
@@ -189,5 +189,5 @@ The parameters passed to the class dataset2:
 * **height**: frame height values.
 * **width**: frame width values.
 * **standby_time**: e.g 0.2 cause a waiting time of 0.2 seconds between every shoot.
-* **perc**: portion of images to use in the test set (write a value between [0,1]).
+* **perc**: portion of images to use in the test set (write a value between (0,1)).
 

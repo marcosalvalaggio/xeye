@@ -40,6 +40,7 @@ class dataset:
         camera = cv2.VideoCapture(self.index)
         if camera.isOpened() == False:
             raise TypeError('Insert valid camera index...')
+        camera.release()
 
         # set how many type of images do you want to collect
         self.label = []
@@ -81,6 +82,9 @@ class dataset:
     # --------------------    
     def preview(self):
 
+        print('\n')
+        print('--- PREVIEW ---')
+
         camera = cv2.VideoCapture(self.index)
 
         while(True):
@@ -98,10 +102,11 @@ class dataset:
             cv2.imshow("Camera PreView", frame)
 
             if cv2.waitKey(1) == ord('q'):
+                print('preview closed')
+                camera.release()
+                cv2.destroyAllWindows()
                 break
 
-        camera.release()
-        cv2.destroyAllWindows()
 
 
 
@@ -135,7 +140,7 @@ class dataset:
                     break
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-                cv2.imshow("Camera View",gray)
+                cv2.imshow(f"Camera View for image type [{folder}]", gray)
 
                 gray = cv2.resize(gray, (self.width, self.height))
 
@@ -188,7 +193,7 @@ class dataset:
                     print("frame doesn't been captured")
                     break
 
-                cv2.imshow("Camera View", frame)
+                cv2.imshow(f"Camera View for image type [{folder}]", frame)
 
                 frame = cv2.resize(frame, (self.width, self.height))
 
@@ -214,7 +219,7 @@ class dataset:
     def compressTrainTest(self):
         print('\n')
         print('--- DATASET SETTING ---')
-        self.perc = float(input('percentage of images in the test set: '))
+        self.perc = float(input('percentage of images in the test set (0,1): '))
         if self.perc <= 0:
             raise TypeError('percentage value must be greater than 0...')
         # index for image type 
@@ -309,7 +314,7 @@ class dataset:
 
 class dataset2:
     
-    def __init__(self, index, img_types, label, num, height, width, stand_by_time, perc):
+    def __init__(self, index, img_types, label, num, height, width, stand_by_time, perc = 0.1):
     # inizialized variable
         self.index = index
         self.img_types = img_types
@@ -322,7 +327,7 @@ class dataset2:
         self.standby_time = stand_by_time
         self.statusGray = 0
         self.statusRGB = 0
-        self.perc = 1
+        self.perc = perc
 
     def init(self):
 
@@ -373,8 +378,11 @@ class dataset2:
 
     # --------------------
     # preview 
-    # --------------------    
+    # --------------------      
     def preview(self):
+
+        print('\n')
+        print('--- PREVIEW ---')
 
         camera = cv2.VideoCapture(self.index)
 
@@ -393,10 +401,10 @@ class dataset2:
             cv2.imshow("Camera PreView", frame)
 
             if cv2.waitKey(1) == ord('q'):
+                print('preview closed')
+                camera.release()
+                cv2.destroyAllWindows()
                 break
-
-        camera.release()
-        cv2.destroyAllWindows()
 
 
 
@@ -405,6 +413,9 @@ class dataset2:
     #----------------
     def gray(self):
         
+        print('\n')
+        print('--- START TAKING PHOTOS ---')
+
         camera = cv2.VideoCapture(self.index)
 
         # Index for files name 
@@ -412,6 +423,10 @@ class dataset2:
         for folder in self.label:
           
             count = 0
+            print(f'Press [b] on keyboard to start data collection of image type: [{folder}]')
+            userinput = input()
+            if userinput != 'b':
+                print("Wrong Input...press 'b'")
 
             while count < self.num:
                 
@@ -422,7 +437,7 @@ class dataset2:
                     break
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-                cv2.imshow("Camera View",gray)
+                cv2.imshow(f"Camera View for image type [{folder}]",gray)
 
                 gray = cv2.resize(gray, (self.width, self.height))
 
@@ -435,7 +450,7 @@ class dataset2:
 
                 if cv2.waitKey(1) == ord('q'):
                     break
-
+                
             i += 1
 
         camera.release()
@@ -450,6 +465,9 @@ class dataset2:
     # -----------
     def rgb(self):
 
+        print('\n')
+        print('--- START TAKING PHOTOS ---')
+
         camera = cv2.VideoCapture(self.index)
 
         # Index for files name 
@@ -457,6 +475,12 @@ class dataset2:
         for folder in self.label:
 
             count = 0
+
+            print(f'Press [b] on keyboard to start data collection of image type: [{folder}]')
+            userinput = input()
+            if userinput != 'b':
+                print("Wrong Input...press 'b'")
+                exit()
 
             while count < self.num:
 
@@ -466,7 +490,7 @@ class dataset2:
                     print("frame doesn't been captured")
                     break
 
-                cv2.imshow("Camera View", frame)
+                cv2.imshow(f"Camera View for image type [{folder}]", frame)
 
                 frame = cv2.resize(frame, (self.width, self.height))
 
