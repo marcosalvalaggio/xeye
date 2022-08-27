@@ -217,6 +217,9 @@ class dataset:
 
 
     def compressTrainTest(self):
+        # data control
+        if self.statusRGB == 0 and self.statusGray == 0:
+            raise TypeError('You have to call rgb or gray function before compress a dataset...')
         print('\n')
         print('--- DATASET SETTING ---')
         self.perc = float(input('percentage of images in the test set (0,1): '))
@@ -249,15 +252,19 @@ class dataset:
                 j += 1
             # unique final tensors 
             self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
-            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i+1, self.num, axis = 0))
+            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i, self.num, axis = 0))
             i += 1
         # create dataset (mnist style)
         self.tensor['X'] = self.tensor['X'].astype('uint8')
+        self.tensor['y'] = self.tensor['y'].astype('uint8')
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=self.perc, random_state=123)
         np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
 
 
     def compressAll(self):
+        # data control
+        if self.statusRGB == 0 and self.statusGray == 0:
+            raise TypeError('You have to call rgb or gray function before compress a dataset...')
         # index for image type 
         i = 0
         # X
@@ -285,10 +292,11 @@ class dataset:
                 j += 1
             # unique final tensors 
             self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
-            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i+1, self.num, axis = 0))
+            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i, self.num, axis = 0))
             i += 1
         # create dataset (mnist style)
         self.tensor['X'] = self.tensor['X'].astype('uint8')
+        self.tensor['y'] = self.tensor['y'].astype('uint8')
         np.savez('datasetall.npz', x = self.tensor['X'], y = self.tensor['y'])
 
 
@@ -513,6 +521,9 @@ class dataset2:
 
 
     def compressTrainTest(self):
+        # data control
+        if self.statusRGB == 0 and self.statusGray == 0:
+            raise TypeError('You have to call rgb or gray function before compress a dataset...')
         # index for image type 
         i = 0
         # X
@@ -540,15 +551,19 @@ class dataset2:
                 j += 1
             # unique final tensors 
             self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
-            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i+1, self.num, axis = 0))
+            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i, self.num, axis = 0))
             i += 1
         # create dataset (mnist style)
         self.tensor['X'] = self.tensor['X'].astype('uint8')
+        self.tensor['y'] = self.tensor['y'].astype('uint8')
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=self.perc, random_state=123)
         np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
 
 
     def compressAll(self):
+        # data control
+        if self.statusRGB == 0 and self.statusGray == 0:
+            raise TypeError('You have to call rgb or gray function before compress a dataset...')
         # index for image type 
         i = 0
         # X
@@ -576,10 +591,11 @@ class dataset2:
                 j += 1
             # unique final tensors 
             self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
-            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i+1, self.num, axis = 0))
+            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i, self.num, axis = 0))
             i += 1
         # create dataset (mnist style)
         self.tensor['X'] = self.tensor['X'].astype('uint8')
+        self.tensor['y'] = self.tensor['y'].astype('uint8')
         np.savez('datasetall.npz', x = self.tensor['X'], y = self.tensor['y'])
 
 
