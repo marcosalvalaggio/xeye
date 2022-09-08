@@ -99,12 +99,14 @@ class dataset:
             text = 'click on the image window and then press [q] on the keyboard to quit preview'
             cv2.putText(frame,text,(5,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
 
+            cv2.startWindowThread()
             cv2.imshow("Camera PreView", frame)
 
             if cv2.waitKey(1) == ord('q'):
                 print('preview closed')
                 camera.release()
                 cv2.destroyAllWindows()
+                cv2.waitKey(1)
                 break
 
 
@@ -140,6 +142,7 @@ class dataset:
                     break
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
+                cv2.startWindowThread()
                 cv2.imshow(f"Camera View for image type [{folder}]", gray)
 
                 gray = cv2.resize(gray, (self.width, self.height))
@@ -158,6 +161,7 @@ class dataset:
 
         camera.release()
         cv2.destroyAllWindows()
+        cv2.waitKey(1)
         # set status
         self.statusGray = 1
         self.statusRGB = 0
@@ -193,6 +197,7 @@ class dataset:
                     print("frame doesn't been captured")
                     break
 
+                cv2.startWindowThread()
                 cv2.imshow(f"Camera View for image type [{folder}]", frame)
 
                 frame = cv2.resize(frame, (self.width, self.height))
@@ -210,6 +215,7 @@ class dataset:
 
         camera.release()
         cv2.destroyAllWindows()
+        cv2.waitKey(1)
         # Set status 
         self.statusGray = 0
         self.statusRGB = 1
@@ -322,7 +328,7 @@ class dataset:
 
 class dataset2:
     
-    def __init__(self, index, img_types, label, num, height, width, stand_by_time, perc = 0.1):
+    def __init__(self, index, img_types, label, num, height, width, stand_by_time):
     # inizialized variable
         self.index = index
         self.img_types = img_types
@@ -335,7 +341,6 @@ class dataset2:
         self.standby_time = stand_by_time
         self.statusGray = 0
         self.statusRGB = 0
-        self.perc = perc
 
     def init(self):
 
@@ -406,12 +411,14 @@ class dataset2:
             text = 'click on the image window and then press [q] on the keyboard to quit preview'
             cv2.putText(frame,text,(5,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
 
+            cv2.startWindowThread()
             cv2.imshow("Camera PreView", frame)
 
             if cv2.waitKey(1) == ord('q'):
                 print('preview closed')
                 camera.release()
                 cv2.destroyAllWindows()
+                cv2.waitKey(1)
                 break
 
 
@@ -445,6 +452,7 @@ class dataset2:
                     break
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
+                cv2.startWindowThread()
                 cv2.imshow(f"Camera View for image type [{folder}]",gray)
 
                 gray = cv2.resize(gray, (self.width, self.height))
@@ -463,6 +471,7 @@ class dataset2:
 
         camera.release()
         cv2.destroyAllWindows()
+        cv2.waitKey(1)
         # set status
         self.statusGray = 1
         self.statusRGB = 0
@@ -498,6 +507,7 @@ class dataset2:
                     print("frame doesn't been captured")
                     break
 
+                cv2.startWindowThread()
                 cv2.imshow(f"Camera View for image type [{folder}]", frame)
 
                 frame = cv2.resize(frame, (self.width, self.height))
@@ -515,12 +525,16 @@ class dataset2:
 
         camera.release()
         cv2.destroyAllWindows()
+        cv2.waitKey(1)
         # Set status 
         self.statusGray = 0
         self.statusRGB = 1
 
 
-    def compressTrainTest(self):
+    def compressTrainTest(self, perc = 0.1):
+        # percentage control 
+        if perc <= 0:
+            raise TypeError('percentage value must be greater than 0...')
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise TypeError('You have to call rgb or gray function before compress a dataset...')
@@ -556,7 +570,7 @@ class dataset2:
         # create dataset (mnist style)
         self.tensor['X'] = self.tensor['X'].astype('uint8')
         self.tensor['y'] = self.tensor['y'].astype('uint8')
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=self.perc, random_state=123)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=perc, random_state=123)
         np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
 
 
