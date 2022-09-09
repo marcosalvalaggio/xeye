@@ -174,10 +174,10 @@ standby_time = 0
 # percentage of images in the test set 
 perc = 0.2
 
-data = dp.dataset2(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time, perc = perc)
+data = dp.dataset2(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
 data.init()
 data.rgb()
-data.compressTrainTest()
+data.compressTrainTest(perc = perc)
 ```
 
 The parameters passed to the class dataset2:
