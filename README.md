@@ -14,7 +14,7 @@ To install the package,
 pip install xeye
 ```
 
-## Dynamic API UI
+## API with full UI
 
 First of all, load the module datapipe from the package:
 
@@ -156,8 +156,8 @@ data.compressTrainTest()
 data.varControl()
 ```
 
-## Static API 
-A faster way to use the datapipe module is represented by **dataset2()** class. In this case there isn't a terminal UI that guide you in the construction of the dataset. With dataset2 you only pass the parameters to the class, and call the functions you need. 
+## API without full UI
+A faster way to use the datapipe module is represented by the **fastDataset()** class. In this case there isn't a complete terminal UI that guide you in the construction of the dataset. With fastDataset, you only pass the parameters to the class, and then call the functions you need. 
 
 ```python
 # Load datapipe module
@@ -174,13 +174,13 @@ standby_time = 0
 # percentage of images in the test set 
 perc = 0.2
 
-data = dp.dataset2(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
+data = dp.fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
 data.init()
 data.rgb()
 data.compressTrainTest(perc = perc)
 ```
 
-The parameters passed to the class dataset2:
+The parameters passed to the class fastDataset:
 
 * **index**: generally 0 for integrated camera, 1 for usb external camera.
 * **img_types**: numbers of objects types that you want to include in your dataset.
@@ -189,5 +189,8 @@ The parameters passed to the class dataset2:
 * **height**: frame height values.
 * **width**: frame width values.
 * **standby_time**: e.g 0.2 cause a waiting time of 0.2 seconds between every shoot.
+  
+For split images in train and test dataset, pass a value between (0,1) to the perc parameter of the **compressTrainTest** function: 
+
 * **perc**: portion of images to use in the test set (write a value between (0,1)).
 

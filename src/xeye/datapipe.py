@@ -326,7 +326,7 @@ class dataset:
 
 
 
-class dataset2:
+class fastDataset:
     
     def __init__(self, index, img_types, label, num, height, width, stand_by_time):
     # inizialized variable
@@ -636,14 +636,14 @@ if __name__ == '__main__':
     data = dataset()
     data.init()
     data.preview()
-    #data.gray()
-    #data.rgb()
-    #data.compressTrainTest()
-    #data.compressAll()
+    data.gray()
+    data.rgb()
+    data.compressTrainTest()
+    data.compressAll()
     data.varControl()
 
     '''
-    ### test with dataset 2 
+    ### test with fastDataset 
     index = 0
     img_types = 1
     label = ['test']
@@ -654,12 +654,12 @@ if __name__ == '__main__':
     perc = 0.2
 
     # class call 
-    data = dataset2(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time, perc = perc)
+    data = fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
     data.init()
     data.preview()
     data.varControl()
     data.gray()
     data.rgb()
     data.compressAll()
-    data.compressTrainTest()
+    data.compressTrainTest(perc = perc)
     '''
