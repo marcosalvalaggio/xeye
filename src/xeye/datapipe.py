@@ -732,6 +732,69 @@ class fastDataset:
 
 
 
+class buildDataset:
+
+    def __init__(self, path, label, color = True, split = True, perc = 0.1):
+        self.path = path
+        self.label = label 
+        self.color = color 
+        self.split = split
+        self.perc = perc
+        self.height = 0
+        self.width = 0 
+        self.tensor = {}
+
+    def sizer(self):
+        _height = []
+        _width = []
+        for path in self.path:
+            data = np.load(path)
+            x = data['x']
+            _height.append(x.shape[1])
+            _width.append(x.shape[2])
+
+        if len(set(_height)) == 1:
+            self.height = _height[0]
+        else:
+            raise TypeError("Datasets doesn't have the same dimensions...")
+        
+        if len(set(_width)) == 1:
+            self.width = _width[0]
+        else:
+            raise TypeError("Datasets doesn't have the same dimensions...")
+
+    def build(self):
+        # call the crawler function for check the dimensions of the images
+        self.sizer()
+        # control if the path and label lists have the same length
+        if len(self.path) != len(self.label):
+            raise TypeError("Path and label lists doesn't have the same length...")
+        # Create the tensor X
+        if self.color == True:
+            self.tensor['X'] = np.empty((0,self.height,self.width,3))
+        else: 
+            self.tensor['X'] = np.empty((0,self.height,self.width))
+        # array for label y 
+        self.tensor['y'] = np.empty((0))
+        # loop 
+        for i in range(len(self.path)):
+            data = np.load(f'{self.path[i]}')
+            x = data['x']
+            self.tensor['X'] = np.append(self.tensor['X'], x, axis = 0)
+            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(self.label[i], x.shape[0], axis = 0))
+        # set data type for memory management 
+        self.tensor['X'] = self.tensor['X'].astype('uint8')
+        self.tensor['y'] = self.tensor['y'].astype('uint8')
+        # save dataset 
+        if self.split == True:
+            self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=self.perc, random_state=123)
+            np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
+        else: 
+            np.savez('datasetall.npz', x = self.tensor['X'], y = self.tensor['y'])
+
+
+
+
 if __name__ == '__main__':
 
     
