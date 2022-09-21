@@ -14,7 +14,7 @@ To install the package,
 pip install xeye
 ```
 
-## API with full UI
+## API with full UI (class: dataset)
 
 First of all, load the module datapipe from the package:
 
@@ -27,7 +27,7 @@ then initialize the instance like this
 ```python
 data = dp.dataset()
 ```
-set the parameters related to the images with the **init()** function
+set the parameters related to the images with the **init** function
 
 ```python
 data.init()
@@ -66,15 +66,15 @@ Precisely the questions refer to:
 
 After having set the parameters you can invoke the function in order to start shooting images. Datapipe module provides two different formats of images:
 
-* Grayscale image with the **gray()** function;
-* Color image with the **rgb()** function.
+* Grayscale image with the **gray** function;
+* Color image with the **rgb** function.
   
-Let's produce a dataset based on rgb images with the rgb() function:
+Let's produce a dataset based on rgb images with the rgb function:
 
 ```python
 data.rgb()
 ```
-in the terminal press [b] to make photos for the image types passed to the **init()** function 
+in the terminal press [b] to make photos for the image types passed to the **init** function 
 
 ```console
 --- START TAKING PHOTOS ---
@@ -84,10 +84,10 @@ Press [b] on keyboard to start data collection of image type [mouse]
 b
 ``` 
 
-On the directory of the script, you can find the folders that contain the images produced by the **rbg()** function (e.g. keyboard folder and mouse folder). 
+On the directory of the script, you can find the folders that contain the images produced by the **rbg** function (e.g. keyboard folder and mouse folder). 
 
 
-Images collected in the folders can be used for building dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist). The first approch to achive this result is calling the **compressTrainTest()** function:
+Images collected in the folders can be used for building dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist). The first approch to achive this result is calling the **compressTrainTest** function:
 
 ```python
 data.compressTrainTest()
@@ -111,7 +111,7 @@ in which you can select the portion of images to use in the train set and in the
   
 (matrices for grayscale images: [Height$\times$Width$\times$1], tensors for rgb images:[Height$\times$Width$\times$3]).
 
-An alternative approch is to use the function **compressAll()**
+An alternative approch is to use the function **compressAll**
 
 ```python
 data.compressAll()
@@ -122,6 +122,19 @@ in which the images is grouped in a unique tensor that containes all the frames 
 * Unique tensor:
   * **X**: matricies/tensors of every single images produced;
   * **y**: classes (ordinal values) associated to every single images produced.
+
+Finally you can use the **justCompress** function for create a unique tensor that contain all the images produced. 
+
+```python
+data.justCompress()
+```
+In terminal you have to insert a name for the dataset
+
+```console
+--- DATASET SETTING ---
+Select a name for the compress file: batch_test
+``` 
+If you pass the value 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produce by this function can be use by the class **buildDataset** for put togheter more .npz file and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist) (this operation will be show in detail later in the readme).
 
 ### Other useful functions
 
@@ -144,7 +157,7 @@ statusRGB: 0
 
 #### Xeye script example 
 
-Example of script in order to use the **dataset()** class:
+Example of script in order to use the **dataset** class:
 
 ```python
 from xeye import datapipe as dp
@@ -156,8 +169,8 @@ data.compressTrainTest()
 data.varControl()
 ```
 
-## API without full UI
-A faster way to use the datapipe module is represented by the **fastDataset()** class. In this case there isn't a complete terminal UI that guide you in the construction of the dataset. With fastDataset, you only pass the parameters to the class, and then call the functions you need. 
+## API without full UI (class: fastDataset)
+A faster way to use the datapipe module is represented by the **fastDataset** class. In this case there isn't a complete terminal UI that guide you in the construction of the dataset. With fastDataset, you only pass the parameters to the class, and then call the functions you need. 
 
 ```python
 # Load datapipe module
@@ -178,6 +191,7 @@ data = dp.fastDataset(index = index, img_types = img_types, label = label, num =
 data.init()
 data.rgb()
 data.compressTrainTest(perc = perc)
+data.justCompress("batch_test")
 ```
 
 The parameters passed to the class fastDataset:
@@ -194,3 +208,4 @@ For split images in train and test dataset, pass a value between (0,1) to the pe
 
 * **perc**: portion of images to use in the test set (write a value between (0,1)).
 
+If you don't pass any value to the **justCompress** function the dataset will be save with the name **dataset_raw.npz**. 
