@@ -14,7 +14,7 @@ To install the package,
 pip install xeye
 ```
 
-## API with full UI (class: dataset)
+## Create dataset with full UI 
 
 First of all, load the module datapipe from the package:
 
@@ -169,7 +169,7 @@ data.compressTrainTest()
 data.varControl()
 ```
 
-## API without full UI (class: fastDataset)
+## Create dataset with fast UI 
 A faster way to use the datapipe module is represented by the **fastDataset** class. In this case there isn't a complete terminal UI that guide you in the construction of the dataset. With fastDataset, you only pass the parameters to the class, and then call the functions you need. 
 
 ```python
