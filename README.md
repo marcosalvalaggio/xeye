@@ -134,7 +134,7 @@ In terminal you have to insert a name for the dataset
 --- DATASET SETTING ---
 Select a name for the compress file: batch_test
 ``` 
-If you pass the value 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produce by this function can be use by the class **buildDataset** for put togheter more .npz file and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist) (this operation will be show in detail later in the readme).
+If you pass 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produce by this function can be use by the class **buildDataset** for put togheter more .npz files and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist).
 
 ### Other useful functions
 
