@@ -209,3 +209,11 @@ For split images in train and test dataset, pass a value between (0,1) to the pe
 * **perc**: portion of images to use in the test set (write a value between (0,1)).
 
 If you don't pass any value to the **justCompress** function the dataset will be save with the name **dataset_raw.npz**. 
+
+## Using xeye dataset for deep learning models implementation
+
+In the [notebooks](notebooks/) folder you can find examples of deep learning models (builded with [Tensorflow](notebooks/tensorflow/) or [Pytorch](notebooks/pytorch/) frameworks), based on datasets produced by the xeye package. 
+
+The example notebooks produced with both frameworks refer to datasets stored in the [data](notebooks/data/) folder. In this folder you can find trivial example datasets for implement a binary or multi-label classification models. 
+
+* [Binary dataset](notebooks/data/TrivialBinaryClassification.npz): containing two types of images (keybord or mouse). 
