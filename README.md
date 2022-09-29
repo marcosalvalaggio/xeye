@@ -214,7 +214,7 @@ If you don't pass any value to the **justCompress** function, the dataset will b
 
 In the [notebooks](notebooks/) folder you can find examples of deep learning models based on datasets produced by the xeye package (builded with [Tensorflow](notebooks/tensorflow/) or [Pytorch](notebooks/pytorch/) frameworks). 
 
-The example notebooks produced with both frameworks refer to datasets stored in the [data](notebooks/data/) folder. In this folder, you can find trivial example datasets for implementing a binary or multi-label classification models. 
+The example notebooks produced with both frameworks refer to datasets stored in the [data](notebooks/data/) folder. In this folder, you can find trivial example datasets that you can use for implementing binary or multi-label classification models. 
 
-* [Binary dataset](notebooks/data/TrivialBinaryClassification.npz): containing two types of grayscale images (keyboard or mouse).
+* [Binary dataset](notebooks/data/TrivialBinaryClassification.npz): containing two types of grayscale images (keyboard and mouse).
    
