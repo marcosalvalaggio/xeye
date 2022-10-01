@@ -172,7 +172,7 @@ data.varControl()
 ```
 
 ## Create dataset with fast UI 
-A faster way to use the datapipe module is represented by the **fastDataset** class. In this case there isn't a complete terminal UI that guide you in the construction of the dataset. With fastDataset, you only pass the parameters to the class, and then call the functions you need. 
+A faster way to use the datapipe module is represented by the **fastDataset** class. In this case, there isn't a complete terminal UI that guides you in the construction of the dataset. With **fastDataset**, you only pass the parameters to the class, and then call the functions you need. 
 
 ```python
 # Load datapipe module
@@ -198,25 +198,25 @@ data.justCompress("batch_test")
 
 The parameters passed to the class fastDataset:
 
-* **index**: generally 0 for integrated camera, 1 for usb external camera.
-* **img_types**: numbers of objects types that you want to include in your dataset.
-* **label**: list of names for every specif object that you you want to include in the dataset. The **init** function create a named folder for every images types to include.
-* **num**: number of images you want to shoot and save in every object folder that compose the dataset. 
+* **index**: generally 0 for integrated camera, 1 for USB external camera.
+* **img_types**: numbers of object types that you want to include in your dataset.
+* **label**: list of object names to include in the dataset. The **init** function creates a named folder for every image type.
+* **num**: select the number of images you want to shoot and save them in every object folder.
 * **height**: frame height values.
 * **width**: frame width values.
 * **standby_time**: e.g 0.2 cause a waiting time of 0.2 seconds between every shoot.
   
-For split images in train and test dataset, pass a value between (0,1) to the perc parameter of the **compressTrainTest** function: 
+For split images in the train and test dataset, pass a value between (0,1) to the perc parameter of the **compressTrainTest** function
 
-* **perc**: portion of images to use in the test set (write a value between (0,1)).
+* **perc**: the portion of images to use in the test dataset, write a value between (0,1).
 
-If you don't pass any value to the **justCompress** function, the dataset will be save with the name **dataset_raw.npz**. 
+If you don't pass any value to the **justCompress** function, the dataset will be saved with the name **dataset_raw.npz**.
 
-## Xeye dataset for deep learning 
+## Xeye datasets for deep learning 
 
-In the [notebooks](notebooks/) folder you can find examples of deep learning models based on datasets produced by the xeye package (builded with [Tensorflow](notebooks/tensorflow/) or [Pytorch](notebooks/pytorch/) frameworks). 
+In the [notebooks](notebooks/) folder, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (built with [Tensorflow](notebooks/tensorflow/) or [Pytorch](notebooks/pytorch/) frameworks).
 
-The example notebooks produced with both frameworks refer to datasets stored in the [data](notebooks/data/) folder. In this folder, you can find trivial example datasets that you can use for implementing binary or multi-label classification models. 
+The [data](notebooks/data/) folder contains trivial example datasets for implementing binary or multi-label classification models:
 
 * [Binary dataset](notebooks/data/TrivialBinaryClassification.npz): containing two types of grayscale images (keyboard and mouse).
    
