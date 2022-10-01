@@ -1,10 +1,11 @@
 # Introduction
 
-Xeye is a package for creating dataset for computer vision applications based on inferencial results of deep learning models. The main reasons to use Xeye are:
+Xeye is a package designed for creating datasets for computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:
 
-* Create a dataset using only a laptop and its integrated camera (or alternatively an external usb camera);
+* Create a dataset using only a laptop and its integrated camera (or alternatively an external USB camera);
 * Create a dataset already structured like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist);
 * Create a dataset that can be used for building models with [Tensorflow](https://www.tensorflow.org/) or [Pytorch](https://pytorch.org/).
+
 
 ## Installation
 
@@ -32,7 +33,7 @@ set the parameters related to the images with the **init** function
 ```python
 data.init()
 ```
-the execution of this function causes the starting of the user interface in **terminal** 
+the execution of this function causes the starting of the user interface in the **terminal** 
 
 
 ```console
@@ -40,7 +41,7 @@ the execution of this function causes the starting of the user interface in **te
 Select the index of the camera that you want to use for creating the dataset: 1
 ``` 
 
-the **init()** function arises multiple questions that set the parameters values
+the **init** function arises multiple questions that set the parameters' values
 
 
 ```console
@@ -56,91 +57,92 @@ num. of waiting time (in sec.) between every frame: 0
 
 Precisely the questions refer to:
 
-* **Select the index of the camera that you want to use for creating the dataset**: generally 0 for integrated camera, 1 for usb external camera.
-* **Num. of types of images to scan**: answer 2 if you want to create a dataset with 2 objects (e.g. keyboard and mouse); answer with the number of objects types that you want to include in your dataset.
-* **Name of image type**: insert the name for every specif object that you you want to include in the dataset. The **init** function creates a named folder for every image types to include. 
+* **Select the index of the camera that you want to use for creating the dataset**: generally 0 for integrated camera, 1 for USB external camera.
+* **Num. of types of images to scan**: answer 2 if you want to create a dataset with two objects (e.g. keyboard and mouse). In general, answer with the number of object types to include in your dataset.
+* **Name of image type**: insert the name of every specific object you want to include in the dataset. The **init** function creates a named folder for every image type. 
 * **Num. of frames to shoot for every image type**: select the number of images you want to shoot and save them in every object folder. 
 * **Single frame HEIGHT**: frame height values.
 * **Single frame WIDTH**: frame width values.
-* **num. of waiting time (in sec.) between every frame**: e.g 0.2 causes a waiting time of 0.2 seconds between every shoot.
+* **Num. of waiting time (in sec.) between every frame**: e.g 0.2 causes a waiting time of 0.2 seconds between every shoot.
 
-After having set the parameters you can invoke the function in order to start shooting images. Datapipe module provides two different formats of images:
+After the parameters setting, you can invoke the function to start shooting images. Datapipe module provides two different formats of images:
 
 * Grayscale image with the **gray** function;
 * Color image with the **rgb** function.
   
-Let's produce a dataset based on rgb images with the rgb function:
+Let's produce a dataset based on RGB images with the **rgb** function:
 
 ```python
 data.rgb()
 ```
-in the terminal press [b] to make photos for the image types passed to the **init** function 
+In the terminal keypress [b], to make photos for the image types passed to the **init** function.
 
 ```console
 --- START TAKING PHOTOS ---
-Press [b] on keyboard to start data collection of image type [keyboard]
+Press [b] on the keyboard to start data collection of image type [keyboard]
 b
-Press [b] on keyboard to start data collection of image type [mouse]
+Press [b] on the keyboard to start data collection of image type [mouse]
 b
 ``` 
 
 On the directory of the script, you can find the folders that contain the images produced by the **rbg** function (e.g. keyboard folder and mouse folder). 
 
 
-Images collected in the folders can be used for building dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist). The first approch to achive this result is calling the **compressTrainTest** function:
+
+Images collected in the folders can be used for building datasets like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist). The first approach to achieve this result is calling the **compressTrainTest** function:
 
 ```python
 data.compressTrainTest()
 ```
 
-that produces the following output in the terminal window 
+That produces the following output in the terminal window 
 
 ```console
 --- DATASET SETTING ---
 percentage of images in the test set: 0.2
 ``` 
 
-in which you can select the portion of images to use in the train set and in the test set (write a value between (0,1)). By doing so, the function produces a **.npz** file formed by these specific tensors:
+In which you can select the portion of images to use in the train and test datasets (write a value between (0,1)). By doing so, the function produces a **.npz** file formed by these specific tensors:
 
 * Train set:
-  * **X_train**: matrices/tensors of every single images in the train set;
-  * **y_train**: classes (ordinal values) associated to every single images in the train set.
+  * **X_train**: matrices/tensors of every single image in the train dataset;
+  * **y_train**: classes (ordinal values) are associated with every image in the train dataset.
 * Test set:
-  * **X_test**: matrices/tensors of every single images in the test set;
-  * **y_test**: classes (ordinal values) associated to every single images in the test set.
+  * **X_test**: matrices/tensors of every single image in the test dataset;
+  * **y_test**: classes (ordinal values) are associated with every image in the test dataset.
   
-(matrices for grayscale images: [Height$\times$Width$\times$1], tensors for rgb images:[Height$\times$Width$\times$3]).
+(matrices for grayscale images: [Height$\times$Width$\times$1], tensors for RGB images:[Height$\times$Width$\times$3]).
 
-An alternative approch is to use the function **compressAll**
+An alternative approach is represented by the use of the function **compressAll**
 
 ```python
 data.compressAll()
 ```
 
-in which the images is grouped in a unique tensor that containes all the frames produced previously. 
+In this case, the images are united in a unique tensor that contains all the frames produced previously. 
 
 * Unique tensor:
-  * **X**: matricies/tensors of every single images produced;
-  * **y**: classes (ordinal values) associated to every single images produced.
+  * **X**: matricies/tensors of every single image produced;
+  * **y**: classes (ordinal values) are associated with every image produced.
 
-Finally you can use the **justCompress** function for create a unique tensor that contain all the images produced. 
+Finally, you can use the **justCompress** function to create a unique tensor with all the images produced.
 
 ```python
 data.justCompress()
 ```
-In terminal you have to insert a name for the dataset
+In the terminal, you have to insert the dataset’s name
 
 ```console
 --- DATASET SETTING ---
-Select a name for the compress file: batch_test
+Select a name for the compressed file: batch_test
 ``` 
-If you pass 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produce by this function can be use by the class **buildDataset** for put togheter more .npz files and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist).
+If you pass 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produced by this function can be used by the class **buildDataset** to put together more .npz files and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist).
 
 ### Other useful functions
 
-* **preview**: open camera stream to check the framing. 
+* **preview**: open the camera stream to check the framing. 
   ![](img/1.png)
-* **varControl**: print the values of the parameters set with the init function. 
+* **varControl**: print the values of the parameters set with the **init** function. 
 ```console
 --- PARAMETERS CONTROL ---
 camera index: 1
@@ -157,7 +159,7 @@ statusRGB: 0
 
 #### Xeye script example 
 
-Example of script in order to use the **dataset** class:
+Example of a script to use the **dataset** class:
 
 ```python
 from xeye import datapipe as dp

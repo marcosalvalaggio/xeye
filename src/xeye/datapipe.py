@@ -129,7 +129,7 @@ class dataset:
         for folder in self.label:
           
             count = 0
-            print(f'Press [b] on keyboard to start data collection of image type: [{folder}]')
+            print(f'Press [b] on the keyboard to start data collection of image type: [{folder}]')
             userinput = input()
             if userinput != 'b':
                 print("Wrong Input...press 'b'")
@@ -184,7 +184,7 @@ class dataset:
 
             count = 0
 
-            print(f'Press [b] on keyboard to start data collection of image type: [{folder}]')
+            print(f'Press [b] on the keyboard to start data collection of image type: [{folder}]')
             userinput = input()
             if userinput != 'b':
                 print("Wrong Input...press 'b'")
@@ -323,7 +323,7 @@ class dataset:
         # insert name for the compress file 
         print('\n')
         print('--- DATASET SETTING ---')
-        name = input('Select a name for the compress file: ')
+        name = input('Select a name for the compressed file: ')
         # check the name for the dataset 
         if len(name) == 0:
             raise TypeError("Insert a valide name for the compress file...")
@@ -492,7 +492,7 @@ class fastDataset:
         for folder in self.label:
           
             count = 0
-            print(f'Press [b] on keyboard to start data collection of image type: [{folder}]')
+            print(f'Press [b] on the keyboard to start data collection of image type: [{folder}]')
             userinput = input()
             if userinput != 'b':
                 print("Wrong Input...press 'b'")
@@ -547,7 +547,7 @@ class fastDataset:
 
             count = 0
 
-            print(f'Press [b] on keyboard to start data collection of image type: [{folder}]')
+            print(f'Press [b] on the keyboard to start data collection of image type: [{folder}]')
             userinput = input()
             if userinput != 'b':
                 print("Wrong Input...press 'b'")
@@ -683,7 +683,7 @@ class fastDataset:
             raise TypeError('You have to call rgb or gray function before compress a dataset...')
         # check the name for the dataset 
         if len(str(name)) == 0:
-            raise TypeError("Insert a valide name for the compress file...")
+            raise TypeError("Insert a valide name for the compressed file...")
         # index for image type 
         i = 0
         # X
