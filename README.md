@@ -24,8 +24,7 @@ To install the package,
 pip install xeye
 ```
 
-<div id='id-dataset/>
-
+<div id='id-dataset'/>
 ## Create a dataset with full UI 
 
 First of all, load the module datapipe from the package:
