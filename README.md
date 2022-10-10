@@ -1,10 +1,15 @@
 
 # Introduction
 
-- [Installation](#id-installation)
-- [Dataset](#id-dataset)
-- [Other useful function](#id-useful)
-- [Dataset script example](#id-script1)
+  - [Installation](#installation)
+  - [Create a dataset with full UI](#create-a-dataset-with-full-ui)
+    - [Other useful functions](#other-useful-functions)
+      - [Script example](#script-example)
+  - [Create a dataset with fast UI](#create-a-dataset-with-fast-ui)
+  - [Build datasets from different .npz files](#build-datasets-from-different-npz-files)
+      - [Script example](#script-example-1)
+  - [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
+  
 
 Xeye is a package designed for creating datasets for computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:
 
@@ -185,6 +190,7 @@ data.rgb()
 data.compressTrainTest()
 data.varControl()
 ```
+<div id='id-fastdataset'/>
 
 ## Create a dataset with fast UI 
 A faster way to use the datapipe module is represented by the **fastDataset** class. In this case, there isn't a complete terminal UI that guides you in the construction of the dataset. With **fastDataset**, you only pass the parameters to the class, and then call the functions you need. 
@@ -226,6 +232,8 @@ For split images in the train and test dataset, pass a value between (0,1) to th
 * **perc**: the portion of images to use in the test dataset, write a value between (0,1).
 
 If you don't pass any value to the **justCompress** function, the dataset will be saved with the name **dataset_raw.npz**.
+
+<div id='id-builddataset'/>
 
 ## Build datasets from different .npz files 
 
