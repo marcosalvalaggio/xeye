@@ -15,6 +15,7 @@ Xeye is a package designed for creating datasets for computer vision application
 
 
 <div id='id-installation'/>
+
 ## Installation
 
 To install the package, 
@@ -24,6 +25,7 @@ pip install xeye
 ```
 
 <div id='id-dataset/>
+
 ## Create a dataset with full UI 
 
 First of all, load the module datapipe from the package:
@@ -148,6 +150,7 @@ Select a name for the compressed file: batch_test
 If you pass 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produced by this function can be used by the class **buildDataset** to put together more .npz files and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist).
 
 <div id='id-useful'/>
+
 ### Other useful functions
 
 * **preview**: open the camera stream to check the framing. 
@@ -168,6 +171,7 @@ statusRGB: 0
 ``` 
 
 <div id='id-script1'/>
+
 #### Script example 
 
 Example of a script to use the **dataset** class:
@@ -231,7 +235,7 @@ If you want to build datasets made by different types of images, but for example
 * Create different .npz files for every type of images that composes the dataset (use the same dimension for the frames and the same colour: all rgb or all grayscale);
 * Create a new script and call the **buildDataset** class that merges all the .npz files created before.
 
-### Script example 
+#### Script example 
 
 ```python
 from xeye import datapipe as dp
