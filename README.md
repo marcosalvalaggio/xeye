@@ -1,4 +1,10 @@
+
 # Introduction
+
+- [Installation](#id-installation)
+- [Dataset](#id-dataset)
+- [Other useful function](#id-useful)
+- [Dataset script example](#id-script1)
 
 Xeye is a package designed for creating datasets for computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:
 
@@ -7,6 +13,8 @@ Xeye is a package designed for creating datasets for computer vision application
 * Create a dataset that can be used for building models with [Tensorflow](https://www.tensorflow.org/) or [Pytorch](https://pytorch.org/).
 
 
+
+<div id='id-installation'/>
 ## Installation
 
 To install the package, 
@@ -15,6 +23,7 @@ To install the package,
 pip install xeye
 ```
 
+<div id='id-dataset/>
 ## Create a dataset with full UI 
 
 First of all, load the module datapipe from the package:
@@ -138,6 +147,7 @@ Select a name for the compressed file: batch_test
 ``` 
 If you pass 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produced by this function can be used by the class **buildDataset** to put together more .npz files and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist).
 
+<div id='id-useful'/>
 ### Other useful functions
 
 * **preview**: open the camera stream to check the framing. 
@@ -157,7 +167,8 @@ statusGray: 1
 statusRGB: 0
 ``` 
 
-#### Xeye script example 
+<div id='id-script1'/>
+#### Script example 
 
 Example of a script to use the **dataset** class:
 
@@ -219,6 +230,19 @@ If you want to build datasets made by different types of images, but for example
 * Create datasets with the **justCompress** function;
 * Create different .npz files for every type of images that composes the dataset (use the same dimension for the frames and the same colour: all rgb or all grayscale);
 * Create a new script and call the **buildDataset** class that merges all the .npz files created before.
+
+### Script example 
+
+```python
+from xeye import datapipe as dp
+# list of directory (paths for the .npz files)
+path = ['/Users/marcosalvalaggio/code/testxeye/dataset/batch_2.npz', '/Users/marcosalvalaggio/code/testxeye/dataset/batch_3.npz']
+# list of labels associated with the images inside the .npz files
+label = [0,1]
+# initializes the class
+data = dp.buildDataset(path=path, label=label, color=True, split=True, perc=0.2)
+data.build()
+```
 
 
  
