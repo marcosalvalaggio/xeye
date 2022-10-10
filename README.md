@@ -212,6 +212,10 @@ For split images in the train and test dataset, pass a value between (0,1) to th
 
 If you don't pass any value to the **justCompress** function, the dataset will be saved with the name **dataset_raw.npz**.
 
+## Build datasets from different npz files 
+
+In case you want to build datasets made by different types of images, but for example, you can't shoot one of the image types that compose the dataset (you have to wait a significant amount of time or change location), you can use the **buildDataset** class. 
+
 ## Xeye datasets for deep learning 
 
 In the [notebooks](notebooks/) folder, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (built with [Tensorflow](notebooks/tensorflow/) or [Pytorch](notebooks/pytorch/) frameworks).
