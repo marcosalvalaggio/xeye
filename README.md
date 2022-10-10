@@ -212,13 +212,13 @@ For split images in the train and test dataset, pass a value between (0,1) to th
 
 If you don't pass any value to the **justCompress** function, the dataset will be saved with the name **dataset_raw.npz**.
 
-## Build datasets from different npz files 
+## Build datasets from different .npz files 
 
-If you want to build datasets made by different types of images, but for example, you can't shoot one of the image types that compose the dataset (you have to wait a significant amount of time or change location), you can use the buildDataset class. 
+If you want to build datasets made by different types of images, but for example, you can't shoot one of the image types that compose the dataset (because you have to wait a significant amount of time or change location), you can use the **buildDataset** class. 
 
-* Create datasets with the justCompress function;
+* Create datasets with the **justCompress** function;
 * Create different .npz files for every type of images that composes the dataset (use the same dimension for the frames and the same colour: all rgb or all grayscale);
-* Create a new script and call the buildDataset class that merges all the .npz files created before.
+* Create a new script and call the **buildDataset** class that merges all the .npz files created before.
 
 
  
