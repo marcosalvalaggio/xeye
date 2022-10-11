@@ -4,10 +4,10 @@
   - [Installation](#installation)
   - [Create a dataset with full UI](#create-a-dataset-with-full-ui)
     - [Other useful functions](#other-useful-functions)
-      - [Script example](#script-example)
+    - [Script example](#script-example)
   - [Create a dataset with fast UI](#create-a-dataset-with-fast-ui)
   - [Build datasets from different .npz files](#build-datasets-from-different-npz-files)
-      - [Script example](#script-example-1)
+    - [Script example](#script-example-1)
   - [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
   
 
@@ -177,7 +177,7 @@ statusRGB: 0
 
 <div id='id-script1'/>
 
-#### Script example 
+### Script example 
 
 Example of a script to use the **dataset** class:
 
@@ -243,7 +243,7 @@ If you want to build datasets made by different types of images, but for example
 * Create different .npz files for every type of images that composes the dataset (use the same dimension for the frames and the same colour: all rgb or all grayscale);
 * Create a new script and call the **buildDataset** class that merges all the .npz files created before.
 
-#### Script example 
+### Script example 
 
 ```python
 from xeye import datapipe as dp
