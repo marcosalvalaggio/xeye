@@ -2,10 +2,10 @@
   - [Installation](#installation)
   - [Create a dataset with full UI](#create-a-dataset-with-full-ui)
     - [Other useful functions](#other-useful-functions)
-    - [Script example](#script-example)
+    - [Script example](#script-example-1)
   - [Create a dataset with fast UI](#create-a-dataset-with-fast-ui)
   - [Build datasets from different .npz files](#build-datasets-from-different-npz-files)
-    - [Script example](#script-example-1)
+    - [Script example](#script-example-2)
   - [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
   
 
@@ -17,7 +17,7 @@ Xeye is a package designed for creating datasets for computer vision application
 
 
 
-<div id='id-installation'/>
+<div id='installation'/>
 
 ## Installation
 
@@ -27,7 +27,7 @@ To install the package,
 pip install xeye
 ```
 
-<div id='id-dataset'/>
+<div id='create-a-dataset-with-full-ui'/>
 
 ## Create a dataset with full UI 
 
@@ -152,7 +152,7 @@ Select a name for the compressed file: batch_test
 ``` 
 If you pass 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produced by this function can be used by the class **buildDataset** to put together more .npz files and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist).
 
-<div id='id-useful'/>
+<div id='other-useful-functions'/>
 
 ### Other useful functions
 
@@ -173,7 +173,7 @@ statusGray: 1
 statusRGB: 0
 ``` 
 
-<div id='id-script1'/>
+<div id='script-example-1'/>
 
 ### Script example 
 
@@ -188,7 +188,7 @@ data.rgb()
 data.compressTrainTest()
 data.varControl()
 ```
-<div id='id-fastdataset'/>
+<div id='create-a-dataset-with-fast-ui'/>
 
 ## Create a dataset with fast UI 
 A faster way to use the datapipe module is represented by the **fastDataset** class. In this case, there isn't a complete terminal UI that guides you in the construction of the dataset. With **fastDataset**, you only pass the parameters to the class, and then call the functions you need. 
@@ -231,7 +231,7 @@ For split images in the train and test dataset, pass a value between (0,1) to th
 
 If you don't pass any value to the **justCompress** function, the dataset will be saved with the name **dataset_raw.npz**.
 
-<div id='id-builddataset'/>
+<div id='create-a-dataset-with-fast-ui'/>
 
 ## Build datasets from different .npz files 
 
@@ -240,6 +240,8 @@ If you want to build datasets made by different types of images, but for example
 * Create datasets with the **justCompress** function;
 * Create different .npz files for every type of images that composes the dataset (use the same dimension for the frames and the same colour: all rgb or all grayscale);
 * Create a new script and call the **buildDataset** class that merges all the .npz files created before.
+
+<div id='script-example-2'/>
 
 ### Script example 
 
@@ -255,7 +257,7 @@ data.build()
 ```
 
 
- 
+<div id='xeye-datasets-for-deep-learning'/>
 
 ## Xeye datasets for deep learning 
 
