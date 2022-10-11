@@ -1,6 +1,4 @@
 
-# Introduction
-
   - [Installation](#installation)
   - [Create a dataset with full UI](#create-a-dataset-with-full-ui)
     - [Other useful functions](#other-useful-functions)
