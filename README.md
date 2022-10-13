@@ -215,7 +215,7 @@ data.compressTrainTest(perc = perc)
 data.justCompress("batch_test")
 ```
 
-The parameters passed to the class fastDataset:
+The parameters passed to the class **fastDataset**:
 
 * **index**: generally 0 for integrated camera, 1 for USB external camera.
 * **img_types**: numbers of object types that you want to include in your dataset.
@@ -255,6 +255,15 @@ label = [0,1]
 data = dp.buildDataset(path=path, label=label, color=True, split=True, perc=0.2)
 data.build()
 ```
+The parameters passed to the class **buildDataset**:
+
+* **Path**: a list of the paths to the .npz files you want to include in the new dataset. 
+* **Label**: a list of ordinal integer values representing the class type of the images inside a .npz file contained in the new dataset. In the example script, the first .npz file images are associated with class 0, while the second .npz file images are associated with class 1. Remember: always start with 0.
+* **Color**: defines if the images contained in the .npz files are grayscale or RGB. A boolean value by default, set to True.
+* **Split**: defines if you want to build a dataset split in train-test or not. A boolean value by default, set to True.
+* **Perc**: defines the percentage of images assigned to the test dataset. A float value between (0,1).
+
+An important consideration to take in mind whenever you want to use the **buildDataset** class is that you need to have .npz files containing images with equal dimensions (height, width) and the same types of colours (all grayscale images or RGB).
 
 
 <div id='xeye-datasets-for-deep-learning'/>
