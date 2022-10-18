@@ -37,10 +37,10 @@ class dataset:
         print('--- CAMERA SETTING ---')
         self.index = int(input('Select the index of the camera that you want to use for creating the dataset: '))
         if self.index == -1:
-            raise TypeError('Insert valid camera index...')
+            raise ValueError('Insert valid camera index...')
         camera = cv2.VideoCapture(self.index)
         if camera.isOpened() == False:
-            raise TypeError('Insert valid camera index...')
+            raise ValueError('Insert valid camera index...')
         camera.release()
 
         # set how many type of images do you want to collect
@@ -49,7 +49,7 @@ class dataset:
         print('--- IMAGE SETTINGS ---')
         img_types = int(input('Num. of types of images to scan: '))
         if img_types == 0: # informarsi sul raise error 
-            raise TypeError('Number of images types must be greather than 0')
+            raise ValueError('Number of images types must be greather than 0')
         for i in range(0,img_types):
             l = str(input(f"Name of image type ({i+1}): "))
             self.label.append(l)
@@ -61,21 +61,21 @@ class dataset:
         # number of frames 
         self.num = int(input('Num. of frames to shoot for every image type: '))
         if self.num == 0 or self.num < 0:
-            raise TypeError('You cant inizialize frames number equal or below zero...')
+            raise ValueError('You cant inizialize frames number equal or below zero...')
         
 
         # Image shaping phase
         self.height = int(input('Single frame HEIGHT: '))
         if self.height == 0 or self.height < 0:
-            raise TypeError('Frame HEIGHT must be greather than 0')
+            raise ValueError('Frame HEIGHT must be greather than 0')
         self.width = int(input('Single frame WIDTH: '))
         if self.width == 0 or self.width < 0:
-            raise TypeError('Frame WIDTH must be greather than 0')
+            raise ValueError('Frame WIDTH must be greather than 0')
 
         # Waiting time in shooting loop
         self.standby_time = float(input('num. of waiting time (in sec.) between every frame: '))
         if self.standby_time < 0:
-            raise TypeError('waiting time must be grater than 0...')
+            raise ValueError('waiting time must be grater than 0...')
 
 
     # --------------------
@@ -229,12 +229,12 @@ class dataset:
     def compressTrainTest(self):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
-            raise TypeError('You have to call rgb or gray function before compress a dataset...')
+            raise ValueError('You have to call rgb or gray function before compress a dataset...')
         print('\n')
         print('--- DATASET SETTING ---')
         self.perc = float(input('percentage of images in the test set (0,1): '))
         if self.perc <= 0:
-            raise TypeError('percentage value must be greater than 0...')
+            raise ValueError('percentage value must be greater than 0...')
         # index for image type 
         i = 0
         # X
@@ -277,7 +277,7 @@ class dataset:
     def compressAll(self):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
-            raise TypeError('You have to call rgb or gray function before compress a dataset...')
+            raise ValueError('You have to call rgb or gray function before compress a dataset...')
         # index for image type 
         i = 0
         # X
@@ -319,14 +319,14 @@ class dataset:
     def justCompress(self):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
-            raise TypeError('You have to call rgb or gray function before compress a dataset...')
+            raise ValueError('You have to call rgb or gray function before compress a dataset...')
         # insert name for the compress file 
         print('\n')
         print('--- DATASET SETTING ---')
         name = input('Select a name for the compressed file: ')
         # check the name for the dataset 
         if len(name) == 0:
-            raise TypeError("Insert a valide name for the compress file...")
+            raise ValueError("Insert a valide name for the compress file...")
         if name == "0":
             pass
         else:
@@ -408,37 +408,37 @@ class fastDataset:
         
         # camera setting
         if self.index == -1:
-            raise TypeError('Insert valid camera index...')
+            raise ValueError('Insert valid camera index...')
         camera = cv2.VideoCapture(self.index)
         if camera.isOpened() == False:
-            raise TypeError('Insert valid camera index...')
+            raise ValueError('Insert valid camera index...')
 
         # set how many type of images do you want to collect
         if self.img_types == 0: # informarsi sul raise error 
-            raise TypeError('Number of images types must be greather than 0')
+            raise ValueError('Number of images types must be greather than 0')
         # folder building
         if self.label == []:
-            raise TypeError('Not valid names for images types...')
+            raise ValueError('Not valid names for images types...')
         if len(self.label) != self.img_types:
-            raise TypeError("You must have a number of labels equal to the number of images types selected...")
+            raise ValueError("You must have a number of labels equal to the number of images types selected...")
         for lab in self.label:
             if not os.path.exists(lab):
                 os.mkdir(lab)
 
         # number of frames 
         if self.num == 0 or self.num < 0:
-            raise TypeError('You cant inizialize frames number equal or below zero...')
+            raise ValueError('You cant inizialize frames number equal or below zero...')
         
 
         # Image shaping phase
         if self.height == 0 or self.height < 0:
-            raise TypeError('Frame HEIGHT must be greather than 0')
+            raise ValueError('Frame HEIGHT must be greather than 0')
         if self.width == 0 or self.width < 0:
-            raise TypeError('Frame WIDTH must be greather than 0')
+            raise ValueError('Frame WIDTH must be greather than 0')
 
         # Waiting time in shooting loop
         if self.standby_time < 0:
-            raise TypeError('waiting time must be grater than 0...')
+            raise ValueError('waiting time must be grater than 0...')
 
 
 
@@ -591,10 +591,10 @@ class fastDataset:
     def compressTrainTest(self, perc = 0.1):
         # percentage control 
         if perc <= 0:
-            raise TypeError('percentage value must be greater than 0...')
+            raise ValueError('percentage value must be greater than 0...')
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
-            raise TypeError('You have to call rgb or gray function before compress a dataset...')
+            raise ValueError('You have to call rgb or gray function before compress a dataset...')
         # index for image type 
         i = 0
         # X
@@ -637,7 +637,7 @@ class fastDataset:
     def compressAll(self):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
-            raise TypeError('You have to call rgb or gray function before compress a dataset...')
+            raise ValueError('You have to call rgb or gray function before compress a dataset...')
         # index for image type 
         i = 0
         # X
@@ -680,10 +680,10 @@ class fastDataset:
     def justCompress(self, name = "dataset_raw"):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
-            raise TypeError('You have to call rgb or gray function before compress a dataset...')
+            raise ValueError('You have to call rgb or gray function before compress a dataset...')
         # check the name for the dataset 
         if len(str(name)) == 0:
-            raise TypeError("Insert a valide name for the compressed file...")
+            raise ValueError("Insert a valide name for the compressed file...")
         # index for image type 
         i = 0
         # X
@@ -756,19 +756,19 @@ class buildDataset:
         if len(set(_height)) == 1:
             self.height = _height[0]
         else:
-            raise TypeError("Datasets doesn't have the same dimensions...")
+            raise ValueError("Datasets doesn't have the same dimensions...")
         
         if len(set(_width)) == 1:
             self.width = _width[0]
         else:
-            raise TypeError("Datasets doesn't have the same dimensions...")
+            raise ValueError("Datasets doesn't have the same dimensions...")
 
     def build(self):
         # call the crawler function for check the dimensions of the images
         self.sizer()
         # control if the path and label lists have the same length
         if len(self.path) != len(self.label):
-            raise TypeError("Path and label lists doesn't have the same length...")
+            raise ValueError("Path and label lists doesn't have the same length...")
         # Create the tensor X
         if self.color == True:
             self.tensor['X'] = np.empty((0,self.height,self.width,3))
