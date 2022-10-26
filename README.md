@@ -9,7 +9,7 @@
   - [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
   
 
-Xeye is a package designed for creating datasets for computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:
+Xeye is a package for data collection to build computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:
 
 * Create a dataset using only a laptop and its integrated camera (or alternatively an external USB camera);
 * Create a dataset already structured like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist);
