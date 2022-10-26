@@ -257,6 +257,7 @@ class dataset:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
                     img = cv2.imread(lab + '/' + file)
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
@@ -300,6 +301,7 @@ class dataset:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
                     img = cv2.imread(lab + '/' + file)
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
@@ -351,6 +353,7 @@ class dataset:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
                     img = cv2.imread(lab + '/' + file)
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
@@ -617,6 +620,7 @@ class fastDataset:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
                     img = cv2.imread(lab + '/' + file)
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
@@ -660,6 +664,7 @@ class fastDataset:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
                     img = cv2.imread(lab + '/' + file)
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
@@ -704,6 +709,7 @@ class fastDataset:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
                     img = cv2.imread(lab + '/' + file)
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 # save in tensor class 
                 self.class_dict['t'+str(i)][j] = img
                 j += 1
