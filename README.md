@@ -270,9 +270,8 @@ An important consideration to take in mind whenever you want to use the **buildD
 
 ## Xeye datasets for deep learning 
 
-In the [notebooks](notebooks/) folder, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (built with [Tensorflow](notebooks/tensorflow/) or [Pytorch](notebooks/pytorch/) frameworks).
+In the [notebooks](notebooks/) folder, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with [Tensorflow](notebooks/tensorflow/) or [Pytorch](notebooks/pytorch/) frameworks).
 
-The [data](notebooks/data/) folder contains trivial example datasets for implementing binary or multi-label classification models:
 
 * [Binary dataset](https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing): containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).
 * [MultiLabel dataset](https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing): containing three types of rgb images (three types of security cameras with labels: 0=dome, 1=bullet, 2=cube)
