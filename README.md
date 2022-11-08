@@ -1,4 +1,3 @@
-<img src="img/logo.png" alt="drawing" width="100"/>
 
   - [Installation](#installation)
   - [Create a dataset with full UI](#create-a-dataset-with-full-ui)
