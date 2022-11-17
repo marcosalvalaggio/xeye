@@ -1,12 +1,15 @@
-
-  - [Installation](#installation)
-  - [Create a dataset with full UI](#create-a-dataset-with-full-ui)
-    - [Other useful functions](#other-useful-functions)
-    - [Script example](#script-example-1)
-  - [Create a dataset with fast UI](#create-a-dataset-with-fast-ui)
-  - [Build datasets from different .npz files](#build-datasets-from-different-npz-files)
-    - [Script example](#script-example-2)
-  - [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
+<center>
+<img src="img/logo.png" alt="drawing" style="width:500px;"/>
+</center>
+ 
+- [Installation](#installation)
+- [Create a dataset with full UI](#create-a-dataset-with-full-ui)
+  - [Other useful functions](#other-useful-functions)
+  - [Script example](#script-example)
+- [Create a dataset with fast UI](#create-a-dataset-with-fast-ui)
+- [Build datasets from different .npz files](#build-datasets-from-different-npz-files)
+  - [Script example](#script-example-1)
+- [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
   
 
 Xeye is a package for data collection to build computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:
@@ -46,6 +49,7 @@ set the parameters related to the images with the **init** function
 
 ```python
 data.init()
+
 ```
 the execution of this function causes the starting of the user interface in the **terminal** 
 
@@ -186,7 +190,6 @@ data.init()
 data.preview()
 data.rgb()
 data.compressTrainTest()
-data.varControl()
 ```
 <div id='create-a-dataset-with-fast-ui'/>
 
