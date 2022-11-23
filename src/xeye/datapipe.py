@@ -772,9 +772,13 @@ class buildDataset:
             self.size.append(max(height))
             self.size.append(max(width))
             self.size = tuple(self.size)
+        else:
+            pass
         # Color channels control
         if len(set(color_ch)) != 1:
             raise ValueError("Datasets with different colour spaces...used datasets with the same colour spaces for the images")
+        else:
+            pass
 
         
 
@@ -826,7 +830,6 @@ if __name__ == '__main__':
     data.compressTrainTest()
     data.compressAll()
     data.justCompress()
-    data.varControl()
 
     '''
     ### test with fastDataset 
@@ -839,7 +842,6 @@ if __name__ == '__main__':
     standby_time = 0
     perc = 0.2
 
-    # class call 
     data = fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
     data.init()
     data.preview()

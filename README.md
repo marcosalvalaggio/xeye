@@ -241,7 +241,7 @@ If you don't pass any value to the **justCompress** function, the dataset will b
 If you want to build datasets made by different types of images, but for example, you can't shoot one of the image types that compose the dataset (because you have to wait a significant amount of time or change location), you can use the **buildDataset** class. 
 
 * Create datasets with the **justCompress** function;
-* Create different .npz files for every type of images that composes the dataset (use the same dimension for the frames and the same colour: all rgb or all grayscale);
+* Create different .npz files for every type of images that composes the dataset (use the same colour spaces in all datasets, RGB or grayscale);
 * Create a new script and call the **buildDataset** class that merges all the .npz files created before.
 
 <div id='script-example-2'/>
@@ -255,18 +255,19 @@ path = ['/Users/marcosalvalaggio/code/testxeye/dataset/batch_2.npz', '/Users/mar
 # list of labels associated with the images inside the .npz files
 label = [0,1]
 # initializes the class
-data = dp.buildDataset(path=path, label=label, color=True, split=True, perc=0.2)
+data = dp.buildDataset(path=path, label=label, size = None, color=True, split=True, perc=0.2)
 data.build()
 ```
 The parameters passed to the class **buildDataset**:
 
-* **Path**: a list of the paths to the .npz files you want to include in the new dataset. 
-* **Label**: a list of ordinal integer values representing the class type of the images inside a .npz file contained in the new dataset. In the example script, the first .npz file images are associated with class 0, while the second .npz file images are associated with class 1. Remember: always start with 0.
-* **Color**: defines if the images contained in the .npz files are grayscale or RGB. A boolean value by default, set to True.
-* **Split**: defines if you want to build a dataset split in train-test or not. A boolean value by default, set to True.
-* **Perc**: defines the percentage of images assigned to the test dataset. A float value between (0,1).
+* **path**: list of files (.npz) path you want to include in the new dataset
+* **label**: list of ordinal integer values representing the class type of the images inside a .npz file contained in the new dataset. In the example script, the first .npz file images are associated with class 0, while the second .npz file images are associated with class 1. Remember: always start with 0.
+* **size**: tuple (height, width) for the images in the new dataset created. The default value (None) indicates that new images have the maximum height and width found in the datasets listed as dimensions
+* **color**: defines if the images contained in the .npz files are RGB or grayscale. A boolean value, by default, is set to True (meaning RGB images).
+* **split**: defines if you want to build a dataset split in train-test or not. A boolean value, by default, is set to True.
+* **perc**: defines the percentage of images assigned to the test dataset. A floating value between (0,1). It's set to 0.1 by default.
 
-An important consideration to take in mind whenever you want to use the **buildDataset** class is that you need to have .npz files containing images with equal dimensions (height, width) and the same types of colours (all grayscale images or RGB).
+When you want to use the **buildDataset** class, you need to have .npz files containing images with the same types of colour spaces (all grayscale images or RGB).
 
 
 <div id='xeye-datasets-for-deep-learning'/>

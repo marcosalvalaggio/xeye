@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xeye"
-version = "0.24"
+version = "0.25"
 authors = [
   { name="Marco Salvalaggio", email="mar.salvalaggio@gmail.com" },
 ]
-description = "Create datasets for computer vision application"
+description = "Create datasets for computer vision applications"
 readme = "README.md"
 license = { file="LICENSE" }
 requires-python = ">=3.7"
@@ -24,5 +24,5 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/Glue-Coder/xeye"
-"Bug Tracker" = "https://github.com/Glue-Coder/xeye"
+"Homepage" = "https://github.com/marcosalvalaggio/xeye"
+"Bug Tracker" = "https://github.com/marcosalvalaggio/xeye"
