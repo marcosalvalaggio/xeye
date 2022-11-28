@@ -280,7 +280,7 @@ The parameters passed to the class **manualDataset**:
 
 ### How to take pictures manually
 
-On the image window title, after the image type caption i's reported how to take pictures manually with the **manualDataset**
+On the image window title, after the image type caption it's reported how to take pictures manually with the **manualDataset**
 
 * Press [s] on the keyboard to save the image nr: 1
 
