@@ -387,7 +387,7 @@ class dataset:
 
 class fastDataset:
     
-    def __init__(self, index, img_types, label, num, height, width, stand_by_time):
+    def __init__(self, index: int, img_types: int, label: list[str], num: int, height: int, width: int, stand_by_time: float) -> None:
     # inizialized variable
         self.index = index
         self.img_types = img_types
@@ -400,8 +400,6 @@ class fastDataset:
         self.standby_time = stand_by_time
         self.statusGray = 0
         self.statusRGB = 0
-
-    def init(self):
 
         # clear terminal 
         if(os.name == 'posix'): #unix
@@ -740,7 +738,7 @@ class fastDataset:
 
 class manualDataset(fastDataset):
 
-    def __init__(self, index, img_types, label, num, height, width):
+    def __init__(self, index: int, img_types: int, label: list[str], num: int, height: int, width: int):
     # inizialized variable
         self.index = index
         self.img_types = img_types
@@ -752,8 +750,6 @@ class manualDataset(fastDataset):
         self.tensor = {}
         self.statusGray = 0
         self.statusRGB = 0
-
-    def init(self):
 
         # clear terminal 
         if(os.name == 'posix'): #unix
@@ -901,7 +897,7 @@ class manualDataset(fastDataset):
 
 class buildDataset:
 
-    def __init__(self, path, label, size=None, color = True, split = True, perc = 0.1):
+    def __init__(self, path: list[str], label: list[int], size: tuple = None, color: bool = True, split: bool = True, perc: float = 0.1) -> None:
         self.path = path
         self.label = label 
         self.size = size
@@ -1008,26 +1004,24 @@ if __name__ == '__main__':
     perc = 0.2
     
     data = fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
-    data.init()
     data.preview()
     data.varControl()
     data.gray()
     data.rgb()
     data.compressAll()
     data.compressTrainTest(perc = perc)
-    data.justCompress()
+    data.justCompress('batch_test')
      # ------------------------ #
 
     # ------------------------ #
     ### test with manualDataset
     data = manualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
-    data.init()
     data.preview()
     #data.rgb()
     data.gray()
     data.compressAll()
     data.compressTrainTest(perc = perc)
-    data.justCompress()
+    data.justCompress('batch_test')
      # ------------------------ #
     
     ### plot image from the dataset created 

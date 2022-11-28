@@ -192,6 +192,9 @@ data.init()
 data.preview()
 data.rgb()
 data.compressTrainTest()
+data.compressAll()
+data.justCompress()
+
 ```
 <div id='create-a-dataset-with-fast-ui'/>
 
@@ -214,7 +217,7 @@ standby_time = 0
 perc = 0.2
 
 data = dp.fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
-data.init()
+data.preview()
 data.rgb()
 data.compressTrainTest(perc = perc)
 data.compressAll()
@@ -260,7 +263,7 @@ standby_time = 0
 perc = 0.2
 
 data = dp.manualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
-data.init()
+data.preview()
 data.rgb()
 data.compressTrainTest(perc = perc)
 data.compressAll()
