@@ -8,7 +8,7 @@
   - [Script example](#script-example)
 - [Create a dataset with fast UI](#create-a-dataset-with-fast-ui)
 - [Create a dataset with manual UI](#create-a-dataset-with-manual-ui)
-  - [How to take picture manually](#how-to-take-picture-manually)
+  - [How to take pictures manually](#how-to-take-pictures-manually)
 - [Build datasets from different .npz files](#build-datasets-from-different-npz-files)
   - [Script example](#script-example-1)
 - [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
@@ -278,7 +278,7 @@ The parameters passed to the class **manualDataset**:
 * **height**: frame height values.
 * **width**: frame width values.
 
-### How to take picture manually
+### How to take pictures manually
 
 On the image window title, after the image type caption i's reported how to take pictures manually with the **manualDataset**
 
