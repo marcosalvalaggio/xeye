@@ -738,6 +738,167 @@ class fastDataset:
 
 
 
+class manualDataset(fastDataset):
+
+    def __init__(self, index, img_types, label, num, height, width):
+    # inizialized variable
+        self.index = index
+        self.img_types = img_types
+        self.label = label
+        self.num = num
+        self.height = height
+        self.width = width
+        self.class_dict = {}
+        self.tensor = {}
+        self.statusGray = 0
+        self.statusRGB = 0
+
+    def init(self):
+
+        # clear terminal 
+        if(os.name == 'posix'): #unix
+            os.system('clear')
+        else: #windows
+            os.system('cls')
+        
+        # camera setting
+        if self.index == -1:
+            raise ValueError('Insert valid camera index...')
+        camera = cv2.VideoCapture(self.index)
+        if camera.isOpened() == False:
+            raise ValueError('Insert valid camera index...')
+
+        # set how many type of images do you want to collect
+        if self.img_types == 0: # informarsi sul raise error 
+            raise ValueError('Number of images types must be greather than 0')
+        # folder building
+        if self.label == []:
+            raise ValueError('Not valid names for images types...')
+        if len(self.label) != self.img_types:
+            raise ValueError("You must have a number of labels equal to the number of images types selected...")
+        for lab in self.label:
+            if not os.path.exists(lab):
+                os.mkdir(lab)
+
+        # number of frames 
+        if self.num == 0 or self.num < 0:
+            raise ValueError('You cant inizialize frames number equal or below zero...')
+        
+
+        # Image shaping phase
+        if self.height == 0 or self.height < 0:
+            raise ValueError('Frame HEIGHT must be greather than 0')
+        if self.width == 0 or self.width < 0:
+            raise ValueError('Frame WIDTH must be greather than 0')
+
+    # -----------
+    # rgb imges
+    # -----------
+    def rgb(self):
+
+        print('\n')
+        print('--- START TAKING PHOTOS ---')
+
+        camera = cv2.VideoCapture(self.index)
+
+        # Index for files name 
+        i = 0
+        for folder in self.label:
+
+            count = 0
+
+            print(f'Press [b] on the keyboard to start data collection of image type: [{folder}]')
+            userinput = input()
+            if userinput != 'b':
+                print("Wrong Input...press 'b'")
+                exit()
+
+            while count < self.num:
+
+                status, frame = camera.read()
+
+                if not status:
+                    print("frame doesn't been captured")
+                    break
+
+                cv2.startWindowThread()
+                cv2.imshow(f"Camera View for image type [{folder}], Press [s] on the keyboard to save the image nr: {count}", frame)
+
+                frame = cv2.resize(frame, (self.width, self.height))
+                
+                if cv2.waitKey(1) == ord('s'):
+                    cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', frame)
+                    count=count+1
+                else:
+                    pass
+
+                if cv2.waitKey(1) == ord('q'):
+                    break
+            
+            i += 1
+
+        camera.release()
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)
+        # Set status 
+        self.statusGray = 0
+        self.statusRGB = 1
+
+    # ---------------
+    # grayscale images 
+    #----------------
+    def gray(self):
+        
+        print('\n')
+        print('--- START TAKING PHOTOS ---')
+
+        camera = cv2.VideoCapture(self.index)
+
+        # Index for files name 
+        i = 0
+        for folder in self.label:
+          
+            count = 0
+            print(f'Press [b] on the keyboard to start data collection of image type: [{folder}]')
+            userinput = input()
+            if userinput != 'b':
+                print("Wrong Input...press 'b'")
+
+            while count < self.num:
+                
+                status, frame = camera.read()
+
+                if not status:
+                    print("frame doesn't been captured")
+                    break
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+                cv2.startWindowThread()
+                cv2.imshow(f"Camera View for image type [{folder}], Press [s] on the keyboard to save the image nr: {count}",gray)
+
+                gray = cv2.resize(gray, (self.width, self.height))
+
+                if cv2.waitKey(1) == ord('s'):
+                    cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', gray)
+                    count=count+1
+                else:
+                    pass
+
+                if cv2.waitKey(1) == ord('q'):
+                    break
+                
+            i += 1
+
+        camera.release()
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)
+        # set status
+        self.statusGray = 1
+        self.statusRGB = 0
+
+
+
+
 class buildDataset:
 
     def __init__(self, path, label, size=None, color = True, split = True, perc = 0.1):
@@ -821,7 +982,9 @@ class buildDataset:
 
 if __name__ == '__main__':
 
-    
+
+    # ------------------------ #
+    ### test with dataset
     data = dataset()
     data.init()
     data.preview()
@@ -830,8 +993,10 @@ if __name__ == '__main__':
     data.compressTrainTest()
     data.compressAll()
     data.justCompress()
+    # ------------------------ #
 
     '''
+    # ------------------------ #
     ### test with fastDataset 
     index = 0
     img_types = 1
@@ -841,7 +1006,7 @@ if __name__ == '__main__':
     width = 100
     standby_time = 0
     perc = 0.2
-
+    
     data = fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
     data.init()
     data.preview()
@@ -850,4 +1015,32 @@ if __name__ == '__main__':
     data.rgb()
     data.compressAll()
     data.compressTrainTest(perc = perc)
+    data.justCompress()
+     # ------------------------ #
+
+    # ------------------------ #
+    ### test with manualDataset
+    data = manualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
+    data.init()
+    data.preview()
+    #data.rgb()
+    data.gray()
+    data.compressAll()
+    data.compressTrainTest(perc = perc)
+    data.justCompress()
+     # ------------------------ #
+    
+    ### plot image from the dataset created 
+    data = np.load('dataset.npz')
+    X_train = data['X_train']
+    X_test = data['X_test']
+    y_train = data['y_train']
+    y_test = data['y_test']
+    print(X_train.shape)
+    print(X_test.shape)
+    print(y_train.shape)
+    print(y_test.shape)
+    plt.imshow(X_train[0], cmap = 'gray')
+    plt.title(f'load image: {y_train[0]}')
+    plt.show()
     '''
