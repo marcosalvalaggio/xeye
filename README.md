@@ -286,7 +286,7 @@ On the image window title, after the image type caption it's reported how to tak
 
 ![](img/manual.png)
 
-Press [s] until you reach the number of frames passed to the **num** option. 
+Press [s] until you reach the number of frames passed to the **num** parameter of the class. 
 
 ## Build datasets from different .npz files 
 
