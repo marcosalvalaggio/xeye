@@ -7,6 +7,8 @@
   - [Other useful functions](#other-useful-functions)
   - [Script example](#script-example)
 - [Create a dataset with fast UI](#create-a-dataset-with-fast-ui)
+- [Create a dataset with manual UI](#create-a-dataset-with-manual-ui)
+  - [How to take picture manually](#how-to-take-picture-manually)
 - [Build datasets from different .npz files](#build-datasets-from-different-npz-files)
   - [Script example](#script-example-1)
 - [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
@@ -215,6 +217,7 @@ data = dp.fastDataset(index = index, img_types = img_types, label = label, num =
 data.init()
 data.rgb()
 data.compressTrainTest(perc = perc)
+data.compressAll()
 data.justCompress("batch_test")
 ```
 
@@ -234,7 +237,56 @@ For split images in the train and test dataset, pass a value between (0,1) to th
 
 If you don't pass any value to the **justCompress** function, the dataset will be saved with the name **dataset_raw.npz**.
 
-<div id='create-a-dataset-with-fast-ui'/>
+
+
+<div id='create-a-dataset-with-manual-ui'/>
+
+## Create a dataset with manual UI 
+The **manualDataset** class is how you can build a dataset by taking pictures manually. 
+
+```python
+# Load datapipe module
+from xeye import datapipe as dp
+
+# define parameters values
+index = 0
+img_types = 2
+label = ['keyboard', 'mouse']
+num = 20
+height = 100
+width = 100
+standby_time = 0
+# percentage of images in the test set 
+perc = 0.2
+
+data = dp.manualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
+data.init()
+data.rgb()
+data.compressTrainTest(perc = perc)
+data.compressAll()
+data.justCompress("batch_test")
+```
+
+As you can see in the code snippet, the **manualDataset** class works like the **fastDataset** class. The only difference is the absence of the **standby_time option**, which is no more necessary in this case. 
+
+The parameters passed to the class **manualDataset**:
+
+* **index**: generally 0 for integrated camera, 1 for USB external camera.
+* **img_types**: numbers of object types that you want to include in your dataset.
+* **label**: list of object names to include in the dataset. The **init** function creates a named folder for every image type.
+* **num**: select the number of images you want to shoot and save them in every object folder.
+* **height**: frame height values.
+* **width**: frame width values.
+
+### How to take picture manually
+
+On the image window title, after the image type caption i's reported how to take pictures manually with the **manualDataset**
+
+* Press [s] on the keyboard to save the image nr: 1
+
+![](img/manual.png)
+
+Press [s] until you reach the number of frames passed to the **num** option. 
 
 ## Build datasets from different .npz files 
 
