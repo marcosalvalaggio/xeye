@@ -412,34 +412,34 @@ class fastDataset:
             raise ValueError('Insert valid camera index...')
         camera = cv2.VideoCapture(self.index)
         if camera.isOpened() == False:
-            raise ValueError('Insert valid camera index...')
+            raise ValueError('index: Insert valid camera index...')
 
         # set how many type of images do you want to collect
         if self.img_types == 0: # informarsi sul raise error 
-            raise ValueError('Number of images types must be greather than 0')
+            raise ValueError('img_types: Number of images types must be greather than 0')
         # folder building
         if self.label == []:
-            raise ValueError('Not valid names for images types...')
+            raise ValueError('label: Not valid names for images types...')
         if len(self.label) != self.img_types:
-            raise ValueError("You must have a number of labels equal to the number of images types selected...")
+            raise ValueError("label: You must have a number of labels equal to the number of images types selected...")
         for lab in self.label:
             if not os.path.exists(lab):
                 os.mkdir(lab)
 
         # number of frames 
         if self.num == 0 or self.num < 0:
-            raise ValueError('You cant inizialize frames number equal or below zero...')
+            raise ValueError('num: You cant inizialize frames number equal or below zero...')
         
 
         # Image shaping phase
         if self.height == 0 or self.height < 0:
-            raise ValueError('Frame HEIGHT must be greather than 0')
+            raise ValueError('height: Frame HEIGHT must be greather than 0')
         if self.width == 0 or self.width < 0:
-            raise ValueError('Frame WIDTH must be greather than 0')
+            raise ValueError('width: Frame WIDTH must be greather than 0')
 
         # Waiting time in shooting loop
         if self.standby_time < 0:
-            raise ValueError('waiting time must be grater than 0...')
+            raise ValueError('standby_time: waiting time must be grater than 0...')
 
 
 
@@ -589,10 +589,10 @@ class fastDataset:
     # -----------
     # compressTrainTest
     # -----------
-    def compressTrainTest(self, perc = 0.1):
+    def compressTrainTest(self, perc: float = 0.1):
         # percentage control 
         if perc <= 0:
-            raise ValueError('percentage value must be greater than 0...')
+            raise ValueError('perc: Percentage value must be greater than 0...')
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -686,7 +686,7 @@ class fastDataset:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
         # check the name for the dataset 
         if len(str(name)) == 0:
-            raise ValueError("Insert a valide name for the compressed file...")
+            raise ValueError("name: Insert a valide name for the compressed file...")
         # index for image type 
         i = 0
         # X
@@ -759,33 +759,33 @@ class manualDataset(fastDataset):
         
         # camera setting
         if self.index == -1:
-            raise ValueError('Insert valid camera index...')
+            raise ValueError('index: Insert valid camera index...')
         camera = cv2.VideoCapture(self.index)
         if camera.isOpened() == False:
-            raise ValueError('Insert valid camera index...')
+            raise ValueError('index: Insert valid camera index...')
 
         # set how many type of images do you want to collect
         if self.img_types == 0: # informarsi sul raise error 
-            raise ValueError('Number of images types must be greather than 0')
+            raise ValueError('img_types: Number of images types must be greather than 0')
         # folder building
         if self.label == []:
-            raise ValueError('Not valid names for images types...')
+            raise ValueError('label: Not valid names for images types...')
         if len(self.label) != self.img_types:
-            raise ValueError("You must have a number of labels equal to the number of images types selected...")
+            raise ValueError("label: You must have a number of labels equal to the number of images types selected...")
         for lab in self.label:
             if not os.path.exists(lab):
                 os.mkdir(lab)
 
         # number of frames 
         if self.num == 0 or self.num < 0:
-            raise ValueError('You cant inizialize frames number equal or below zero...')
+            raise ValueError('num: You cant inizialize frames number equal or below zero...')
         
 
         # Image shaping phase
         if self.height == 0 or self.height < 0:
-            raise ValueError('Frame HEIGHT must be greather than 0')
+            raise ValueError('height: Frame HEIGHT must be greather than 0')
         if self.width == 0 or self.width < 0:
-            raise ValueError('Frame WIDTH must be greather than 0')
+            raise ValueError('width: Frame WIDTH must be greather than 0')
 
     # -----------
     # rgb imges

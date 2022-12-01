@@ -39,13 +39,13 @@ pip install xeye
 First of all, load the module datapipe from the package:
 
 ```python
-from xeye import datapipe as dp
+import xeye
 ```
 
 then initialize the instance like this 
 
 ```python
-data = dp.dataset()
+data = xeye.dataset()
 ```
 set the parameters related to the images with the **init** function
 
@@ -186,8 +186,8 @@ statusRGB: 0
 Example of a script to use the **dataset** class:
 
 ```python
-from xeye import datapipe as dp
-data = dp.dataset()
+import xeye
+data = xeye.dataset()
 data.init()
 data.preview()
 data.rgb()
@@ -203,7 +203,7 @@ A faster way to use the datapipe module is represented by the **fastDataset** cl
 
 ```python
 # Load datapipe module
-from xeye import datapipe as dp
+import xeye
 
 # define parameters values
 index = 0
@@ -216,7 +216,7 @@ standby_time = 0
 # percentage of images in the test set 
 perc = 0.2
 
-data = dp.fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
+data = xeye.fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
 data.preview()
 data.rgb()
 data.compressTrainTest(perc = perc)
@@ -249,7 +249,7 @@ The **manualDataset** class is how you can build a dataset by taking pictures ma
 
 ```python
 # Load datapipe module
-from xeye import datapipe as dp
+import xeye
 
 # define parameters values
 index = 0
@@ -262,7 +262,7 @@ standby_time = 0
 # percentage of images in the test set 
 perc = 0.2
 
-data = dp.manualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
+data = xeye.manualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
 data.preview()
 data.rgb()
 data.compressTrainTest(perc = perc)
@@ -304,13 +304,13 @@ If you want to build datasets made by different types of images, but for example
 ### Script example 
 
 ```python
-from xeye import datapipe as dp
+import xeye
 # list of directory (paths for the .npz files)
 path = ['/Users/marcosalvalaggio/code/testxeye/dataset/batch_2.npz', '/Users/marcosalvalaggio/code/testxeye/dataset/batch_3.npz']
 # list of labels associated with the images inside the .npz files
 label = [0,1]
 # initializes the class
-data = dp.buildDataset(path=path, label=label, size = None, color=True, split=True, perc=0.2)
+data = xeye.buildDataset(path=path, label=label, size = None, color=True, split=True, perc=0.2)
 data.build()
 ```
 The parameters passed to the class **buildDataset**:
