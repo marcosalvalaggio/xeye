@@ -829,6 +829,7 @@ class manualDataset(fastDataset):
                 if cv2.waitKey(1) == ord('s'):
                     cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', frame)
                     count=count+1
+                    cv2.destroyAllWindows()
                 else:
                     pass
 
@@ -881,6 +882,7 @@ class manualDataset(fastDataset):
                 if cv2.waitKey(1) == ord('s'):
                     cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', gray)
                     count=count+1
+                    cv2.destroyAllWindows()
                 else:
                     pass
 
