@@ -5,7 +5,7 @@ import numpy as np
 import time
 
 
-class dataset:
+class Dataset:
 
     # inizialized variable
     index = 0
@@ -226,7 +226,7 @@ class dataset:
     # -----------
     # compressTrainTest
     # -----------
-    def compressTrainTest(self):
+    def compress_train_test(self):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -275,7 +275,7 @@ class dataset:
     # -----------
     # compressAll
     # -----------
-    def compressAll(self):
+    def compress_all(self):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -318,7 +318,7 @@ class dataset:
     # -----------
     # justCompress
     # -----------
-    def justCompress(self):
+    def just_compress(self):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -370,7 +370,7 @@ class dataset:
     # control function 
     # ------------------
 
-    def varControl(self):
+    def var_control(self):
         print('\n')
         print('--- PARAMETERS CONTROL ---')
         print(f'camera index: {self.index}')
@@ -385,7 +385,7 @@ class dataset:
 
 
 
-class fastDataset:
+class FastDataset:
     
     def __init__(self, index: int, img_types: int, label: list[str], num: int, height: int, width: int, stand_by_time: float) -> None:
     # inizialized variable
@@ -591,7 +591,7 @@ class fastDataset:
     # -----------
     # compressTrainTest
     # -----------
-    def compressTrainTest(self, perc: float = 0.1):
+    def compress_train_test(self, perc: float = 0.1):
         # percentage control 
         if perc <= 0:
             raise ValueError('(perc) Percentage value must be greater than 0...')
@@ -638,7 +638,7 @@ class fastDataset:
     # -----------
     # compressAll
     # -----------
-    def compressAll(self):
+    def compress_all(self):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -682,7 +682,7 @@ class fastDataset:
     # -----------
     # justCompress
     # -----------
-    def justCompress(self, name = "dataset_raw"):
+    def just_compress(self, name: str = "dataset_raw"):
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -722,7 +722,7 @@ class fastDataset:
 
 
 
-    def varControl(self):
+    def var_control(self):
         print('\n')
         print('--- PARAMETERS CONTROL ---')
         print(f'camera index: {self.index}')
@@ -738,7 +738,7 @@ class fastDataset:
 
 
 
-class manualDataset(fastDataset):
+class ManualDataset(FastDataset):
 
     def __init__(self, index: int, img_types: int, label: list[str], num: int, height: int, width: int):
     # inizialized variable
@@ -901,7 +901,7 @@ class manualDataset(fastDataset):
 
 
 
-class buildDataset:
+class BuildDataset:
 
     def __init__(self, path: list[str], label: list[int], size: tuple = None, color: bool = True, split: bool = True, perc: float = 0.1) -> None:
         self.path = path
@@ -987,14 +987,14 @@ if __name__ == '__main__':
 
     # ------------------------ #
     ### test with dataset
-    data = dataset()
+    data = Dataset()
     data.init()
     data.preview()
     data.gray()
     data.rgb()
-    data.compressTrainTest()
-    data.compressAll()
-    data.justCompress()
+    data.compress_train_test()
+    data.compress_all()
+    data.just_compress()
     # ------------------------ #
 
     '''
@@ -1009,25 +1009,24 @@ if __name__ == '__main__':
     standby_time = 0
     perc = 0.2
     
-    data = fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
+    data = FastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
     data.preview()
-    data.varControl()
     data.gray()
     data.rgb()
-    data.compressAll()
-    data.compressTrainTest(perc = perc)
-    data.justCompress('batch_test')
+    data.compress_all()
+    data.compress_train_test(perc = perc)
+    data.just_compress('batch_test')
      # ------------------------ #
 
     # ------------------------ #
     ### test with manualDataset
-    data = manualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
+    data = ManualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
     data.preview()
     #data.rgb()
     data.gray()
-    data.compressAll()
-    data.compressTrainTest(perc = perc)
-    data.justCompress('batch_test')
+    data.compress_all()
+    data.compress_train_test(perc = perc)
+    data.just_compress('batch_test')
      # ------------------------ #
     
     ### plot image from the dataset created 

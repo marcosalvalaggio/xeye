@@ -45,7 +45,7 @@ import xeye
 then initialize the instance like this 
 
 ```python
-data = xeye.dataset()
+data = xeye.Dataset()
 ```
 set the parameters related to the images with the **init** function
 
@@ -109,10 +109,10 @@ On the directory of the script, you can find the folders that contain the images
 
 
 
-Images collected in the folders can be used for building datasets like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist). The first approach to achieve this result is calling the **compressTrainTest** function:
+Images collected in the folders can be used for building datasets like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist). The first approach to achieve this result is calling the **compress_train_test** function:
 
 ```python
-data.compressTrainTest()
+data.compress_train_test()
 ```
 
 That produces the following output in the terminal window 
@@ -133,10 +133,10 @@ In which you can select the portion of images to use in the train and test datas
   
 (matrices for grayscale images: [Height$\times$Width$\times$1], tensors for RGB images:[Height$\times$Width$\times$3]).
 
-An alternative approach is represented by the use of the function **compressAll**
+An alternative approach is represented by the use of the function **compress_all**
 
 ```python
-data.compressAll()
+data.compress_all()
 ```
 
 In this case, the images are united in a unique tensor that contains all the frames produced previously. 
@@ -145,10 +145,10 @@ In this case, the images are united in a unique tensor that contains all the fra
   * **X**: matricies/tensors of every single image produced;
   * **y**: classes (ordinal values) are associated with every image produced.
 
-Finally, you can use the **justCompress** function to create a unique tensor with all the images produced.
+Finally, you can use the **just_compress** function to create a unique tensor with all the images produced.
 
 ```python
-data.justCompress()
+data.just_compress()
 ```
 In the terminal, you have to insert the dataset’s name
 
@@ -156,7 +156,7 @@ In the terminal, you have to insert the dataset’s name
 --- DATASET SETTING ---
 Select a name for the compressed file: batch_test
 ``` 
-If you pass 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produced by this function can be used by the class **buildDataset** to put together more .npz files and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist).
+If you pass 0, by default the dataset will be save with the name **dataset_raw.npz**. The dataset produced by this function can be used by the class **BuildDataset** to put together more .npz files and create a dataset like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist).
 
 <div id='other-useful-functions'/>
 
@@ -164,7 +164,7 @@ If you pass 0, by default the dataset will be save with the name **dataset_raw.n
 
 * **preview**: open the camera stream to check the framing. 
   ![](img/1.png)
-* **varControl**: print the values of the parameters set with the **init** function. 
+* **var_control**: print the values of the parameters set with the **init** function. 
 ```console
 --- PARAMETERS CONTROL ---
 camera index: 1
@@ -183,7 +183,7 @@ statusRGB: 0
 
 ### Script example 
 
-Example of a script to use the **dataset** class:
+Example of a script to use the **Dataset** class:
 
 ```python
 import xeye
@@ -191,15 +191,15 @@ data = xeye.dataset()
 data.init()
 data.preview()
 data.rgb()
-data.compressTrainTest()
-data.compressAll()
-data.justCompress()
+data.compress_train_test()
+data.compress_all()
+data.just_compress()
 
 ```
 <div id='create-a-dataset-with-fast-ui'/>
 
 ## Create a dataset with fast UI 
-A faster way to use the datapipe module is represented by the **fastDataset** class. In this case, there isn't a complete terminal UI that guides you in the construction of the dataset. With **fastDataset**, you only pass the parameters to the class, and then call the functions you need. 
+A faster way to use the datapipe module is represented by the **FastDataset** class. In this case, there isn't a complete terminal UI that guides you in the construction of the dataset. With **FastDataset**, you only pass the parameters to the class, and then call the functions you need. 
 
 ```python
 # Load datapipe module
@@ -216,15 +216,15 @@ standby_time = 0
 # percentage of images in the test set 
 perc = 0.2
 
-data = xeye.fastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
+data = xeye.FastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
 data.preview()
 data.rgb()
-data.compressTrainTest(perc = perc)
-data.compressAll()
-data.justCompress("batch_test")
+data.compress_train_test(perc = perc)
+data.compress_all()
+data.just_compress("batch_test")
 ```
 
-The parameters passed to the class **fastDataset**:
+The parameters passed to the class **FastDataset**:
 
 * **index**: generally 0 for integrated camera, 1 for USB external camera.
 * **img_types**: numbers of object types that you want to include in your dataset.
@@ -234,18 +234,18 @@ The parameters passed to the class **fastDataset**:
 * **width**: frame width values.
 * **standby_time**: e.g 0.2 cause a waiting time of 0.2 seconds between every shoot.
   
-For split images in the train and test dataset, pass a value between (0,1) to the perc parameter of the **compressTrainTest** function
+For split images in the train and test dataset, pass a value between (0,1) to the perc parameter of the **compress_train_test** function
 
 * **perc**: the portion of images to use in the test dataset, write a value between (0,1).
 
-If you don't pass any value to the **justCompress** function, the dataset will be saved with the name **dataset_raw.npz**.
+If you don't pass any value to the **just_compress** function, the dataset will be saved with the name **dataset_raw.npz**.
 
 
 
 <div id='create-a-dataset-with-manual-ui'/>
 
 ## Create a dataset with manual UI 
-The **manualDataset** class is how you can build a dataset by taking pictures manually. 
+The **ManualDataset** class is how you can build a dataset by taking pictures manually. 
 
 ```python
 # Load datapipe module
@@ -262,17 +262,17 @@ standby_time = 0
 # percentage of images in the test set 
 perc = 0.2
 
-data = xeye.manualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
+data = xeye.ManualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
 data.preview()
 data.rgb()
-data.compressTrainTest(perc = perc)
-data.compressAll()
-data.justCompress("batch_test")
+data.compress_train_test(perc = perc)
+data.compress_all()
+data.just_compress("batch_test")
 ```
 
-As you can see in the code snippet, the **manualDataset** class works like the **fastDataset** class. The only difference is the absence of the **standby_time option**, which is no more necessary in this case. 
+As you can see in the code snippet, the **ManualDataset** class works like the **FastDataset** class. The only difference is the absence of the **standby_time option**, which is no more necessary in this case. 
 
-The parameters passed to the class **manualDataset**:
+The parameters passed to the class **ManualDataset**:
 
 * **index**: generally 0 for integrated camera, 1 for USB external camera.
 * **img_types**: numbers of object types that you want to include in your dataset.
@@ -283,7 +283,7 @@ The parameters passed to the class **manualDataset**:
 
 ### How to take pictures manually
 
-On the image window title, after the image type caption it's reported how to take pictures manually with the **manualDataset**
+On the image window title, after the image type caption it's reported how to take pictures manually with the **ManualDataset**
 
 * Press [s] on the keyboard to save the image nr: 1
 
@@ -293,11 +293,11 @@ Press [s] until you reach the number of frames passed to the **num** parameter o
 
 ## Build datasets from different .npz files 
 
-If you want to build datasets made by different types of images, but for example, you can't shoot one of the image types that compose the dataset (because you have to wait a significant amount of time or change location), you can use the **buildDataset** class. 
+If you want to build datasets made by different types of images, but for example, you can't shoot one of the image types that compose the dataset (because you have to wait a significant amount of time or change location), you can use the **BuildDataset** class. 
 
-* Create datasets with the **justCompress** function;
+* Create datasets with the **just_compress** function;
 * Create different .npz files for every type of images that composes the dataset (use the same colour spaces in all datasets, RGB or grayscale);
-* Create a new script and call the **buildDataset** class that merges all the .npz files created before.
+* Create a new script and call the **BuildDataset** class that merges all the .npz files created before.
 
 <div id='script-example-2'/>
 
@@ -310,10 +310,10 @@ path = ['/Users/marcosalvalaggio/code/testxeye/dataset/batch_2.npz', '/Users/mar
 # list of labels associated with the images inside the .npz files
 label = [0,1]
 # initializes the class
-data = xeye.buildDataset(path=path, label=label, size = None, color=True, split=True, perc=0.2)
+data = xeye.BuildDataset(path=path, label=label, size = None, color=True, split=True, perc=0.2)
 data.build()
 ```
-The parameters passed to the class **buildDataset**:
+The parameters passed to the class **BuildDataset**:
 
 * **path**: list of files (.npz) path you want to include in the new dataset
 * **label**: list of ordinal integer values representing the class type of the images inside a .npz file contained in the new dataset. In the example script, the first .npz file images are associated with class 0, while the second .npz file images are associated with class 1. Remember: always start with 0.
@@ -322,7 +322,7 @@ The parameters passed to the class **buildDataset**:
 * **split**: defines if you want to build a dataset split in train-test or not. A boolean value, by default, is set to True.
 * **perc**: defines the percentage of images assigned to the test dataset. A floating value between (0,1). It's set to 0.1 by default.
 
-When you want to use the **buildDataset** class, you need to have .npz files containing images with the same types of colour spaces (all grayscale images or RGB).
+When you want to use the **BuildDataset** class, you need to have .npz files containing images with the same types of colour spaces (all grayscale images or RGB).
 
 
 <div id='xeye-datasets-for-deep-learning'/>

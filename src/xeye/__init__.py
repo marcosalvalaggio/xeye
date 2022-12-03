@@ -1,4 +1,4 @@
-from .datapipe import dataset, fastDataset, manualDataset, buildDataset
+from .datapipe import Dataset, FastDataset, ManualDataset, BuildDataset
 
 #version
-__version__ = "0.31"
+__version__ = "0.32"
