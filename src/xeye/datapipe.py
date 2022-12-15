@@ -24,7 +24,7 @@ class Dataset:
     # --------------------
     # init image parameters
     # --------------------
-    def init(self):
+    def init(self)->None:
 
         # clear terminal 
         if(os.name == 'posix'): #unix
@@ -81,7 +81,7 @@ class Dataset:
     # --------------------
     # preview 
     # --------------------    
-    def preview(self):
+    def preview(self)->None:
 
         print('\n')
         print('--- PREVIEW ---')
@@ -117,7 +117,7 @@ class Dataset:
     # ---------------
     # grayscale images 
     #----------------
-    def gray(self):
+    def gray(self)->None:
         
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -171,7 +171,7 @@ class Dataset:
     # -----------
     # rgb imges
     # -----------
-    def rgb(self):
+    def rgb(self)->None:
 
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -226,7 +226,7 @@ class Dataset:
     # -----------
     # compressTrainTest
     # -----------
-    def compress_train_test(self):
+    def compress_train_test(self)->None:
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -275,7 +275,7 @@ class Dataset:
     # -----------
     # compressAll
     # -----------
-    def compress_all(self):
+    def compress_all(self)->None:
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -318,7 +318,7 @@ class Dataset:
     # -----------
     # justCompress
     # -----------
-    def just_compress(self):
+    def just_compress(self)->None:
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -370,7 +370,7 @@ class Dataset:
     # control function 
     # ------------------
 
-    def var_control(self):
+    def var_control(self)->None:
         print('\n')
         print('--- PARAMETERS CONTROL ---')
         print(f'camera index: {self.index}')
@@ -449,7 +449,7 @@ class FastDataset:
     # --------------------
     # preview 
     # --------------------      
-    def preview(self):
+    def preview(self)->None:
 
         print('\n')
         print('--- PREVIEW ---')
@@ -483,7 +483,7 @@ class FastDataset:
     # ---------------
     # grayscale images 
     #----------------
-    def gray(self):
+    def gray(self)->None:
         
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -537,7 +537,7 @@ class FastDataset:
     # -----------
     # rgb imges
     # -----------
-    def rgb(self):
+    def rgb(self)->None:
 
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -591,7 +591,7 @@ class FastDataset:
     # -----------
     # compressTrainTest
     # -----------
-    def compress_train_test(self, perc: float = 0.1):
+    def compress_train_test(self, perc: float = 0.1)->None:
         # percentage control 
         if perc <= 0:
             raise ValueError('(perc) Percentage value must be greater than 0...')
@@ -638,7 +638,7 @@ class FastDataset:
     # -----------
     # compressAll
     # -----------
-    def compress_all(self):
+    def compress_all(self)->None:
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -682,7 +682,7 @@ class FastDataset:
     # -----------
     # justCompress
     # -----------
-    def just_compress(self, name: str = "dataset_raw"):
+    def just_compress(self, name: str = "dataset_raw")->None:
         # data control
         if self.statusRGB == 0 and self.statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
@@ -722,7 +722,7 @@ class FastDataset:
 
 
 
-    def var_control(self):
+    def var_control(self)->None:
         print('\n')
         print('--- PARAMETERS CONTROL ---')
         print(f'camera index: {self.index}')
@@ -740,7 +740,7 @@ class FastDataset:
 
 class ManualDataset(FastDataset):
 
-    def __init__(self, index: int, img_types: int, label: list[str], num: int, height: int, width: int):
+    def __init__(self, index: int, img_types: int, label: list[str], num: int, height: int, width: int)->None:
     # inizialized variable
         self.index = index
         self.img_types = img_types
@@ -794,7 +794,7 @@ class ManualDataset(FastDataset):
     # -----------
     # rgb imges
     # -----------
-    def rgb(self):
+    def rgb(self)->None:
 
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -848,7 +848,7 @@ class ManualDataset(FastDataset):
     # ---------------
     # grayscale images 
     #----------------
-    def gray(self):
+    def gray(self)->None:
         
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -916,7 +916,7 @@ class BuildDataset:
         self.temp_tensor = []
     
 
-    def control(self):
+    def control(self)->None:
         height = []
         width = []
         color_ch = []
@@ -945,7 +945,7 @@ class BuildDataset:
 
         
 
-    def build(self):
+    def build(self)->None:
         # control method calling 
         self.control()
         # control if the path and label lists have the same length
