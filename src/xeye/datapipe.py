@@ -916,7 +916,7 @@ class BuildDataset:
         self.temp_tensor = []
     
 
-    def control(self)->None:
+    def _control(self)->None:
         height = []
         width = []
         color_ch = []
@@ -947,7 +947,7 @@ class BuildDataset:
 
     def build(self)->None:
         # control method calling 
-        self.control()
+        self._control()
         # control if the path and label lists have the same length
         if len(self.path) != len(self.label):
             raise ValueError("Path and label lists doesn't have the same length...")
