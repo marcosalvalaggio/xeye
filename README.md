@@ -326,7 +326,7 @@ When you want to use the **BuildDataset** class, you need to have .npz files con
 
 ## Xeye datasets for deep learning 
 
-In the [notebooks](notebooks/) folder, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with [Tensorflow](notebooks/tensorflow/) or [Pytorch](notebooks/pytorch/) frameworks).
+In the [xeye-notebooks](https://github.com/marcosalvalaggio/xeye-notebooks) repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with [Tensorflow](https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/tensorflow) or [Pytorch](https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/pytorch) frameworks).
 
 
 * [Binary dataset](https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing): containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).
