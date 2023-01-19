@@ -199,7 +199,6 @@ data.just_compress()
 A faster way to use the datapipe module is represented by the **FastDataset** class. In this case, there isn't a complete terminal UI that guides you in the construction of the dataset. With **FastDataset**, you only pass the parameters to the class, and then call the functions you need. 
 
 ```python
-# Load datapipe module
 import xeye
 
 # define parameters values
@@ -245,7 +244,6 @@ If you don't pass any value to the **just_compress** function, the dataset will 
 The **ManualDataset** class is how you can build a dataset by taking pictures manually. 
 
 ```python
-# Load datapipe module
 import xeye
 
 # define parameters values
