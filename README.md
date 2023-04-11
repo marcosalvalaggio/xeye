@@ -1,15 +1,21 @@
  
-- [Installation](#installation)
-- [Create a dataset with full UI](#create-a-dataset-with-full-ui)
-  - [Other useful functions](#other-useful-functions)
-  - [Script example](#script-example)
-- [Create a dataset with fast UI](#create-a-dataset-with-fast-ui)
-- [Create a dataset with manual UI](#create-a-dataset-with-manual-ui)
-  - [How to take pictures manually](#how-to-take-pictures-manually)
-- [Build datasets from different .npz files](#build-datasets-from-different-npz-files)
-  - [Script example](#script-example-1)
-- [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
+# Xeye
+[![PyPI version](https://badge.fury.io/py/xeye.svg)](https://badge.fury.io/py/xeye) ![PyPI - Downloads](https://img.shields.io/pypi/dm/xeye) 
+
+- [Xeye](#xeye)
+  - [Installation](#installation)
+  - [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
+  - [Xeye functionalities](#xeye-functionalities)
+  - [Create a dataset with full terminal UI (Dataset)](#create-a-dataset-with-full-terminal-ui-dataset)
+    - [Other useful functions](#other-useful-functions)
+    - [Script example](#script-example)
+  - [Create a dataset with fast UI (FastDataset)](#create-a-dataset-with-fast-ui-fastdataset)
+  - [Create a dataset with manual UI (ManualDataset)](#create-a-dataset-with-manual-ui-manualdataset)
+    - [How to take pictures manually](#how-to-take-pictures-manually)
+  - [Build datasets from different .npz files (BuildDataset)](#build-datasets-from-different-npz-files-builddataset)
+    - [Script example](#script-example-1)
   
+<hr>
 
 Xeye is a package for data collection to build computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:
 
@@ -17,6 +23,7 @@ Xeye is a package for data collection to build computer vision applications base
 * Create a dataset already structured like the [mnist](https://www.tensorflow.org/datasets/catalog/mnist);
 * Create a dataset that can be used for building models with [Tensorflow](https://www.tensorflow.org/) or [Pytorch](https://pytorch.org/).
 
+<hr>
 
 
 <div id='installation'/>
@@ -29,9 +36,37 @@ To install the package,
 pip install xeye
 ```
 
+<hr>
+
+<div id='xeye-datasets-for-deep-learning'/>
+
+## Xeye datasets for deep learning 
+
+In the [xeye-notebooks](https://github.com/marcosalvalaggio/xeye-notebooks) repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with [Tensorflow](https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/tensorflow) or [Pytorch](https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/pytorch) frameworks).
+
+
+* [Binary dataset](https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing): containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).
+* [MultiLabel dataset](https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing): containing three types of rgb images (three types of security cameras with labels: 0=dome, 1=bullet, 2=cube)
+
+Additionally, the [xeye-notebooks](https://github.com/marcosalvalaggio/xeye-notebooks) repository contains examples of scripts that use the Xeye package to build datasets ([examples link](https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/xeye-example)).
+
 <div id='create-a-dataset-with-full-ui'/>
 
-## Create a dataset with full UI 
+<hr>
+
+## Xeye functionalities
+
+The Xeye package includes three major approaches (classes) for creating a dataset from scratch: Dataset, FastDataset, and ManualDataset.
+
+* **Dataset**: Uses the full UI terminal interface.
+* **FastDataset**: Uses the constructor with all the specifications of the dataset.
+* **ManualDataset**: Same as FastDataset, but every image is shot manually one at a time.
+  
+Additionally, the package provides a method for combining datasets created with the **BuildDataset** class.
+
+<hr>
+
+## Create a dataset with full terminal UI (Dataset)
 
 First of all, load the module datapipe from the package:
 
@@ -172,8 +207,6 @@ Single frame HEIGHT: 720
 Single frame WIDTH:  720
 waiting time between frames: 0.0
 percentage of images in train dataset: 0.2
-statusGray: 1
-statusRGB: 0
 ``` 
 
 <div id='script-example-1'/>
@@ -191,11 +224,13 @@ data.rgb()
 data.compress_train_test()
 data.compress_all()
 data.just_compress()
-
 ```
+
+<hr>
+
 <div id='create-a-dataset-with-fast-ui'/>
 
-## Create a dataset with fast UI 
+## Create a dataset with fast UI (FastDataset)
 A faster way to use the datapipe module is represented by the **FastDataset** class. In this case, there isn't a complete terminal UI that guides you in the construction of the dataset. With **FastDataset**, you only pass the parameters to the class, and then call the functions you need. 
 
 ```python
@@ -236,11 +271,12 @@ For split images in the train and test dataset, pass a value between (0,1) to th
 
 If you don't pass any value to the **just_compress** function, the dataset will be saved with the name **dataset_raw.npz**.
 
-
+<hr>
 
 <div id='create-a-dataset-with-manual-ui'/>
 
-## Create a dataset with manual UI 
+## Create a dataset with manual UI (ManualDataset)
+
 The **ManualDataset** class is how you can build a dataset by taking pictures manually. 
 
 ```python
@@ -276,6 +312,7 @@ The parameters passed to the class **ManualDataset**:
 * **height**: frame height values.
 * **width**: frame width values.
 
+
 ### How to take pictures manually
 
 On the image window title, after the image type caption it's reported how to take pictures manually with the **ManualDataset**
@@ -286,7 +323,9 @@ On the image window title, after the image type caption it's reported how to tak
 
 Press [s] until you reach the number of frames passed to the **num** parameter of the class. 
 
-## Build datasets from different .npz files 
+<hr>
+
+## Build datasets from different .npz files (BuildDataset)
 
 If you want to build datasets made by different types of images, but for example, you can't shoot one of the image types that compose the dataset (because you have to wait a significant amount of time or change location), you can use the **BuildDataset** class. 
 
@@ -320,12 +359,3 @@ The parameters passed to the class **BuildDataset**:
 When you want to use the **BuildDataset** class, you need to have .npz files containing images with the same types of colour spaces (all grayscale images or RGB).
 
 
-<div id='xeye-datasets-for-deep-learning'/>
-
-## Xeye datasets for deep learning 
-
-In the [xeye-notebooks](https://github.com/marcosalvalaggio/xeye-notebooks) repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with [Tensorflow](https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/tensorflow) or [Pytorch](https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/pytorch) frameworks).
-
-
-* [Binary dataset](https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing): containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).
-* [MultiLabel dataset](https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing): containing three types of rgb images (three types of security cameras with labels: 0=dome, 1=bullet, 2=cube)
