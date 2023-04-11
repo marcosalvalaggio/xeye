@@ -47,7 +47,7 @@ data = xeye.Dataset()
 set the parameters related to the images with the **init** function
 
 ```python
-data.init()
+data.setup()
 
 ```
 the execution of this function causes the starting of the user interface in the **terminal** 
