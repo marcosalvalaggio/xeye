@@ -60,7 +60,7 @@ class FastDataset:
         if camera.isOpened() == False:
             raise ValueError('(index) Insert valid camera index...')
         # set how many type of images do you want to collect
-        if self.img_types == 0: # informarsi sul raise error 
+        if self.img_types == 0: 
             raise ValueError('(img_types) Number of images types must be greather than 0')
         if type(self.img_types) != int:
             raise TypeError('(img_types) passed a string, not an integer')
