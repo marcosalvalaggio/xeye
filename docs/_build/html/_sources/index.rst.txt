@@ -99,6 +99,26 @@ After the parameters setting, you can invoke the function to start shooting imag
 * Grayscale image with the **gray** function;
 * Color image with the **rgb** function.
 
+Let's produce a dataset based on RGB images with the **rgb** function:
+
+.. code-block:: python
+
+   data.rgb()
+
+In the terminal keypress [b], to make photos for the image types passed to the **setup** function.
+
+.. code-block:: console
+
+   --- START TAKING PHOTOS ---
+   Press [b] on the keyboard to start data collection of image type [keyboard]
+   b
+   Press [b] on the keyboard to start data collection of image type [mouse]
+   b
+
+On the directory of the script, you can find the folders that contain the images produced by the **rbg** function (e.g. keyboard folder and mouse folder). 
+
+Images collected in the folders can be used for building datasets like the `mnist`_:
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

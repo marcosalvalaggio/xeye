@@ -24,7 +24,7 @@ To install the package,
 Xeye datasets for deep learning 
 -------------------------------
 
-In the `xeye-notebooks <https://github.com/marcosalvalaggio/xeye-notebooks>`_ repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with `Tensorflow lib. <https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/tensorflow>`_ or `Pytorch lib. <https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/pytorch>`_).
+In the `xeye-notebooks <https://github.com/marcosalvalaggio/xeye-notebooks>`_ repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with `Tensorflow <https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/tensorflow>`_ or `Pytorch <https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/pytorch>`_).
 
 
 * `Binary dataset <https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing>`_: containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).
