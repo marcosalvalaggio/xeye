@@ -128,7 +128,7 @@ In which you can select the portion of images to use in the train and test datas
   * **X_test**: matrices/tensors of every single image in the test dataset;
   * **y_test**: classes (ordinal values) are associated with every image in the test dataset.
   
-(matrices for grayscale images: [Height$\times$Width$\times$1], tensors for RGB images:[Height$\times$Width$\times$3]).
+(matrices for grayscale images: [Height $\times$ Width $\times$ 1], tensors for RGB images:[Height $\times$ Width $\times$ 3]).
 
 An alternative approach is represented by the use of the function **compress_all**
 
