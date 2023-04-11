@@ -24,7 +24,7 @@ To install the package,
 Xeye datasets for deep learning 
 -------------------------------
 
-In the `xeye-notebooks <https://github.com/marcosalvalaggio/xeye-notebooks>`_ repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with `Tensorflow lib. <https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/tensorflow>`_ or `Pytorch lib. <https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/pytorch>`_).
+In the `xeye-notebooks <https://github.com/marcosalvalaggio/xeye-notebooks>`_ repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with `Tensorflow`_ or `Pytorch`_).
 
 
 * `Binary dataset <https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing>`_: containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).
@@ -118,6 +118,30 @@ In the terminal keypress [b], to make photos for the image types passed to the *
 On the directory of the script, you can find the folders that contain the images produced by the **rbg** function (e.g. keyboard folder and mouse folder). 
 
 Images collected in the folders can be used for building datasets like the `mnist`_:
+
+.. code-block:: python
+
+   data.compress_train_test()
+
+That produces the following output in the terminal window 
+
+.. code-block:: console
+
+   --- DATASET SETTING ---
+   percentage of images in the test set: 0.2
+
+In which you can select the portion of images to use in the train and test datasets (write a value between (0,1)). By doing so, the function produces a **.npz** file formed by these specific tensors:
+
+* Train set:
+
+  - **X_train**: matrices/tensors of every single image in the train dataset;
+  - **y_train**: classes (ordinal values) are associated with every image in the train dataset.
+
+* Test set:
+  - **X_test**: matrices/tensors of every single image in the test dataset;
+  - **y_test**: classes (ordinal values) are associated with every image in the test dataset.
+  
+(Matrices for grayscale images are represented by :math:`Height \times Width \times 1` matrices, while tensors for RGB images are represented by :math:`Height \times Width \times 3` tensors.)
 
 .. toctree::
    :maxdepth: 2

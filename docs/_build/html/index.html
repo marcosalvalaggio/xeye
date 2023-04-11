@@ -15,6 +15,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -84,7 +85,7 @@
 </section>
 <section id="xeye-datasets-for-deep-learning">
 <h2>Xeye datasets for deep learning<a class="headerlink" href="#xeye-datasets-for-deep-learning" title="Permalink to this headline"></a></h2>
-<p>In the <a class="reference external" href="https://github.com/marcosalvalaggio/xeye-notebooks">xeye-notebooks</a> repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with <a class="reference external" href="https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/tensorflow">Tensorflow lib.</a> or <a class="reference external" href="https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/pytorch">Pytorch lib.</a>).</p>
+<p>In the <a class="reference external" href="https://github.com/marcosalvalaggio/xeye-notebooks">xeye-notebooks</a> repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a> or <a class="reference external" href="https://pytorch.org/">Pytorch</a>).</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing">Binary dataset</a>: containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).</p></li>
 <li><p><a class="reference external" href="https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing">MultiLabel dataset</a>: containing three types of rgb images (three types of security cameras with labels: 0=dome, 1=bullet, 2=cube)</p></li>
@@ -160,6 +161,27 @@
 </div>
 <p>On the directory of the script, you can find the folders that contain the images produced by the <strong>rbg</strong> function (e.g. keyboard folder and mouse folder).</p>
 <p>Images collected in the folders can be used for building datasets like the <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/mnist">mnist</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">compress_train_test</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>That produces the following output in the terminal window</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--- DATASET SETTING ---</span>
+<span class="go">percentage of images in the test set: 0.2</span>
+</pre></div>
+</div>
+<p>In which you can select the portion of images to use in the train and test datasets (write a value between (0,1)). By doing so, the function produces a <strong>.npz</strong> file formed by these specific tensors:</p>
+<ul class="simple">
+<li><p>Train set:</p>
+<ul>
+<li><p><strong>X_train</strong>: matrices/tensors of every single image in the train dataset;</p></li>
+<li><p><strong>y_train</strong>: classes (ordinal values) are associated with every image in the train dataset.</p></li>
+</ul>
+</li>
+<li><p>Test set:
+- <strong>X_test</strong>: matrices/tensors of every single image in the test dataset;
+- <strong>y_test</strong>: classes (ordinal values) are associated with every image in the test dataset.</p></li>
+</ul>
+<p>(Matrices for grayscale images are represented by <span class="math notranslate nohighlight">\(Height \times Width \times 1\)</span> matrices, while tensors for RGB images are represented by <span class="math notranslate nohighlight">\(Height \times Width \times 3\)</span> tensors.)</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
