@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to Xeye’s documentation! &mdash; Xeye 0.38 documentation</title>
+  <title>Xeye &mdash; Xeye 0.38 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -59,7 +59,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to Xeye’s documentation!</li>
+      <li class="breadcrumb-item active">Xeye</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -69,8 +69,83 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-xeye-s-documentation">
-<h1>Welcome to Xeye’s documentation!<a class="headerlink" href="#welcome-to-xeye-s-documentation" title="Permalink to this headline"></a></h1>
+  <section id="xeye">
+<h1>Xeye<a class="headerlink" href="#xeye" title="Permalink to this headline"></a></h1>
+<p>Xeye is a package for data collection to build computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:</p>
+<ul class="simple">
+<li><p>Create a dataset using only a laptop and its integrated camera (or alternatively an external USB camera).</p></li>
+<li><p>Create a dataset already structured like the <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/mnist">mnist</a>.</p></li>
+<li><p>Create a dataset that can be used for building models with <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a> or <a class="reference external" href="https://pytorch.org/">Pytorch</a>.</p></li>
+</ul>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<p>To install the package,</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">xeye</span></code></p>
+</section>
+<section id="xeye-datasets-for-deep-learning">
+<h2>Xeye datasets for deep learning<a class="headerlink" href="#xeye-datasets-for-deep-learning" title="Permalink to this headline"></a></h2>
+<p>In the <a class="reference external" href="https://github.com/marcosalvalaggio/xeye-notebooks">xeye-notebooks</a> repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with <a class="reference external" href="https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/tensorflow">Tensorflow lib.</a> or <a class="reference external" href="https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/pytorch">Pytorch lib.</a>).</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing">Binary dataset</a>: containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).</p></li>
+<li><p><a class="reference external" href="https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing">MultiLabel dataset</a>: containing three types of rgb images (three types of security cameras with labels: 0=dome, 1=bullet, 2=cube)</p></li>
+</ul>
+<p>Additionally, the <a class="reference external" href="https://github.com/marcosalvalaggio/xeye-notebooks">xeye-notebooks</a> repository contains examples of scripts that use the Xeye package to build datasets (<a class="reference external" href="https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/xeye-example">examples link</a>).</p>
+</section>
+<section id="xeye-functionalities">
+<h2>Xeye functionalities<a class="headerlink" href="#xeye-functionalities" title="Permalink to this headline"></a></h2>
+<p>The Xeye package includes three major approaches (classes) for creating a dataset from scratch: Dataset, FastDataset, and ManualDataset.</p>
+<ul class="simple">
+<li><p><strong>Dataset</strong>: Uses the full UI terminal interface.</p></li>
+<li><p><strong>FastDataset</strong>: Uses the constructor with all the specifications of the dataset.</p></li>
+<li><p><strong>ManualDataset</strong>: Same as FastDataset, but every image is shot manually one at a time.</p></li>
+</ul>
+<p>Additionally, the package provides a method for combining datasets created with the <strong>BuildDataset</strong> class.</p>
+</section>
+<section id="create-a-dataset-with-full-terminal-ui-dataset">
+<h2>Create a dataset with full terminal UI (Dataset)<a class="headerlink" href="#create-a-dataset-with-full-terminal-ui-dataset" title="Permalink to this headline"></a></h2>
+<p>First of all, load the module datapipe from the package:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xeye</span>
+</pre></div>
+</div>
+<p>then initialize the instance like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">xeye</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>set the parameters related to the images with the <strong>setup</strong> method</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>the execution of this function causes the starting of the user interface in the <strong>terminal</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--- CAMERA SETTING ---</span>
+<span class="go">Select the index of the camera that you want to use for creating the dataset: 1</span>
+</pre></div>
+</div>
+<p>the <strong>setup</strong> function arises multiple questions that set the parameters’ values</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--- IMAGE SETTINGS ---</span>
+<span class="go">Num. of types of images to scan: 2</span>
+<span class="go">Name of image type (1): keyboard</span>
+<span class="go">Name of image type (2): mouse</span>
+<span class="go">Num. of frames to shoot for every image type: 10</span>
+<span class="go">Single frame HEIGHT: 720</span>
+<span class="go">Single frame WIDTH:  720</span>
+<span class="go">num. of waiting time (in sec.) between every frame: 0</span>
+</pre></div>
+</div>
+<p>Precisely the questions refer to:</p>
+<ul class="simple">
+<li><p><strong>Select the index of the camera that you want to use for creating the dataset</strong>: generally 0 for integrated camera, 1 for USB external camera.</p></li>
+<li><p><strong>Num. of types of images to scan</strong>: answer 2 if you want to create a dataset with two objects (e.g. keyboard and mouse). In general, answer with the number of object types to include in your dataset.</p></li>
+<li><p><strong>Name of image type</strong>: insert the name of every specific object you want to include in the dataset. The <strong>init</strong> function creates a named folder for every image type.</p></li>
+<li><p><strong>Num. of frames to shoot for every image type</strong>: select the number of images you want to shoot and save them in every object folder.</p></li>
+<li><p><strong>Single frame HEIGHT</strong>: frame height values.</p></li>
+<li><p><strong>Single frame WIDTH</strong>: frame width values.</p></li>
+<li><p><strong>Num. of waiting time (in sec.) between every frame</strong>: e.g 0.2 causes a waiting time of 0.2 seconds between every shoot.</p></li>
+</ul>
+<p>After the parameters setting, you can invoke the function to start shooting images. Datapipe module provides two different formats of images:</p>
+<ul class="simple">
+<li><p>Grayscale image with the <strong>gray</strong> function;</p></li>
+<li><p>Color image with the <strong>rgb</strong> function.</p></li>
+</ul>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -80,6 +155,7 @@
 </li>
 </ul>
 </div>
+</section>
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>

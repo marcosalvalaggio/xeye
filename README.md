@@ -79,12 +79,12 @@ then initialize the instance like this
 ```python
 data = xeye.Dataset()
 ```
-set the parameters related to the images with the **init** function
+set the parameters related to the images with the **setup** method
 
 ```python
 data.setup()
-
 ```
+
 the execution of this function causes the starting of the user interface in the **terminal** 
 
 
@@ -93,7 +93,7 @@ the execution of this function causes the starting of the user interface in the 
 Select the index of the camera that you want to use for creating the dataset: 1
 ``` 
 
-the **init** function arises multiple questions that set the parameters' values
+the **setup** function arises multiple questions that set the parameters' values
 
 
 ```console
@@ -127,7 +127,7 @@ Let's produce a dataset based on RGB images with the **rgb** function:
 ```python
 data.rgb()
 ```
-In the terminal keypress [b], to make photos for the image types passed to the **init** function.
+In the terminal keypress [b], to make photos for the image types passed to the **setup** function.
 
 ```console
 --- START TAKING PHOTOS ---
