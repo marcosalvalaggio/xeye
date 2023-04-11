@@ -3,11 +3,22 @@ import os
 from sklearn.model_selection import train_test_split
 import numpy as np
 import time
+from typing import List
 
 
 class Dataset:
     """
     A class for collecting a dataset of images using OpenCV.
+
+    Attributes:
+        index (int): Index of the current image being processed.
+        label (list): List of labels corresponding to each image in the dataset.
+        num (int): Total number of images in the dataset.
+        height (int): Height of the images in the dataset.
+        width (int): Width of the images in the dataset.
+        standby_time (float): Time in seconds to wait before capturing the next image.
+        perc (float): Percentage of the dataset used for training (in range [0, 1]).
+        name (str): Name of the dataset.
 
     Examples:
         >>> import xeye
@@ -20,19 +31,20 @@ class Dataset:
         >>> data.compress_all()
         >>> data.just.compress()
     """
-    
-    index = 0
-    label = []
-    num = 0
-    height = 0
-    width = 0
-    _class_dict = {}
-    _tensor = {}
-    standby_time = 0
-    _statusGray = 0
-    _statusRGB = 0
-    perc = 0
-    name = "dataset_raw"
+
+    def __init__(self, index: int = 0, label: List = [], num: int = 0, height: int = 0, width: int = 0, standby_time: float = 0., perc: float = 0., name: str = "dataset_raw") -> None:
+        self.index = index
+        self.label = label
+        self.num = num
+        self.height = height
+        self.width = width
+        self._class_dict = {}
+        self._tensor = {}
+        self.standby_time = standby_time
+        self._statusGray = 0
+        self._statusRGB = 0
+        self.perc = perc
+        self.name = name
 
 
     def setup(self) -> None:
