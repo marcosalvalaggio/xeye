@@ -30,7 +30,6 @@ class Dataset:
         >>> data.compress_all()
         >>> data.just.compress()
     """
-
     index = 0
     label = []
     num = 0
@@ -100,7 +99,10 @@ class Dataset:
   
     def preview(self) -> None:
         """
-        Open the camera stream on a window. Helpful for checking the framing of the image.
+        Opens the camera stream on a window for checking the framing of the image.
+
+        Returns: 
+            None
         """
         print('\n')
         print('--- PREVIEW ---')
@@ -125,7 +127,10 @@ class Dataset:
 
     def gray(self) -> None:
         """
-        Method for shooting images in grayscale. 
+        Method for shooting images in grayscale.
+
+        Returns:
+            None 
         """
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -163,7 +168,10 @@ class Dataset:
 
     def rgb(self) -> None:
         """
-        Method for shooting images in RGB. 
+        Method for shooting images in RGB.
+
+        Returns:
+            None
         """
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -201,7 +209,14 @@ class Dataset:
 
     def compress_train_test(self) -> None:
         """
-        Save the images shot in datasets divided by train and test like the mnist dataset.
+        Saves the images shot in datasets divided by train and test like the mnist dataset.
+    
+        Raises:
+            ValueError: If both rgb and gray functions have not been called before compressing a dataset.
+            ValueError: If the percentage value for images in the test set is less than or equal to 0.
+    
+        Returns:
+            None
         """
         # data control
         if self._statusRGB == 0 and self._statusGray == 0:
@@ -250,7 +265,13 @@ class Dataset:
 
     def compress_all(self) -> None:
         """
-        Save the images shot in a unique dataset.
+        Saves the images shot in a unique dataset.
+    
+        Raises:
+            ValueError: If both rgb and gray functions have not been called before compressing a dataset.
+        
+        Returns:
+            None
         """
         # data control
         if self._statusRGB == 0 and self._statusGray == 0:
@@ -293,7 +314,13 @@ class Dataset:
 
     def just_compress(self) -> None:
         """
-        Save the images shot in a unique dataset without saving the y variable containing the type of the single image.
+        Saves the images shot in a unique dataset without saving the y variable containing the type of the single image.
+    
+        Raises:
+            ValueError: If both rgb and gray functions have not been called before compressing a dataset.
+        
+        Returns:
+            None
         """
         # data control
         if self._statusRGB == 0 and self._statusGray == 0:
@@ -343,16 +370,16 @@ class Dataset:
 
     def var_control(self) -> None:
         """
-        Print the parameters specified in the init method about the dataset to create.
+        Print the parameters specified in the setup method about the dataset to create.
         """
         print('\n')
         print('--- PARAMETERS CONTROL ---')
-        print(f'camera index: {self.index}')
-        print(f'labels of images types: {self.label}')
-        print(f'num. of images for types: {self.num}')
-        print(f'single frame HEIGHT: {self.height}')
-        print(f'single frame WIDTH: {self.width}')
-        print(f'waiting time between frames: {self.standby_time}')
-        print(f'percentage of images in train dataset: {self.perc}')
-        print(f'_statusGray: {self._statusGray}')
-        print(f'_statusRGB: {self._statusRGB}')
+        print(f'Camera index: {self.index}')
+        print(f'Labels of images types: {self.label}')
+        print(f'Num. of images for types: {self.num}')
+        print(f'Single frame HEIGHT: {self.height}')
+        print(f'Single frame WIDTH: {self.width}')
+        print(f'Waiting time between frames: {self.standby_time}')
+        print(f'Percentage of images in train dataset: {self.perc}')
+        print(f'StatusGray: {self._statusGray}')
+        print(f'StatusRGB: {self._statusRGB}')
