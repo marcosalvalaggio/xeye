@@ -1,19 +1,16 @@
 xeye package
 ============
 
-Submodules
-----------
-
-xeye.build\_dataset module
---------------------------
+build\_dataset 
+--------------
 
 .. automodule:: xeye.build_dataset
    :members:
    :undoc-members:
    :show-inheritance:
 
-xeye.dataset module
--------------------
+dataset
+-------
 
 .. automodule:: xeye.dataset
    :members:
@@ -21,16 +18,16 @@ xeye.dataset module
    :undoc-members:
    :show-inheritance:
 
-xeye.fast\_dataset module
--------------------------
+fast\_dataset
+-------------
 
 .. automodule:: xeye.fast_dataset
    :members:
    :undoc-members:
    :show-inheritance:
 
-xeye.manual\_dataset module
----------------------------
+manual\_dataset
+---------------
 
 .. automodule:: xeye.manual_dataset
    :members:
