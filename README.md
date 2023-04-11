@@ -15,7 +15,7 @@
   - [Build datasets from different .npz files (BuildDataset)](#build-datasets-from-different-npz-files-builddataset)
     - [Script example](#script-example-1)
   
-<hr>
+
 
 Xeye is a package for data collection to build computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:
 
@@ -231,7 +231,8 @@ data.just_compress()
 <div id='create-a-dataset-with-fast-ui'/>
 
 ## Create a dataset with fast UI (FastDataset)
-A faster way to use the datapipe module is represented by the **FastDataset** class. In this case, there isn't a complete terminal UI that guides you in the construction of the dataset. With **FastDataset**, you only pass the parameters to the class, and then call the functions you need. 
+
+The **FastDataset** class provides a faster way to use the datapipe module. Unlike the **Dataset** class, it does not have a complete terminal UI to guide you through the dataset construction process. Instead, you simply pass the parameters to the class and call the necessary functions.
 
 ```python
 import xeye
@@ -327,7 +328,7 @@ Press [s] until you reach the number of frames passed to the **num** parameter o
 
 ## Build datasets from different .npz files (BuildDataset)
 
-If you want to build datasets made by different types of images, but for example, you can't shoot one of the image types that compose the dataset (because you have to wait a significant amount of time or change location), you can use the **BuildDataset** class. 
+If you want to create a dataset that includes different types of images, but cannot shoot all image types at once (e.g., due to time constraints or location differences), you can use the **BuildDataset** class.
 
 * Create datasets with the **just_compress** function;
 * Create different .npz files for every type of images that composes the dataset (use the same colour spaces in all datasets, RGB or grayscale);
