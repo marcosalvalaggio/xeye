@@ -6,25 +6,51 @@ import time
 
 
 class Dataset:
+    """
+    A class for collecting a dataset of images using OpenCV.
+
+    Attributes:
+        index (int): The index of the camera to be used for creating the dataset.
+        label (list): The list of names of the different types of images to be collected.
+        num (int): The number of frames to shoot for every image type.
+        height (int): The height of the individual frames.
+        width (int): The width of the individual frames.
+        standby_time (float): The number of seconds to wait between every frame.
+        perc (int): The percentage of data to use for training (the remaining will be used for validation).
+        name (str): The name of the dataset.
+
+    Examples:
+        >>> from xeye import Datset
+        >>> data = Dataset()
+        >>> data.setup()
+        >>> data.var_control()
+        >>> data.preview()
+        >>> data.rgb() # or data.gray()
+        >>> data.compress_train_test()
+        >>> data.compress_all()
+        >>> data.just.compress()
+    """
 
     index = 0
     label = []
     num = 0
     height = 0
     width = 0
-    class_dict = {}
-    tensor = {}
+    _class_dict = {}
+    _tensor = {}
     standby_time = 0
-    statusGray = 0
-    statusRGB = 0
+    _statusGray = 0
+    _statusRGB = 0
     perc = 0
     name = "dataset_raw"
-    # --------------------
-    # init image parameters
-    # --------------------
-    def init(self)->None:
+
+
+    def setup(self) -> None:
         """
-        The init function starts the terminal interface for setting up the parameters of the dataset.
+        Starts the terminal interface for setting up the parameters of the dataset.
+
+        Returns:
+            None
         """
         # clear terminal 
         if(os.name == 'posix'): #unix
@@ -71,11 +97,8 @@ class Dataset:
         if self.standby_time < 0:
             raise ValueError('waiting time must be grater than 0...')
 
-
-    # --------------------
-    # preview 
-    # --------------------    
-    def preview(self)->None:
+  
+    def preview(self) -> None:
         """
         Open the camera stream on a window. Helpful for checking the framing of the image.
         """
@@ -100,10 +123,7 @@ class Dataset:
                 break
 
 
-    # ---------------
-    # grayscale images 
-    #----------------
-    def gray(self)->None:
+    def gray(self) -> None:
         """
         Method for shooting images in grayscale. 
         """
@@ -137,14 +157,11 @@ class Dataset:
         cv2.destroyAllWindows()
         cv2.waitKey(1)
         # set status
-        self.statusGray = 1
-        self.statusRGB = 0
+        self._statusGray = 1
+        self._statusRGB = 0
 
-    
-    # -----------
-    # rgb imges
-    # -----------
-    def rgb(self)->None:
+
+    def rgb(self) -> None:
         """
         Method for shooting images in RGB. 
         """
@@ -178,19 +195,16 @@ class Dataset:
         cv2.destroyAllWindows()
         cv2.waitKey(1)
         # Set status 
-        self.statusGray = 0
-        self.statusRGB = 1
+        self._statusGray = 0
+        self._statusRGB = 1
     
 
-    # -----------
-    # compressTrainTest
-    # -----------
-    def compress_train_test(self)->None:
+    def compress_train_test(self) -> None:
         """
         Save the images shot in datasets divided by train and test like the mnist dataset.
         """
         # data control
-        if self.statusRGB == 0 and self.statusGray == 0:
+        if self._statusRGB == 0 and self._statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
         print('\n')
         print('--- DATASET SETTING ---')
@@ -200,95 +214,89 @@ class Dataset:
         # index for image type 
         i = 0
         # X
-        if self.statusGray == 1:
-            self.tensor['X'] = np.empty((0,self.height,self.width))
+        if self._statusGray == 1:
+            self._tensor['X'] = np.empty((0,self.height,self.width))
         else:
-            self.tensor['X'] = np.empty((0,self.height,self.width,3))
+            self._tensor['X'] = np.empty((0,self.height,self.width,3))
         # y 
-        self.tensor['y'] = np.empty((0))
+        self._tensor['y'] = np.empty((0))
         # (append) loop 
         for lab in self.label:
             j = 0
-            if self.statusGray == 1:
-                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
+            if self._statusGray == 1:
+                self._class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
             else:
-                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
+                self._class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
             # loop for convert image format  
             for file in os.listdir(lab):
-                if self.statusGray == 1:
+                if self._statusGray == 1:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
                     img = cv2.imread(lab + '/' + file)
                     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-                # save in tensor class 
-                self.class_dict['t'+str(i)][j] = img
+                # save
+                self._class_dict['t'+str(i)][j] = img
                 j += 1
-            # unique final tensors 
-            self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
-            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i, self.num, axis = 0))
+            # unique final _tensors 
+            self._tensor['X'] = np.append(self._tensor['X'], self._class_dict['t'+str(i)], axis = 0)
+            self._tensor['y'] = np.append(self._tensor['y'], np.repeat(i, self.num, axis = 0))
             i += 1
         # create dataset (mnist style)
-        self.tensor['X'] = self.tensor['X'].astype('uint8')
-        self.tensor['y'] = self.tensor['y'].astype('uint8')
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.tensor['X'], self.tensor['y'], test_size=self.perc, random_state=123)
+        self._tensor['X'] = self._tensor['X'].astype('uint8')
+        self._tensor['y'] = self._tensor['y'].astype('uint8')
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self._tensor['X'], self._tensor['y'], test_size=self.perc, random_state=123)
         np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
 
 
-    # -----------
-    # compressAll
-    # -----------
-    def compress_all(self)->None:
+    def compress_all(self) -> None:
         """
         Save the images shot in a unique dataset.
         """
         # data control
-        if self.statusRGB == 0 and self.statusGray == 0:
+        if self._statusRGB == 0 and self._statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
         # index for image type 
         i = 0
         # X
-        if self.statusGray == 1:
-            self.tensor['X'] = np.empty((0,self.height,self.width))
+        if self._statusGray == 1:
+            self._tensor['X'] = np.empty((0,self.height,self.width))
         else:
-            self.tensor['X'] = np.empty((0,self.height,self.width,3))
+            self._tensor['X'] = np.empty((0,self.height,self.width,3))
         # y 
-        self.tensor['y'] = np.empty((0))
+        self._tensor['y'] = np.empty((0))
         # (append) loop 
         for lab in self.label:
             j = 0
-            if self.statusGray == 1:
-                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
+            if self._statusGray == 1:
+                self._class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
             else:
-                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
+                self._class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
             # loop for convert image format
             for file in os.listdir(lab):
-                if self.statusGray == 1:
+                if self._statusGray == 1:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
                     img = cv2.imread(lab + '/' + file)
                     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-                # save in tensor class 
-                self.class_dict['t'+str(i)][j] = img
+                # save 
+                self._class_dict['t'+str(i)][j] = img
                 j += 1
-            # unique final tensors 
-            self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
-            self.tensor['y'] = np.append(self.tensor['y'], np.repeat(i, self.num, axis = 0))
+            # unique final _tensors 
+            self._tensor['X'] = np.append(self._tensor['X'], self._class_dict['t'+str(i)], axis = 0)
+            self._tensor['y'] = np.append(self._tensor['y'], np.repeat(i, self.num, axis = 0))
             i += 1
         # create dataset (mnist style)
-        self.tensor['X'] = self.tensor['X'].astype('uint8')
-        self.tensor['y'] = self.tensor['y'].astype('uint8')
-        np.savez('datasetall.npz', x = self.tensor['X'], y = self.tensor['y'])
+        self._tensor['X'] = self._tensor['X'].astype('uint8')
+        self._tensor['y'] = self._tensor['y'].astype('uint8')
+        np.savez('datasetall.npz', x = self._tensor['X'], y = self._tensor['y'])
 
 
-    # -----------
-    # justCompress
-    # -----------
-    def just_compress(self)->None:
+    def just_compress(self) -> None:
         """
         Save the images shot in a unique dataset without saving the y variable containing the type of the single image.
         """
         # data control
-        if self.statusRGB == 0 and self.statusGray == 0:
+        if self._statusRGB == 0 and self._statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
         # insert name for the compress file 
         print('\n')
@@ -304,39 +312,36 @@ class Dataset:
         # index for image type 
         i = 0
         # X
-        if self.statusGray == 1:
-            self.tensor['X'] = np.empty((0,self.height,self.width))
+        if self._statusGray == 1:
+            self._tensor['X'] = np.empty((0,self.height,self.width))
         else:
-            self.tensor['X'] = np.empty((0,self.height,self.width,3))
+            self._tensor['X'] = np.empty((0,self.height,self.width,3))
         # (append) loop 
         for lab in self.label:
             j = 0
-            if self.statusGray == 1:
-                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
+            if self._statusGray == 1:
+                self._class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width))
             else:
-                self.class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
+                self._class_dict['t'+str(i)] = np.empty((self.num, self.height, self.width, 3))
             # loop for convert image format
             for file in os.listdir(lab):
-                if self.statusGray == 1:
+                if self._statusGray == 1:
                     img = cv2.imread(lab + '/' + file, cv2.IMREAD_GRAYSCALE)
                 else:
                     img = cv2.imread(lab + '/' + file)
                     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-                # save in tensor class 
-                self.class_dict['t'+str(i)][j] = img
+                # save
+                self._class_dict['t'+str(i)][j] = img
                 j += 1
-            # unique final tensors
-            self.tensor['X'] = np.append(self.tensor['X'], self.class_dict['t'+str(i)], axis = 0)
+            # unique final _tensors
+            self._tensor['X'] = np.append(self._tensor['X'], self._class_dict['t'+str(i)], axis = 0)
             i += 1
         # create dataset (mnist style)
-        self.tensor['X'] = self.tensor['X'].astype('uint8')
-        np.savez(f'{self.name}.npz', x = self.tensor['X'])
+        self._tensor['X'] = self._tensor['X'].astype('uint8')
+        np.savez(f'{self.name}.npz', x = self._tensor['X'])
 
 
-    # ------------------
-    # control function 
-    # ------------------
-    def var_control(self)->None:
+    def var_control(self) -> None:
         """
         Print the parameters specified in the init method about the dataset to create.
         """
@@ -349,5 +354,5 @@ class Dataset:
         print(f'single frame WIDTH: {self.width}')
         print(f'waiting time between frames: {self.standby_time}')
         print(f'percentage of images in train dataset: {self.perc}')
-        print(f'statusGray: {self.statusGray}')
-        print(f'statusRGB: {self.statusRGB}')
+        print(f'_statusGray: {self._statusGray}')
+        print(f'_statusRGB: {self._statusRGB}')
