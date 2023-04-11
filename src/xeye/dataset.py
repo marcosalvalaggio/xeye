@@ -20,7 +20,6 @@ class Dataset:
         >>> data.compress_all()
         >>> data.just.compress()
     """
-    
     index = 0
     label = []
     num = 0
