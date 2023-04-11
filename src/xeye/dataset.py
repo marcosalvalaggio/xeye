@@ -9,16 +9,6 @@ class Dataset:
     """
     A class for collecting a dataset of images using OpenCV.
 
-    Attributes:
-        index (int): The index of the camera to be used for creating the dataset.
-        label (list): The list of names of the different types of images to be collected.
-        num (int): The number of frames to shoot for every image type.
-        height (int): The height of the individual frames.
-        width (int): The width of the individual frames.
-        standby_time (float): The number of seconds to wait between every frame.
-        perc (int): The percentage of data to use for training (the remaining will be used for validation).
-        name (str): The name of the dataset.
-
     Examples:
         >>> import xeye
         >>> data = xeye.Dataset()
@@ -30,6 +20,7 @@ class Dataset:
         >>> data.compress_all()
         >>> data.just.compress()
     """
+    
     index = 0
     label = []
     num = 0
