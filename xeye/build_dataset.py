@@ -1,11 +1,22 @@
 import cv2 
 from sklearn.model_selection import train_test_split
 import numpy as np
-from typing import List
+from typing import List, Tuple
 
 
 class BuildDataset:
-    def __init__(self, path: List[str], label: List[int], size: tuple = None, color: bool = True, split: bool = True, perc: float = 0.1) -> None:
+    """
+    Builds a dataset by merging multiple datasets with the given parameters.
+
+    Args:
+        path (List[str]): List of paths to the numpy files containing the datasets.
+        label (List[int]): List of labels corresponding to each dataset.
+        size (tuple): Tuple specifying the size of the images in the dataset. Defaults to None.
+        color (bool): Whether the images are in color or grayscale. Defaults to True.
+        split (bool): Whether to split the dataset into train and test sets. Defaults to True.
+        perc (float): The percentage of data to use for the test set. Defaults to 0.1.
+    """
+    def __init__(self, path: List[str], label: List[int], size: Tuple = None, color: bool = True, split: bool = True, perc: float = 0.1) -> None:
         self.path = path
         self.label = label 
         self.size = size
@@ -18,9 +29,20 @@ class BuildDataset:
         self._temp_tensor = []
     
 
-    def _control(self)->None:
+    def _control(self) -> None:
         """
-        The method checks if the datasets to merge have the same colour space.
+        Checks if the datasets to merge have the same colour space.
+
+        Raises:
+            ValueError: If the datasets have different color spaces.
+
+        Returns:
+            None
+        
+        Notes:
+            * This method extracts the height, width, and color channels of each image in the dataset using numpy.
+            * It then checks if the images have the same color space by comparing the color channel values for each image.
+            * If the sizes of the images in the dataset are not specified in the instance variables, it sets the maximum height and width of all the images as the dataset size.
         """
         height = []
         width = []
@@ -49,9 +71,19 @@ class BuildDataset:
             pass
 
 
-    def build(self)->None:
+    def build(self) -> None:
         """
-        Merge the datasets in a new one with the parameters instance variables indicated. 
+        Builds a new dataset by merging the datasets with the parameters indicated by the instance variables.
+
+        Raises:
+            ValueError: If the path and label lists do not have the same length.
+            ValueError: If the datasets being merged have different color spaces.
+        
+        Returns:
+            None
+
+        Note:
+            The method calls the `_control` method to check if the datasets being merged have the same color space. The resulting merged dataset is stored as a numpy array in `_tensor['X']` and `_tensor['y']`. If the `split` instance variable is set to `True`, the merged dataset is split into training and testing sets using the `train_test_split` method from scikit-learn and saved as a numpy array in the file 'dataset.npz'. Otherwise, the merged dataset is saved as a numpy array in the file 'datasetall.npz'.
         """
         # control method calling 
         self._control()
