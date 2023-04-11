@@ -7,7 +7,35 @@ from typing import List
 
 
 class FastDataset:
+    """
+    A class for shooting and saving images in grayscale or RGB using OpenCV.
+
+    Attributes:
+        index (int): the index of the camera to use.
+        img_types (int): the number of types of images to collect.
+        label (List[str]): a list of strings that represent the name of the directories where the images will be saved.
+        num (int): the number of frames to capture for each image type.
+        height (int): the height of the frames to capture.
+        width (int): the width of the frames to capture.
+        standby_time (float): the time to wait before capturing each frame. 
     
+    Examples: 
+        >>> import xeye
+        >>> # define parameters values
+        >>> index = 0
+        >>> img_types = 2
+        >>> label = ['keyboard', 'mouse']
+        >>> num = 20
+        >>> height = 100
+        >>> width = 100
+        >>> standby_time = 0
+        >>> data = xeye.FastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
+        >>> data.preview()
+        >>> data.rgb() # or data.gray()
+        >>> data.compress_train_test(perc=0.2)
+        >>> data.compress_all()
+        >>> data.just_compress(name="batch_test")
+    """
     def __init__(self, index: int, img_types: int, label: List[str], num: int, height: int, width: int, stand_by_time: float) -> None:
         self.index = index
         self.img_types = img_types
@@ -59,7 +87,10 @@ class FastDataset:
 
     def preview(self) -> None:
         """
-        Open the camera stream on a window. Helpful for checking the framing of the image.
+        Opens the camera stream on a window for checking the framing of the image.
+
+        Returns: 
+            None
         """
         print('\n')
         print('--- PREVIEW ---')
@@ -84,7 +115,10 @@ class FastDataset:
 
     def gray(self) -> None:
         """
-        Method for shooting images in grayscale. 
+        Method for shooting images in grayscale.
+
+        Returns:
+            None 
         """
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -122,7 +156,10 @@ class FastDataset:
 
     def rgb(self) -> None:
         """
-        Method for shooting images in RGB. 
+        Method for shooting images in RGB.
+
+        Returns:
+            None
         """
         print('\n')
         print('--- START TAKING PHOTOS ---')
@@ -160,7 +197,17 @@ class FastDataset:
 
     def compress_train_test(self, perc: float = 0.1) -> None:
         """
-        Save the images shot in datasets divided by train and test like the mnist dataset.
+        Saves the images shot in datasets divided by train and test like the mnist dataset.
+    
+        Args:
+            perc (float): The percentage of images to assign to the test dataset.
+
+        Raises:
+            ValueError: If both rgb and gray functions have not been called before compressing a dataset.
+            ValueError: If the percentage value for images in the test set is less than or equal to 0.
+    
+        Returns:
+            None
         """
         # percentage control 
         if perc <= 0:
@@ -207,7 +254,13 @@ class FastDataset:
 
     def compress_all(self) -> None:
         """
-        Save the images shot in a unique dataset.
+        Saves the images shot in a unique dataset.
+    
+        Raises:
+            ValueError: If both rgb and gray functions have not been called before compressing a dataset.
+        
+        Returns:
+            None
         """
         # data control
         if self._statusRGB == 0 and self._statusGray == 0:
@@ -250,7 +303,16 @@ class FastDataset:
 
     def just_compress(self, name: str = "dataset_raw") -> None:
         """
-        Save the images shot in a unique dataset without saving the y variable containing the type of the single image.
+        Saves the images shot in a unique dataset without saving the y variable containing the type of the single image.
+
+        Args:
+            name (str): The name of the dataset (npz) to be saved.
+    
+        Raises:
+            ValueError: If both rgb and gray functions have not been called before compressing a dataset.
+        
+        Returns:
+            None
         """
         # data control
         if self._statusRGB == 0 and self._statusGray == 0:
@@ -296,13 +358,12 @@ class FastDataset:
         """
         print('\n')
         print('--- PARAMETERS CONTROL ---')
-        print(f'camera index: {self.index}')
-        print(f'num. of images types: {self.img_types}')
-        print(f'labels of images types: {self.label}')
-        print(f'num. of images for types: {self.num}')
-        print(f'single frame HEIGHT: {self.height}')
-        print(f'single frame WIDTH: {self.width}')
-        print(f'waiting time between frames: {self.standby_time}')
-        print(f'percentage of images in train dataset: {self.perc}')
-        print(f'statusGray: {self._statusGray}')
-        print(f'statusRGB: {self._statusRGB}')
+        print(f'Camera index: {self.index}')
+        print(f'Num. of images types: {self.img_types}')
+        print(f'Labels of images types: {self.label}')
+        print(f'Num. of images for type: {self.num}')
+        print(f'Single frame HEIGHT: {self.height}')
+        print(f'Single frame WIDTH: {self.width}')
+        print(f'Waiting time between frames: {self.standby_time}')
+        print(f'StatusGray: {self._statusGray}')
+        print(f'StatusRGB: {self._statusRGB}')

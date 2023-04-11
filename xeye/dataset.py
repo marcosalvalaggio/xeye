@@ -20,8 +20,8 @@ class Dataset:
         name (str): The name of the dataset.
 
     Examples:
-        >>> from xeye import Datset
-        >>> data = Dataset()
+        >>> import xeye
+        >>> data = xeye.Dataset()
         >>> data.setup()
         >>> data.var_control()
         >>> data.preview()
