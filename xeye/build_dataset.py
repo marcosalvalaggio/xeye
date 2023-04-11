@@ -8,13 +8,22 @@ class BuildDataset:
     """
     Builds a dataset by merging multiple datasets with the given parameters.
 
-    Args:
+    Attributes:
         path (List[str]): List of paths to the numpy files containing the datasets.
         label (List[int]): List of labels corresponding to each dataset.
         size (tuple): Tuple specifying the size of the images in the dataset. Defaults to None.
         color (bool): Whether the images are in color or grayscale. Defaults to True.
         split (bool): Whether to split the dataset into train and test sets. Defaults to True.
         perc (float): The percentage of data to use for the test set. Defaults to 0.1.
+    
+    Examples:
+        >>> import xeye
+        >>> # list of directory (paths for the .npz files)
+        >>> path = ['batch_1.npz','batch_2.npz', 'batch_3.npz']
+        >>> # list of labels associated with the images inside the .npz files
+        >>> label = [0,1,2]
+        >>> data = xeye.BuildDataset(path=path, label=label, size = None, color=True, split=True, perc=0.2)
+        >>> data.build()
     """
     def __init__(self, path: List[str], label: List[int], size: Tuple = None, color: bool = True, split: bool = True, perc: float = 0.1) -> None:
         self.path = path
