@@ -5,9 +5,35 @@ from typing import List
 
 
 class ManualDataset(FastDataset):
+    """
+    A class that enables manual capturing of images in grayscale or RGB using OpenCV.
 
-    def __init__(self, index: int, img_types: int, label: List[str], num: int, height: int, width: int, stand_by_time: float = 0) -> None:
-        super().__init__(index, img_types, label, num, height, width, stand_by_time)
+    Attributes:
+        index (int): Camera index.
+        img_types (int): Number of image types.
+        label (List[str]): List of image labels.
+        num (int): Number of images to be taken per image type.
+        height (int): Height of the captured images.
+        width (int): Width of the captured images.
+
+    Examples:
+        >>> import xeye
+        >>> # define parameters values
+        >>> index = 0
+        >>> img_types = 2
+        >>> label = ['keyboard', 'mouse']
+        >>> num = 20
+        >>> height = 100
+        >>> width = 100
+        >>> data = xeye.ManualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
+        >>> data.preview()
+        >>> data.rgb() # or data.gray()
+        >>> data.compress_train_test(perc=0.2)
+        >>> data.compress_all()
+        >>> data.just_compress(name="batch_test")
+    """
+    def __init__(self, index: int, img_types: int, label: List[str], num: int, height: int, width: int, _stand_by_time = 0) -> None:
+        super().__init__(index=index, img_types=img_types, label=label, num=num, height=height, width=width, stand_by_time=_stand_by_time)
 
 
     def gray(self) -> None:
