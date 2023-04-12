@@ -3,3 +3,4 @@ src/xeye.egg-info
 notebooks/pytorch/.ipynb_checkpoints/
 notebooks/data/TrivialMultiClassification.npz
 notebooks/
+xeye.egg-info
