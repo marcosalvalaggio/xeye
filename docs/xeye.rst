@@ -34,4 +34,12 @@ manual\_dataset
    :undoc-members:
    :show-inheritance:
 
+Module contents
+---------------
+
+.. automodule:: xeye
+   :noindex:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
