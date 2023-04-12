@@ -79,6 +79,16 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class for collecting a dataset of images using OpenCV.</span>
 
+<span class="sd">    Attributes:</span>
+<span class="sd">        index (int): The index of the camera to be used for creating the dataset.</span>
+<span class="sd">        label (list): The list of names of the different types of images to be collected.</span>
+<span class="sd">        num (int): The number of frames to shoot for every image type.</span>
+<span class="sd">        height (int): The height of the individual frames.</span>
+<span class="sd">        width (int): The width of the individual frames.</span>
+<span class="sd">        standby_time (float): The number of seconds to wait between every frame.</span>
+<span class="sd">        perc (int): The percentage of data to use for training (the remaining will be used for validation).</span>
+<span class="sd">        name (str): The name of the dataset.</span>
+<span class="sd">    </span>
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; import xeye</span>
 <span class="sd">        &gt;&gt;&gt; data = xeye.Dataset()</span>
