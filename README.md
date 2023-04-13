@@ -350,5 +350,3 @@ The parameters passed to the class **BuildDataset**:
 * **perc**: Defines the percentage of images assigned to the test dataset. A floating value between (0,1). It's set to 0.1 by default.
 
 When you want to use the **BuildDataset** class, you need to have .npz files containing images with the same types of colour spaces (all grayscale images or RGB).
-
-
