@@ -4,7 +4,7 @@ from .manual_dataset import ManualDataset
 from .build_dataset import BuildDataset
 
 #version
-__version__ = "0.39"
+__version__ = "1.0"
 
 __all__ = [
     "Dataset",
