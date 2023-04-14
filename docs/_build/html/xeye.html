@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>xeye package &mdash; Xeye 0.38 documentation</title>
+  <title>xeye package &mdash; Xeye 0.39 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -44,10 +44,10 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">xeye</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">xeye package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-xeye.build_dataset">build_dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dataset">dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-xeye.fast_dataset">fast_dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-xeye.manual_dataset">manual_dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-xeye.build_dataset">BuildDataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataset">Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-xeye.fast_dataset">FastDataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-xeye.manual_dataset">ManualDataset</a></li>
 </ul>
 </li>
 </ul>
@@ -82,7 +82,7 @@
   <section id="xeye-package">
 <h1>xeye package<a class="headerlink" href="#xeye-package" title="Permalink to this headline"></a></h1>
 <section id="module-xeye.build_dataset">
-<span id="build-dataset"></span><h2>build_dataset<a class="headerlink" href="#module-xeye.build_dataset" title="Permalink to this headline"></a></h2>
+<span id="builddataset"></span><h2>BuildDataset<a class="headerlink" href="#module-xeye.build_dataset" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="xeye.build_dataset.BuildDataset">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xeye.build_dataset.</span></span><span class="sig-name descname"><span class="pre">BuildDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xeye/build_dataset.html#BuildDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xeye.build_dataset.BuildDataset" title="Permalink to this definition"></a></dt>
@@ -189,7 +189,7 @@
 
 </section>
 <section id="dataset">
-<h2>dataset<a class="headerlink" href="#dataset" title="Permalink to this headline"></a></h2>
+<h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xeye.dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><a class="reference internal" href="_modules/xeye/dataset.html#Dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -434,7 +434,7 @@
 
 </section>
 <section id="module-xeye.fast_dataset">
-<span id="fast-dataset"></span><h2>fast_dataset<a class="headerlink" href="#module-xeye.fast_dataset" title="Permalink to this headline"></a></h2>
+<span id="fastdataset"></span><h2>FastDataset<a class="headerlink" href="#module-xeye.fast_dataset" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="xeye.fast_dataset.FastDataset">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xeye.fast_dataset.</span></span><span class="sig-name descname"><span class="pre">FastDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stand_by_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xeye/fast_dataset.html#FastDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xeye.fast_dataset.FastDataset" title="Permalink to this definition"></a></dt>
@@ -629,7 +629,7 @@
 
 </section>
 <section id="module-xeye.manual_dataset">
-<span id="manual-dataset"></span><h2>manual_dataset<a class="headerlink" href="#module-xeye.manual_dataset" title="Permalink to this headline"></a></h2>
+<span id="manualdataset"></span><h2>ManualDataset<a class="headerlink" href="#module-xeye.manual_dataset" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="xeye.manual_dataset.ManualDataset">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xeye.manual_dataset.</span></span><span class="sig-name descname"><span class="pre">ManualDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_stand_by_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xeye/manual_dataset.html#ManualDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xeye.manual_dataset.ManualDataset" title="Permalink to this definition"></a></dt>
