@@ -1,5 +1,11 @@
  
 # Xeye
+
+<h1 align="center">
+<img src="logo.png" width="200">
+</h1><br>
+
+
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://xeye.readthedocs.io/en/latest/index.html) [![PyPI version](https://badge.fury.io/py/xeye.svg)](https://badge.fury.io/py/xeye) ![PyPI - Downloads](https://img.shields.io/pypi/dm/xeye) 
 
 - [Xeye](#xeye)
