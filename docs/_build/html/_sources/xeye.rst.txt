@@ -14,7 +14,7 @@ Dataset
 .. automodule:: xeye.dataset
    :members:
    :noindex:
-   :undoc-members:
+   :no-undoc-members:
    :show-inheritance:
 
 FastDataset
