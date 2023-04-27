@@ -54,7 +54,7 @@ In the [example](examples) folder, you can find examples of deep learning model 
 * [Binary dataset](https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing): containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).
 * [MultiLabel dataset](https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing): containing three types of rgb images (three types of security cameras with labels: 0=dome, 1=bullet, 2=cube)
 
-Additionally, the [example](example) folder contains examples of scripts that use the Xeye package to build datasets ([examples link](https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/xeye-example)).
+Additionally, the [example](example) folder contains examples of scripts that use the Xeye package to build datasets ([examples link](examples/xeye-example).
 
 <div id='create-a-dataset-with-full-ui'/>
 
