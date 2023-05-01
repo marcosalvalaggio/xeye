@@ -18,7 +18,9 @@ Installation
 
 To install the package, 
 
-``pip install xeye``
+.. code-block:: console
+   
+   pip install xeye
 
 
 Xeye datasets for deep learning 

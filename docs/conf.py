@@ -66,3 +66,5 @@ html_static_path = ['_static']
 pygments_style = "sphinx"
 
 html_logo = '_static/logo.png'
+
+html_css_files = ['custom.css']
