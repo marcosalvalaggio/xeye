@@ -68,3 +68,11 @@ pygments_style = "sphinx"
 html_logo = '_static/logo.png'
 
 html_css_files = ['custom.css']
+
+html_theme_options = {
+    'github_user': 'marcosalvalaggio',
+    'github_repo': 'xeye',
+    'github_button': 'true',
+    'github_type': 'star',
+    'github_banner': 'true',
+}
