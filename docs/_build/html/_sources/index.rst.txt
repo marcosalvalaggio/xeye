@@ -26,16 +26,16 @@ To install the package,
 Xeye datasets for deep learning 
 -------------------------------
 
-In the `xeye-notebooks <https://github.com/marcosalvalaggio/xeye-notebooks>`_ repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with `Tensorflow`_ or `Pytorch`_).
+In the `examples <https://github.com/marcosalvalaggio/xeye/tree/main/examples>`_ folder of the repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with `Tensorflow`_ or `Pytorch`_).
 
 
 * `Binary dataset <https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing>`_: containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).
 * `MultiLabel dataset <https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing>`_: containing three types of rgb images (three types of security cameras with labels: 0=dome, 1=bullet, 2=cube)
 
-Additionally, the `xeye-notebooks <https://github.com/marcosalvalaggio/xeye-notebooks>`_ repository contains examples of scripts that use the Xeye package to build datasets (`examples link <https://github.com/marcosalvalaggio/xeye-notebooks/tree/main/xeye-example>`_).
+Additionally, the `examples <https://github.com/marcosalvalaggio/xeye/tree/main/examples>`_ folder of the repository contains scripts that use the Xeye package to build datasets (`link <https://github.com/marcosalvalaggio/xeye/tree/main/examples/xeye-example>`_).
 
-Xeye functionalities
---------------------
+Functionalities
+---------------
 
 The Xeye package includes three major approaches (classes) for creating a dataset from scratch: Dataset, FastDataset, and ManualDataset.
 
