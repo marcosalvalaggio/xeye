@@ -1,5 +1,5 @@
  
-# Xeye
+## Xeye
 
 <h1 align="center">
 <img src="logo.png" width="200">
@@ -9,17 +9,17 @@
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://xeye.readthedocs.io/en/latest/index.html) [![PyPI version](https://badge.fury.io/py/xeye.svg)](https://badge.fury.io/py/xeye) ![PyPI - Downloads](https://img.shields.io/pypi/dm/xeye) 
 
 - [Xeye](#xeye)
-  - [Installation](#installation)
-  - [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
-  - [Xeye functionalities](#xeye-functionalities)
-  - [Create a dataset with full terminal UI (Dataset)](#create-a-dataset-with-full-terminal-ui-dataset)
-    - [Other useful methods](#other-useful-methods)
-    - [Script example](#script-example)
-  - [Create a dataset with fast UI (FastDataset)](#create-a-dataset-with-fast-ui-fastdataset)
-  - [Create a dataset with manual UI (ManualDataset)](#create-a-dataset-with-manual-ui-manualdataset)
-    - [How to take pictures manually](#how-to-take-pictures-manually)
-  - [Build datasets from different npz files (BuildDataset)](#build-datasets-from-different-npz-files-builddataset)
-    - [Script example](#script-example-1)
+- [Installation](#installation)
+- [Xeye datasets for deep learning](#xeye-datasets-for-deep-learning)
+- [Xeye functionalities](#xeye-functionalities)
+- [Create a dataset with full terminal UI (Dataset)](#create-a-dataset-with-full-terminal-ui-dataset)
+  - [Other useful methods](#other-useful-methods)
+  - [Script example](#script-example)
+- [Create a dataset with fast UI (FastDataset)](#create-a-dataset-with-fast-ui-fastdataset)
+- [Create a dataset with manual UI (ManualDataset)](#create-a-dataset-with-manual-ui-manualdataset)
+  - [How to take pictures manually](#how-to-take-pictures-manually)
+- [Build datasets from different npz files (BuildDataset)](#build-datasets-from-different-npz-files-builddataset)
+  - [Script example](#script-example-1)
   
 
 
