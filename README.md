@@ -64,7 +64,7 @@ Additionally, the [example](example) folder contains examples of scripts that us
 
 The Xeye package includes three major approaches (classes) for creating a dataset from scratch: Dataset, FastDataset, and ManualDataset.
 
-* **Dataset**: Uses the full UI terminal interface.
+* **Dataset**: Uses the full terminal UI.
 * **FastDataset**: Uses the constructor with all the specifications of the dataset.
 * **ManualDataset**: Same as FastDataset, but every image is shot manually one at a time.
   
