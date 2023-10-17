@@ -19,7 +19,7 @@ class Dataset:
         >>> data.compress_all()
         >>> data.just.compress()
     """
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Starts the terminal interface for setting up the parameters of the dataset.
 
@@ -350,9 +350,7 @@ class Dataset:
         print('\n')
         print('--- PARAMETERS CONTROL ---')
         print(f'Camera index: {self.index}')
-        print(f'Num. of images types: {self.img_types}')
         print(f'Labels of images types: {self.label}')
         print(f'Num. of images for types: {self.num}')
         print(f'Single frame HEIGHT: {self.height}')
         print(f'Single frame WIDTH: {self.width}')
-        print(f'Waiting time between frames: {self.standby_time}')
