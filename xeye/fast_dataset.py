@@ -365,5 +365,3 @@ class FastDataset:
         print(f'Single frame HEIGHT: {self.height}')
         print(f'Single frame WIDTH: {self.width}')
         print(f'Waiting time between frames: {self.standby_time}')
-        print(f'StatusGray: {self._statusGray}')
-        print(f'StatusRGB: {self._statusRGB}')

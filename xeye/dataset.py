@@ -65,11 +65,11 @@ class Dataset:
         self.width = int(input('Single frame WIDTH: '))
         if self.width == 0 or self.width < 0:
             raise ValueError('Frame WIDTH must be greather than 0')
-
         # Waiting time in shooting loop
         self.standby_time = float(input('num. of waiting time (in sec.) between every frame: '))
         if self.standby_time < 0:
             raise ValueError('waiting time must be grater than 0...')
+        self.perc=0.25
 
 
     def preview(self) -> None:
@@ -350,11 +350,9 @@ class Dataset:
         print('\n')
         print('--- PARAMETERS CONTROL ---')
         print(f'Camera index: {self.index}')
+        print(f'Num. of images types: {self.img_types}')
         print(f'Labels of images types: {self.label}')
         print(f'Num. of images for types: {self.num}')
         print(f'Single frame HEIGHT: {self.height}')
         print(f'Single frame WIDTH: {self.width}')
         print(f'Waiting time between frames: {self.standby_time}')
-        print(f'Percentage of images in train dataset: {self.perc}')
-        print(f'StatusGray: {self._statusGray}')
-        print(f'StatusRGB: {self._statusRGB}')
