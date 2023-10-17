@@ -70,6 +70,8 @@ class Dataset:
         if self.standby_time < 0:
             raise ValueError('waiting time must be grater than 0...')
         self.perc=0.25
+        self._class_dict = {}
+        self._tensor = {}
 
 
     def preview(self) -> None:
