@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
-    <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>xeye.fast_dataset - Xeye 1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>xeye.fast_dataset - Xeye 1.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
 
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">Xeye 1.0 documentation</div></a>
+      <a href="../../index.html"><div class="brand">Xeye 1.5 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
     <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Xeye 1.0 documentation</span>
+  <span class="sidebar-brand-text">Xeye 1.5 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -207,7 +207,9 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 
-<div class="viewcode-block" id="FastDataset"><a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset">[docs]</a><span class="k">class</span> <span class="nc">FastDataset</span><span class="p">:</span>
+<div class="viewcode-block" id="FastDataset">
+<a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset">[docs]</a>
+<span class="k">class</span> <span class="nc">FastDataset</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class for shooting and saving images in grayscale or RGB using OpenCV.</span>
 
@@ -286,7 +288,9 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;(standby_time) waiting time must be grater than 0...&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="FastDataset.preview"><a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.preview">[docs]</a>    <span class="k">def</span> <span class="nf">preview</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="FastDataset.preview">
+<a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.preview">[docs]</a>
+    <span class="k">def</span> <span class="nf">preview</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Opens the camera stream on a window for checking the framing of the image.</span>
 
@@ -314,7 +318,10 @@
                 <span class="k">break</span></div>
 
 
-<div class="viewcode-block" id="FastDataset.gray"><a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.gray">[docs]</a>    <span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="FastDataset.gray">
+<a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.gray">[docs]</a>
+    <span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for shooting images in grayscale.</span>
 
@@ -355,7 +362,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_statusRGB</span> <span class="o">=</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="FastDataset.rgb"><a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.rgb">[docs]</a>    <span class="k">def</span> <span class="nf">rgb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="FastDataset.rgb">
+<a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.rgb">[docs]</a>
+    <span class="k">def</span> <span class="nf">rgb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for shooting images in RGB.</span>
 
@@ -396,7 +406,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_statusRGB</span> <span class="o">=</span> <span class="mi">1</span></div>
 
 
-<div class="viewcode-block" id="FastDataset.compress_train_test"><a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.compress_train_test">[docs]</a>    <span class="k">def</span> <span class="nf">compress_train_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perc</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="FastDataset.compress_train_test">
+<a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.compress_train_test">[docs]</a>
+    <span class="k">def</span> <span class="nf">compress_train_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perc</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the images shot in datasets divided by train and test like the mnist dataset.</span>
 <span class="sd">    </span>
@@ -453,7 +466,10 @@
         <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s1">&#39;dataset.npz&#39;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="FastDataset.compress_all"><a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.compress_all">[docs]</a>    <span class="k">def</span> <span class="nf">compress_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="FastDataset.compress_all">
+<a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.compress_all">[docs]</a>
+    <span class="k">def</span> <span class="nf">compress_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the images shot in a unique dataset.</span>
 <span class="sd">    </span>
@@ -502,7 +518,10 @@
         <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s1">&#39;datasetall.npz&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span></div>
 
 
-<div class="viewcode-block" id="FastDataset.just_compress"><a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.just_compress">[docs]</a>    <span class="k">def</span> <span class="nf">just_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;dataset_raw&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="FastDataset.just_compress">
+<a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.just_compress">[docs]</a>
+    <span class="k">def</span> <span class="nf">just_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;dataset_raw&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the images shot in a unique dataset without saving the y variable containing the type of the single image.</span>
 
@@ -553,21 +572,22 @@
         <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.npz&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">])</span></div>
 
 
-<div class="viewcode-block" id="FastDataset.var_control"><a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.var_control">[docs]</a>    <span class="k">def</span> <span class="nf">var_control</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="FastDataset.var_control">
+<a class="viewcode-back" href="../../xeye.html#xeye.fast_dataset.FastDataset.var_control">[docs]</a>
+    <span class="k">def</span> <span class="nf">var_control</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the parameters specified in the init method about the dataset to create.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- PARAMETERS CONTROL ---&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Camera index: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Num. of images types: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">img_types</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Labels of images types: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Num. of images for type: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Single frame HEIGHT: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Single frame WIDTH: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Waiting time between frames: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">standby_time</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;StatusGray: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_statusGray</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;StatusRGB: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_statusRGB</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div></div>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Single frame WIDTH: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
         </article>
       </div>
@@ -600,9 +620,9 @@
       
     </aside>
   </div>
-</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/scripts/furo.js"></script>
+</div><script src="../../_static/documentation_options.js?v=aaadad1f"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     </body>
 </html>

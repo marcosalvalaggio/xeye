@@ -60,12 +60,6 @@ then initialize the instance like this
    
    data = xeye.Dataset()
 
-set the parameters related to the images with the **setup** method
-
-.. code-block:: python
-   
-   data.setup()
-
 the execution of this method causes the starting of the user interface in the **terminal**
 
 .. code-block:: console
@@ -73,7 +67,7 @@ the execution of this method causes the starting of the user interface in the **
    --- CAMERA SETTING ---
    Select the index of the camera that you want to use for creating the dataset: 1
 
-the **setup** method arises multiple questions that set the parameters' values
+The initialization method raises multiple questions regarding the setting of parameter values.
 
 .. code-block:: console
    
