@@ -5,3 +5,4 @@ notebooks/data/TrivialMultiClassification.npz
 notebooks/
 xeye.egg-info
 .DS_Store
+lab.py
