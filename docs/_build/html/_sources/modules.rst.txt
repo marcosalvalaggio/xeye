@@ -3,4 +3,5 @@ xeye
 
 .. toctree::
 
-   xeye
+   xeye.usb
+   xeye.tools

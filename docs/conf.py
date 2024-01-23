@@ -28,7 +28,7 @@ copyright = '2023, Marco Salvalaggio'
 author = 'Marco Salvalaggio'
 
 # The full version, including alpha/beta/rc tags
-release = '1.5'
+release = '1.6'
 
 
 # -- General configuration ---------------------------------------------------

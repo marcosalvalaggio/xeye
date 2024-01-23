@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="xeye" href="modules.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="xeye.tools" href="xeye.tools.html" /><link rel="prev" title="xeye" href="modules.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>BuildDataset - Xeye 1.6 documentation</title>
+        <title>xeye.usb - Xeye 1.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -160,10 +160,8 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">xeye</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of xeye</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">BuildDataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dataset">Dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-xeye.usb.fast_dataset">FastDataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-xeye.usb.manual_dataset">ManualDataset</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">xeye.usb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xeye.tools.html">xeye.tools</a></li>
 </ul>
 </li>
 </ul>
@@ -200,118 +198,10 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-xeye.tools.build_dataset">
-<span id="builddataset"></span><h1>BuildDataset<a class="headerlink" href="#module-xeye.tools.build_dataset" title="Link to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xeye.tools.build_dataset.</span></span><span class="sig-name descname"><span class="pre">BuildDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xeye/tools/build_dataset.html#BuildDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Builds a dataset by merging multiple datasets with the given parameters.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.path">
-<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.path" title="Link to this definition">#</a></dt>
-<dd><p>List of paths to the numpy files containing the datasets.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.label">
-<span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.label" title="Link to this definition">#</a></dt>
-<dd><p>List of labels corresponding to each dataset.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[int]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.size">
-<span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.size" title="Link to this definition">#</a></dt>
-<dd><p>Tuple specifying the size of the images in the dataset. Defaults to None.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.color">
-<span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.color" title="Link to this definition">#</a></dt>
-<dd><p>Whether the images are in color or grayscale. Defaults to True.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.split">
-<span class="sig-name descname"><span class="pre">split</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.split" title="Link to this definition">#</a></dt>
-<dd><p>Whether to split the dataset into train and test sets. Defaults to True.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.perc">
-<span class="sig-name descname"><span class="pre">perc</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.perc" title="Link to this definition">#</a></dt>
-<dd><p>The percentage of data to use for the test set. Defaults to 0.1.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xeye</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># list of directory (paths for the .npz files)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch_1.npz&#39;</span><span class="p">,</span><span class="s1">&#39;batch_2.npz&#39;</span><span class="p">,</span> <span class="s1">&#39;batch_3.npz&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># list of labels associated with the images inside the .npz files</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">xeye</span><span class="o">.</span><span class="n">BuildDataset</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">perc</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.build">
-<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/xeye/tools/build_dataset.html#BuildDataset.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.build" title="Link to this definition">#</a></dt>
-<dd><p>Builds a new dataset by merging the datasets with the parameters indicated by the instance variables.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ValueError</strong> – If the path and label lists do not have the same length.</p></li>
-<li><p><strong>ValueError</strong> – If the datasets being merged have different color spaces.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The method calls the <cite>_control</cite> method to check if the datasets being merged have the same color space. The resulting merged dataset is stored as a numpy array in <cite>_tensor[‘X’]</cite> and <cite>_tensor[‘y’]</cite>. If the <cite>split</cite> instance variable is set to <cite>True</cite>, the merged dataset is split into training and testing sets using the <cite>train_test_split</cite> method from scikit-learn and saved as a numpy array in the file ‘dataset.npz’. Otherwise, the merged dataset is saved as a numpy array in the file ‘datasetall.npz’.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<section id="usb">
-<h2>USB<a class="headerlink" href="#usb" title="Link to this heading">#</a></h2>
-</section>
-</section>
+          <section id="xeye-usb">
+<h1>xeye.usb<a class="headerlink" href="#xeye-usb" title="Link to this heading">#</a></h1>
 <section id="dataset">
-<h1>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h1>
+<h2>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xeye.usb.dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><a class="reference internal" href="_modules/xeye/usb/dataset.html#Dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -416,7 +306,7 @@
 
 </section>
 <section id="module-xeye.usb.fast_dataset">
-<span id="fastdataset"></span><h1>FastDataset<a class="headerlink" href="#module-xeye.usb.fast_dataset" title="Link to this heading">#</a></h1>
+<span id="fastdataset"></span><h2>FastDataset<a class="headerlink" href="#module-xeye.usb.fast_dataset" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="xeye.usb.fast_dataset.FastDataset">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xeye.usb.fast_dataset.</span></span><span class="sig-name descname"><span class="pre">FastDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stand_by_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xeye/usb/fast_dataset.html#FastDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xeye.usb.fast_dataset.FastDataset" title="Link to this definition">#</a></dt>
@@ -611,7 +501,7 @@
 
 </section>
 <section id="module-xeye.usb.manual_dataset">
-<span id="manualdataset"></span><h1>ManualDataset<a class="headerlink" href="#module-xeye.usb.manual_dataset" title="Link to this heading">#</a></h1>
+<span id="manualdataset"></span><h2>ManualDataset<a class="headerlink" href="#module-xeye.usb.manual_dataset" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="xeye.usb.manual_dataset.ManualDataset">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xeye.usb.manual_dataset.</span></span><span class="sig-name descname"><span class="pre">ManualDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_stand_by_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xeye/usb/manual_dataset.html#ManualDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xeye.usb.manual_dataset.ManualDataset" title="Link to this definition">#</a></dt>
@@ -725,13 +615,22 @@
 </dd></dl>
 
 </section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
+          <a class="next-page" href="xeye.tools.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">xeye.tools</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
           <a class="prev-page" href="modules.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
@@ -773,20 +672,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">BuildDataset</a><ul>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset"><code class="docutils literal notranslate"><span class="pre">BuildDataset</span></code></a><ul>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.path"><code class="docutils literal notranslate"><span class="pre">BuildDataset.path</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.label"><code class="docutils literal notranslate"><span class="pre">BuildDataset.label</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.size"><code class="docutils literal notranslate"><span class="pre">BuildDataset.size</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.color"><code class="docutils literal notranslate"><span class="pre">BuildDataset.color</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.split"><code class="docutils literal notranslate"><span class="pre">BuildDataset.split</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.perc"><code class="docutils literal notranslate"><span class="pre">BuildDataset.perc</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.build"><code class="docutils literal notranslate"><span class="pre">BuildDataset.build()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usb">USB</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">xeye.usb</a><ul>
 <li><a class="reference internal" href="#dataset">Dataset</a></li>
 <li><a class="reference internal" href="#module-xeye.usb.fast_dataset">FastDataset</a><ul>
 <li><a class="reference internal" href="#xeye.usb.fast_dataset.FastDataset"><code class="docutils literal notranslate"><span class="pre">FastDataset</span></code></a><ul>
@@ -818,6 +704,8 @@
 <li><a class="reference internal" href="#xeye.usb.manual_dataset.ManualDataset.width"><code class="docutils literal notranslate"><span class="pre">ManualDataset.width</span></code></a></li>
 <li><a class="reference internal" href="#xeye.usb.manual_dataset.ManualDataset.gray"><code class="docutils literal notranslate"><span class="pre">ManualDataset.gray()</span></code></a></li>
 <li><a class="reference internal" href="#xeye.usb.manual_dataset.ManualDataset.rgb"><code class="docutils literal notranslate"><span class="pre">ManualDataset.rgb()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
