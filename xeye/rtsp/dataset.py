@@ -72,9 +72,8 @@ class Dataset:
                 raise ValueError('Unable to read camera stream.')
             frame = cv2.resize(frame, (1080, 720))
             font = cv2.FONT_HERSHEY_COMPLEX
-            #text = 'click on the image window and then press [q] on the keyboard to quit preview'
-            text = ''
-            cv2.putText(frame,text,(5,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
+            text = 'click on the image window and then press [q] on the keyboard to quit preview'
+            cv2.putText(frame,text,(5,50),font,0.6,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
             cv2.startWindowThread()
             cv2.imshow("RTSP camera Preview, click q to quit preview", frame)
             if cv2.waitKey(1) == ord('q'):
