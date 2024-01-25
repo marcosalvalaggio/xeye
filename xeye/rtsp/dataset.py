@@ -72,13 +72,55 @@ class Dataset:
                 raise ValueError('Unable to read camera stream.')
             frame = cv2.resize(frame, (1080, 720))
             font = cv2.FONT_HERSHEY_COMPLEX
-            text = 'click on the image window and then press [q] on the keyboard to quit preview'
+            #text = 'click on the image window and then press [q] on the keyboard to quit preview'
+            text = ''
             cv2.putText(frame,text,(5,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
             cv2.startWindowThread()
-            cv2.imshow("RTSP camera Preview", frame)
+            cv2.imshow("RTSP camera Preview, click q to quit preview", frame)
             if cv2.waitKey(1) == ord('q'):
                 print('preview closed')
                 camera.release()
                 cv2.destroyAllWindows()
                 cv2.waitKey(1)
                 break
+
+
+    def gray(self) -> None:
+        """
+        Method for shooting images in grayscale.
+
+        Returns:
+            None 
+        """
+        print('\n')
+        print('--- START TAKING PHOTOS ---')
+        camera = cv2.VideoCapture(self.rtsp)
+        # Index for files name 
+        i = 0
+        for folder in self.label:
+            count = 0
+            print(f'Press [b] on the keyboard to start data collection of image type: [{folder}]')
+            userinput = input()
+            if userinput != 'b':
+                print("Wrong Input...press 'b'")
+            while count < self.num:
+                status, frame = camera.read()
+                if not status:
+                    print("frame doesn't been captured")
+                    break
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                cv2.startWindowThread()
+                cv2.imshow(f"Camera View for image type [{folder}]", gray)
+                gray = cv2.resize(gray, (self.width, self.height))
+                cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', gray)
+                count=count+1
+                time.sleep(self.standby_time)
+                if cv2.waitKey(1) == ord('q'):
+                    break
+            i += 1
+        camera.release()
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)
+        # set status
+        self._statusGray = 1
+        self._statusRGB = 0
