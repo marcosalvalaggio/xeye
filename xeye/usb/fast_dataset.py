@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import time
 from typing import List
+from typing import Tuple
 
 
 class FastDataset:
@@ -85,7 +86,7 @@ class FastDataset:
             raise ValueError('(standby_time) waiting time must be grater than 0...')
 
 
-    def preview(self) -> None:
+    def preview(self, size: Tuple = (1280, 720)) -> None:
         """
         Opens the camera stream on a window for checking the framing of the image.
 
@@ -97,14 +98,15 @@ class FastDataset:
         camera = cv2.VideoCapture(self.index)
         while(True):
             status, frame = camera.read()
+            frame = cv2.resize(frame, size)
             if not status:
                 print("frame doesn't been captured")
                 break
-            font = cv2.FONT_HERSHEY_COMPLEX
-            text = 'click on the image window and then press [q] on the keyboard to quit preview'
-            cv2.putText(frame,text,(5,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
+            #font = cv2.FONT_HERSHEY_COMPLEX
+            #text = 'click on the image window and then press [q] on the keyboard to quit preview'
+            #cv2.putText(frame,text,(5,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font
             cv2.startWindowThread()
-            cv2.imshow("Camera PreView", frame)
+            cv2.imshow("Camera Preview, clicl q to quit preview", frame)
             if cv2.waitKey(1) == ord('q'):
                 print('preview closed')
                 camera.release()
