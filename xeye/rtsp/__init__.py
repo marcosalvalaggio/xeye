@@ -1,5 +1,5 @@
-from .dataset import Dataset
+from .dataset import RTSPDataset
 
 __all__ = [
-    "Dataset"
+    "RTSPDataset"
 ]
