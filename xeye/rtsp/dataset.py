@@ -1,4 +1,4 @@
-from ..usb.dataset import Dataset
+from xeye.usb.dataset import Dataset
 import os
 from typing import List
 
