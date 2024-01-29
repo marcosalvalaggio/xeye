@@ -1,11 +1,6 @@
 from ..usb.dataset import Dataset
-import cv2 
 import os
-from sklearn.model_selection import train_test_split
-import numpy as np
-import time
 from typing import List
-from typing import Tuple
 
 
 class RTSPDataset(Dataset):
