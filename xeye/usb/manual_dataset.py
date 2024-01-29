@@ -1,10 +1,10 @@
 import cv2 
 import os
-from .fast_dataset import FastDataset
+from .dataset import Dataset
 from typing import List
 
 
-class ManualDataset(FastDataset):
+class ManualDataset(Dataset):
     """
     A class that enables manual capturing of images in grayscale or RGB using OpenCV.
 

@@ -3,83 +3,92 @@ import os
 from sklearn.model_selection import train_test_split
 import numpy as np
 import time
+from typing import List
 from typing import Tuple
+
 
 class Dataset:
     """
-    A class for collecting a dataset of images using OpenCV.
+    A class for shooting and saving images in grayscale or RGB using OpenCV.
+
+    Attributes:
+        index (int): the index of the camera to use.
+        img_types (int): the number of types of images to collect.
+        label (List[str]): a list of strings that represent the name of the directories where the images will be saved.
+        num (int): the number of frames to capture for each image type.
+        height (int): the height of the frames to capture.
+        width (int): the width of the frames to capture.
+        standby_time (float): the time to wait before capturing each frame. 
     
-    Examples:
+    Examples: 
         >>> import xeye
-        >>> data = xeye.Dataset()
-        >>> data.var_control()
+        >>> # define parameters values
+        >>> index = 0
+        >>> img_types = 2
+        >>> label = ['keyboard', 'mouse']
+        >>> num = 20
+        >>> height = 100
+        >>> width = 100
+        >>> standby_time = 0
+        >>> data = xeye.FastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
         >>> data.preview()
         >>> data.rgb() # or data.gray()
-        >>> data.compress_train_test()
+        >>> data.compress_train_test(perc=0.2)
         >>> data.compress_all()
-        >>> data.just.compress()
+        >>> data.just_compress(name="batch_test")
     """
-    def __init__(self) -> None:
-        """
-        Starts the terminal interface for setting up the parameters of the dataset.
-
-        Returns:
-            None
-        """
+    def __init__(self, index: int, img_types: int, label: List[str], num: int, height: int, width: int, stand_by_time: float) -> None:
+        self.index = index
+        self.img_types = img_types
+        self.label = label
+        self.num = num
+        self.height = height
+        self.width = width
+        self._class_dict = {}
+        self._tensor = {}
+        self.standby_time = stand_by_time
+        self._statusGray = 0
+        self._statusRGB = 0
         # clear terminal 
-        if(os.name == 'posix'): #unix
+        if(os.name == 'posix'): # unix
             os.system('clear')
-        else: #windows
+        else: # windows
             os.system('cls')
-        # camera setting control 
-        print('--- CAMERA SETTING ---')
-        self.index = int(input('Select the index of the camera that you want to use for creating the dataset: '))
+        # camera setting
         if self.index == -1:
-            raise ValueError('Insert valid camera index...')
+            raise ValueError('(index) Insert valid camera index...')
         camera = cv2.VideoCapture(self.index)
         if camera.isOpened() == False:
-            raise ValueError('Insert valid camera index...')
-        camera.release()
+            raise ValueError('(index) Insert valid camera index...')
         # set how many type of images do you want to collect
-        self.label = []
-        print('\n')
-        print('--- IMAGE SETTINGS ---')
-        img_types = int(input('Num. of types of images to scan: '))
-        if img_types == 0: 
-            raise ValueError('Number of images types must be greather than 0')
-        for i in range(0,img_types):
-            l = str(input(f"Name of image type ({i+1}): "))
-            self.label.append(l)
+        if self.img_types == 0: 
+            raise ValueError('(img_types) Number of images types must be greather than 0')
+        if type(self.img_types) != int:
+            raise TypeError('(img_types) passed a string, not an integer')
         # folder building
+        if self.label == []:
+            raise ValueError('(label) Not valid names for images types...')
+        if len(self.label) != self.img_types:
+            raise ValueError("(label) You must have a number of labels equal to the number of images types selected...")
         for lab in self.label:
             if not os.path.exists(lab):
                 os.mkdir(lab)
         # number of frames 
-        self.num = int(input('Num. of frames to shoot for every image type: '))
         if self.num == 0 or self.num < 0:
-            raise ValueError('You cant inizialize frames number equal or below zero...')
+            raise ValueError('(num) You cant inizialize frames number equal or below zero...')
         # Image shaping phase
-        self.height = int(input('Single frame HEIGHT: '))
         if self.height == 0 or self.height < 0:
-            raise ValueError('Frame HEIGHT must be greather than 0')
-        self.width = int(input('Single frame WIDTH: '))
+            raise ValueError('(height) Frame HEIGHT must be greather than 0')
         if self.width == 0 or self.width < 0:
-            raise ValueError('Frame WIDTH must be greather than 0')
+            raise ValueError('(width) Frame WIDTH must be greather than 0')
         # Waiting time in shooting loop
-        self.standby_time = float(input('num. of waiting time (in sec.) between every frame: '))
         if self.standby_time < 0:
-            raise ValueError('waiting time must be grater than 0...')
-        self.perc=0.25
-        self._class_dict = {}
-        self._tensor = {}
+            raise ValueError('(standby_time) waiting time must be grater than 0...')
 
 
     def preview(self, size: Tuple = (1280, 720)) -> None:
         """
         Opens the camera stream on a window for checking the framing of the image.
-
-        Args:
-            size: The size of the window (width, height).
 
         Returns: 
             None
@@ -131,7 +140,7 @@ class Dataset:
                     break
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 cv2.startWindowThread()
-                cv2.imshow(f"Camera View for image type [{folder}]", gray)
+                cv2.imshow(f"Camera View for image type [{folder}]",gray)
                 gray = cv2.resize(gray, (self.width, self.height))
                 cv2.imwrite(folder+'/'+ str(self.label[i]) + str(count) + '.png', gray)
                 count=count+1
@@ -186,12 +195,15 @@ class Dataset:
         # Set status 
         self._statusGray = 0
         self._statusRGB = 1
-    
 
-    def compress_train_test(self) -> None:
+
+    def compress_train_test(self, perc: float = 0.1) -> None:
         """
         Saves the images shot in datasets divided by train and test like the mnist dataset.
     
+        Args:
+            perc (float): The percentage of images to assign to the test dataset.
+
         Raises:
             ValueError: If both rgb and gray functions have not been called before compressing a dataset.
             ValueError: If the percentage value for images in the test set is less than or equal to 0.
@@ -199,14 +211,12 @@ class Dataset:
         Returns:
             None
         """
+        # percentage control 
+        if perc <= 0:
+            raise ValueError('(perc) Percentage value must be greater than 0...')
         # data control
         if self._statusRGB == 0 and self._statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
-        print('\n')
-        print('--- DATASET SETTING ---')
-        self.perc = float(input('percentage of images in the test set (0,1): '))
-        if self.perc <= 0:
-            raise ValueError('percentage value must be greater than 0...')
         # index for image type 
         i = 0
         # X
@@ -230,7 +240,7 @@ class Dataset:
                 else:
                     img = cv2.imread(lab + '/' + file)
                     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-                # save
+                # save in _tensor class 
                 self._class_dict['t'+str(i)][j] = img
                 j += 1
             # unique final _tensors 
@@ -240,7 +250,7 @@ class Dataset:
         # create dataset (mnist style)
         self._tensor['X'] = self._tensor['X'].astype('uint8')
         self._tensor['y'] = self._tensor['y'].astype('uint8')
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self._tensor['X'], self._tensor['y'], test_size=self.perc, random_state=123)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self._tensor['X'], self._tensor['y'], test_size=perc, random_state=123)
         np.savez('dataset.npz', X_train=self.X_train, X_test=self.X_test, y_train=self.y_train, y_test=self.y_test)
 
 
@@ -280,7 +290,7 @@ class Dataset:
                 else:
                     img = cv2.imread(lab + '/' + file)
                     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-                # save 
+                # save in _tensor class 
                 self._class_dict['t'+str(i)][j] = img
                 j += 1
             # unique final _tensors 
@@ -293,9 +303,12 @@ class Dataset:
         np.savez('datasetall.npz', x = self._tensor['X'], y = self._tensor['y'])
 
 
-    def just_compress(self) -> None:
+    def just_compress(self, name: str = "dataset_raw") -> None:
         """
         Saves the images shot in a unique dataset without saving the y variable containing the type of the single image.
+
+        Args:
+            name (str): The name of the dataset (npz) to be saved.
     
         Raises:
             ValueError: If both rgb and gray functions have not been called before compressing a dataset.
@@ -306,17 +319,9 @@ class Dataset:
         # data control
         if self._statusRGB == 0 and self._statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
-        # insert name for the compress file 
-        print('\n')
-        print('--- DATASET SETTING ---')
-        name = input('Select a name for the compressed file: ')
         # check the name for the dataset 
-        if len(name) == 0:
-            raise ValueError("Insert a valide name for the compress file...")
-        if name == "0":
-            pass
-        else:
-            self.name = name 
+        if len(str(name)) == 0:
+            raise ValueError("name: Insert a valide name for the compressed file...")
         # index for image type 
         i = 0
         # X
@@ -338,7 +343,7 @@ class Dataset:
                 else:
                     img = cv2.imread(lab + '/' + file)
                     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-                # save
+                # save in _tensor class 
                 self._class_dict['t'+str(i)][j] = img
                 j += 1
             # unique final _tensors
@@ -346,17 +351,17 @@ class Dataset:
             i += 1
         # create dataset (mnist style)
         self._tensor['X'] = self._tensor['X'].astype('uint8')
-        np.savez(f'{self.name}.npz', x = self._tensor['X'])
+        np.savez(f'{name}.npz', x = self._tensor['X'])
 
 
     def var_control(self) -> None:
         """
-        Print the parameters specified in the setup method about the dataset to create.
+        Print the parameters specified in the init method about the dataset to create.
         """
         print('\n')
         print('--- PARAMETERS CONTROL ---')
         print(f'Camera index: {self.index}')
         print(f'Labels of images types: {self.label}')
-        print(f'Num. of images for types: {self.num}')
+        print(f'Num. of images for type: {self.num}')
         print(f'Single frame HEIGHT: {self.height}')
         print(f'Single frame WIDTH: {self.width}')
