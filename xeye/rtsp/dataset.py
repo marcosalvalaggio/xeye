@@ -34,7 +34,7 @@ class RTSPDataset(Dataset):
         >>> data.just_compress(name="batch_test")
     """
     def __init__(self, rtsp: str, img_types: int, label: List[str], num: int, height: int, width: int, stand_by_time: float):
-        self.rtsp = rtsp
+        self.index = rtsp
         self.img_types = img_types
         self.label = label
         self.num = num
@@ -51,7 +51,6 @@ class RTSPDataset(Dataset):
         else: # windows
             os.system('cls')
         # move index to rtsp
-        self.index = self.rtsp
         # img num
         if self.img_types == 0: 
             raise ValueError('(img_types) Number of images types must be greather than 0')
