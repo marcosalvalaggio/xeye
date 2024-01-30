@@ -8,3 +8,6 @@ xeye.egg-info
 lab.py
 grimorio.md
 log.md
+tests/*.npz
+tests/a/
+tests/b/
