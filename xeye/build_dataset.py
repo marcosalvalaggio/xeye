@@ -52,15 +52,6 @@ class BuildDataset:
             * This method extracts the height, width, and color channels of each image in the dataset using numpy.
             * It then checks if the images have the same color space by comparing the color channel values for each image.
             * If the sizes of the images in the dataset are not specified in the instance variables, it sets the maximum height and width of all the images as the dataset size.
-
-        Examples:
-            >>> import xeye
-            >>> # list of directory (paths for the .npz files)
-            >>> path = ['batch_2.npz', 'batch_3.npz']
-            >>> # list of labels associated with the images inside the .npz files
-            >>> label = [0,1]
-            >>> data = xeye.BuildDataset(path=path, label=label, size = None, color=True, split=True, perc=0.2)
-            >>> data.build()
         """
         height = []
         width = []
