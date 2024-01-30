@@ -1,7 +1,7 @@
 import cv2 
 import os
 from .dataset import Dataset
-from typing import List
+from typing import List, Union
 
 
 class ManualDataset(Dataset):
@@ -9,7 +9,7 @@ class ManualDataset(Dataset):
     A class that enables manual capturing of images in grayscale or RGB using OpenCV.
 
     Attributes:
-        index (int): Camera index.
+        source (int, str): Camera source.
         img_types (int): Number of image types.
         label (List[str]): List of image labels.
         num (int): Number of images to be taken per image type.
@@ -19,21 +19,21 @@ class ManualDataset(Dataset):
     Examples:
         >>> import xeye
         >>> # define parameters values
-        >>> index = 0
+        >>> source = 0
         >>> img_types = 2
         >>> label = ['keyboard', 'mouse']
         >>> num = 20
         >>> height = 100
         >>> width = 100
-        >>> data = xeye.ManualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)
+        >>> data = xeye.ManualDataset(source = source, img_types = img_types, label = label, num = num, height = height, width = width)
         >>> data.preview()
         >>> data.rgb() # or data.gray()
         >>> data.compress_train_test(perc=0.2)
         >>> data.compress_all()
         >>> data.just_compress(name="batch_test")
     """
-    def __init__(self, index: int, img_types: int, label: List[str], num: int, height: int, width: int, _stand_by_time = 0) -> None:
-        super().__init__(index=index, img_types=img_types, label=label, num=num, height=height, width=width, stand_by_time=_stand_by_time)
+    def __init__(self, source: Union[int, str], img_types: int, label: List[str], num: int, height: int, width: int, _stand_by_time = 0) -> None:
+        super().__init__(source=source, img_types=img_types, label=label, num=num, height=height, width=width, stand_by_time=_stand_by_time)
 
 
     def gray(self) -> None:
@@ -45,8 +45,8 @@ class ManualDataset(Dataset):
         """
         print('\n')
         print('--- START TAKING PHOTOS ---')
-        camera = cv2.VideoCapture(self.index)
-        # Index for files name 
+        camera = cv2.VideoCapture(self.source)
+        # source for files name 
         i = 0
         for folder in self.label:
             count = 0
@@ -89,8 +89,8 @@ class ManualDataset(Dataset):
         """
         print('\n')
         print('--- START TAKING PHOTOS ---')
-        camera = cv2.VideoCapture(self.index)
-        # Index for files name 
+        camera = cv2.VideoCapture(self.source)
+        # source for files name 
         i = 0
         for folder in self.label:
             count = 0

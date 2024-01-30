@@ -3,7 +3,7 @@ import os
 from sklearn.model_selection import train_test_split
 import numpy as np
 import time
-from typing import List
+from typing import List, Union
 from typing import Tuple
 
 
@@ -12,7 +12,7 @@ class Dataset:
     A class for shooting and saving images in grayscale or RGB using OpenCV.
 
     Attributes:
-        index (int): the index of the camera to use.
+        source (int, str): the source of the camera to use, index of usb device or rtsp string.
         img_types (int): the number of types of images to collect.
         label (List[str]): a list of strings that represent the name of the directories where the images will be saved.
         num (int): the number of frames to capture for each image type.
@@ -23,22 +23,22 @@ class Dataset:
     Examples: 
         >>> import xeye
         >>> # define parameters values
-        >>> index = 0
+        >>> source = 0
         >>> img_types = 2
         >>> label = ['keyboard', 'mouse']
         >>> num = 20
         >>> height = 100
         >>> width = 100
         >>> standby_time = 0
-        >>> data = xeye.FastDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
+        >>> data = xeye.ExpDataset(source = source, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)
         >>> data.preview()
         >>> data.rgb() # or data.gray()
         >>> data.compress_train_test(perc=0.2)
         >>> data.compress_all()
         >>> data.just_compress(name="batch_test")
     """
-    def __init__(self, index: int, img_types: int, label: List[str], num: int, height: int, width: int, stand_by_time: float) -> None:
-        self.index = index
+    def __init__(self, source: Union[int, str], img_types: int, label: List[str], num: int, height: int, width: int, stand_by_time: float) -> None:
+        self.source = source
         self.img_types = img_types
         self.label = label
         self.num = num
@@ -54,13 +54,6 @@ class Dataset:
             os.system('clear')
         else: # windows
             os.system('cls')
-        # camera setting
-        if self.index == -1:
-            raise ValueError('(index) Insert valid camera index...')
-        camera = cv2.VideoCapture(self.index)
-        if camera.isOpened() == False:
-            raise ValueError('(index) Insert valid camera index...')
-        # set how many type of images do you want to collect
         if self.img_types == 0: 
             raise ValueError('(img_types) Number of images types must be greather than 0')
         if type(self.img_types) != int:
@@ -95,7 +88,7 @@ class Dataset:
         """
         print('\n')
         print('--- PREVIEW ---')
-        camera = cv2.VideoCapture(self.index)
+        camera = cv2.VideoCapture(self.source)
         while(True):
             status, frame = camera.read()
             frame = cv2.resize(frame, size)
@@ -124,8 +117,8 @@ class Dataset:
         """
         print('\n')
         print('--- START TAKING PHOTOS ---')
-        camera = cv2.VideoCapture(self.index)
-        # Index for files name 
+        camera = cv2.VideoCapture(self.source)
+        # source for files name 
         i = 0
         for folder in self.label:
             count = 0
@@ -165,8 +158,8 @@ class Dataset:
         """
         print('\n')
         print('--- START TAKING PHOTOS ---')
-        camera = cv2.VideoCapture(self.index)
-        # Index for files name 
+        camera = cv2.VideoCapture(self.source)
+        # source for files name 
         i = 0
         for folder in self.label:
             count = 0
@@ -217,7 +210,7 @@ class Dataset:
         # data control
         if self._statusRGB == 0 and self._statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
-        # index for image type 
+        # source for image type 
         i = 0
         # X
         if self._statusGray == 1:
@@ -267,7 +260,7 @@ class Dataset:
         # data control
         if self._statusRGB == 0 and self._statusGray == 0:
             raise ValueError('You have to call rgb or gray function before compress a dataset...')
-        # index for image type 
+        # source for image type 
         i = 0
         # X
         if self._statusGray == 1:
@@ -322,7 +315,7 @@ class Dataset:
         # check the name for the dataset 
         if len(str(name)) == 0:
             raise ValueError("name: Insert a valide name for the compressed file...")
-        # index for image type 
+        # source for image type 
         i = 0
         # X
         if self._statusGray == 1:
@@ -360,7 +353,7 @@ class Dataset:
         """
         print('\n')
         print('--- PARAMETERS CONTROL ---')
-        print(f'Camera index: {self.index}')
+        print(f'Camera source: {self.source}')
         print(f'Labels of images types: {self.label}')
         print(f'Num. of images for type: {self.num}')
         print(f'Single frame HEIGHT: {self.height}')
