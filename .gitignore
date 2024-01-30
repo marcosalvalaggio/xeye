@@ -11,3 +11,4 @@ log.md
 tests/*.npz
 tests/a/
 tests/b/
+archive/
