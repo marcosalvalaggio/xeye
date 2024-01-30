@@ -22,7 +22,6 @@
   - [Script example](#script-example-1)
   
 
-
 Xeye is a package for data collection to build computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:
 
 * Create a dataset using only a laptop and its integrated camera (or alternatively an external USB camera);
