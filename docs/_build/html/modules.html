@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="xeye.usb" href="xeye.usb.html" /><link rel="prev" title="Xeye" href="index.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Dataset" href="xeye.html" /><link rel="prev" title="Xeye" href="index.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
         <title>xeye - Xeye 1.6 documentation</title>
@@ -160,8 +160,9 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">xeye</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of xeye</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="xeye.usb.html">xeye.usb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xeye.tools.html">xeye.tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xeye.html">Dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xeye.html#module-xeye.manual_dataset">ManualDataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xeye.html#module-xeye.build_dataset">BuildDataset</a></li>
 </ul>
 </li>
 </ul>
@@ -202,56 +203,49 @@
 <h1>xeye<a class="headerlink" href="#xeye" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="xeye.usb.html">xeye.usb</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="xeye.usb.html#dataset">Dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xeye.usb.html#module-xeye.usb.fast_dataset">FastDataset</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset"><code class="docutils literal notranslate"><span class="pre">FastDataset</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.index"><code class="docutils literal notranslate"><span class="pre">FastDataset.index</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.img_types"><code class="docutils literal notranslate"><span class="pre">FastDataset.img_types</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.label"><code class="docutils literal notranslate"><span class="pre">FastDataset.label</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.num"><code class="docutils literal notranslate"><span class="pre">FastDataset.num</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.height"><code class="docutils literal notranslate"><span class="pre">FastDataset.height</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.width"><code class="docutils literal notranslate"><span class="pre">FastDataset.width</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.standby_time"><code class="docutils literal notranslate"><span class="pre">FastDataset.standby_time</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.compress_all"><code class="docutils literal notranslate"><span class="pre">FastDataset.compress_all()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.compress_train_test"><code class="docutils literal notranslate"><span class="pre">FastDataset.compress_train_test()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.gray"><code class="docutils literal notranslate"><span class="pre">FastDataset.gray()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.just_compress"><code class="docutils literal notranslate"><span class="pre">FastDataset.just_compress()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.preview"><code class="docutils literal notranslate"><span class="pre">FastDataset.preview()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.rgb"><code class="docutils literal notranslate"><span class="pre">FastDataset.rgb()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.fast_dataset.FastDataset.var_control"><code class="docutils literal notranslate"><span class="pre">FastDataset.var_control()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="xeye.html">Dataset</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.source"><code class="docutils literal notranslate"><span class="pre">Dataset.source</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.img_types"><code class="docutils literal notranslate"><span class="pre">Dataset.img_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.label"><code class="docutils literal notranslate"><span class="pre">Dataset.label</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.num"><code class="docutils literal notranslate"><span class="pre">Dataset.num</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.height"><code class="docutils literal notranslate"><span class="pre">Dataset.height</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.width"><code class="docutils literal notranslate"><span class="pre">Dataset.width</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.standby_time"><code class="docutils literal notranslate"><span class="pre">Dataset.standby_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.compress_all"><code class="docutils literal notranslate"><span class="pre">Dataset.compress_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.compress_train_test"><code class="docutils literal notranslate"><span class="pre">Dataset.compress_train_test()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.gray"><code class="docutils literal notranslate"><span class="pre">Dataset.gray()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.just_compress"><code class="docutils literal notranslate"><span class="pre">Dataset.just_compress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.preview"><code class="docutils literal notranslate"><span class="pre">Dataset.preview()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.rgb"><code class="docutils literal notranslate"><span class="pre">Dataset.rgb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.dataset.Dataset.var_control"><code class="docutils literal notranslate"><span class="pre">Dataset.var_control()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="xeye.usb.html#module-xeye.usb.manual_dataset">ManualDataset</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="xeye.usb.html#xeye.usb.manual_dataset.ManualDataset"><code class="docutils literal notranslate"><span class="pre">ManualDataset</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.manual_dataset.ManualDataset.index"><code class="docutils literal notranslate"><span class="pre">ManualDataset.index</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.manual_dataset.ManualDataset.img_types"><code class="docutils literal notranslate"><span class="pre">ManualDataset.img_types</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.manual_dataset.ManualDataset.label"><code class="docutils literal notranslate"><span class="pre">ManualDataset.label</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.manual_dataset.ManualDataset.num"><code class="docutils literal notranslate"><span class="pre">ManualDataset.num</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.manual_dataset.ManualDataset.height"><code class="docutils literal notranslate"><span class="pre">ManualDataset.height</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.manual_dataset.ManualDataset.width"><code class="docutils literal notranslate"><span class="pre">ManualDataset.width</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.manual_dataset.ManualDataset.gray"><code class="docutils literal notranslate"><span class="pre">ManualDataset.gray()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.usb.html#xeye.usb.manual_dataset.ManualDataset.rgb"><code class="docutils literal notranslate"><span class="pre">ManualDataset.rgb()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="xeye.html#module-xeye.manual_dataset">ManualDataset</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="xeye.html#xeye.manual_dataset.ManualDataset"><code class="docutils literal notranslate"><span class="pre">ManualDataset</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.manual_dataset.ManualDataset.source"><code class="docutils literal notranslate"><span class="pre">ManualDataset.source</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.manual_dataset.ManualDataset.img_types"><code class="docutils literal notranslate"><span class="pre">ManualDataset.img_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.manual_dataset.ManualDataset.label"><code class="docutils literal notranslate"><span class="pre">ManualDataset.label</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.manual_dataset.ManualDataset.num"><code class="docutils literal notranslate"><span class="pre">ManualDataset.num</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.manual_dataset.ManualDataset.height"><code class="docutils literal notranslate"><span class="pre">ManualDataset.height</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.manual_dataset.ManualDataset.width"><code class="docutils literal notranslate"><span class="pre">ManualDataset.width</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.manual_dataset.ManualDataset.gray"><code class="docutils literal notranslate"><span class="pre">ManualDataset.gray()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.manual_dataset.ManualDataset.rgb"><code class="docutils literal notranslate"><span class="pre">ManualDataset.rgb()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="xeye.tools.html">xeye.tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="xeye.tools.html#module-xeye.tools.build_dataset">BuildDataset</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="xeye.tools.html#xeye.tools.build_dataset.BuildDataset"><code class="docutils literal notranslate"><span class="pre">BuildDataset</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="xeye.tools.html#xeye.tools.build_dataset.BuildDataset.path"><code class="docutils literal notranslate"><span class="pre">BuildDataset.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.tools.html#xeye.tools.build_dataset.BuildDataset.label"><code class="docutils literal notranslate"><span class="pre">BuildDataset.label</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.tools.html#xeye.tools.build_dataset.BuildDataset.size"><code class="docutils literal notranslate"><span class="pre">BuildDataset.size</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.tools.html#xeye.tools.build_dataset.BuildDataset.color"><code class="docutils literal notranslate"><span class="pre">BuildDataset.color</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.tools.html#xeye.tools.build_dataset.BuildDataset.split"><code class="docutils literal notranslate"><span class="pre">BuildDataset.split</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.tools.html#xeye.tools.build_dataset.BuildDataset.perc"><code class="docutils literal notranslate"><span class="pre">BuildDataset.perc</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="xeye.tools.html#xeye.tools.build_dataset.BuildDataset.build"><code class="docutils literal notranslate"><span class="pre">BuildDataset.build()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="xeye.html#module-xeye.build_dataset">BuildDataset</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="xeye.html#xeye.build_dataset.BuildDataset"><code class="docutils literal notranslate"><span class="pre">BuildDataset</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.build_dataset.BuildDataset.path"><code class="docutils literal notranslate"><span class="pre">BuildDataset.path</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.build_dataset.BuildDataset.label"><code class="docutils literal notranslate"><span class="pre">BuildDataset.label</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.build_dataset.BuildDataset.size"><code class="docutils literal notranslate"><span class="pre">BuildDataset.size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.build_dataset.BuildDataset.color"><code class="docutils literal notranslate"><span class="pre">BuildDataset.color</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.build_dataset.BuildDataset.split"><code class="docutils literal notranslate"><span class="pre">BuildDataset.split</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.build_dataset.BuildDataset.perc"><code class="docutils literal notranslate"><span class="pre">BuildDataset.perc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xeye.html#xeye.build_dataset.BuildDataset.build"><code class="docutils literal notranslate"><span class="pre">BuildDataset.build()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -265,12 +259,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="xeye.usb.html">
+          <a class="next-page" href="xeye.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">xeye.usb</div>
+                <div class="title">Dataset</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

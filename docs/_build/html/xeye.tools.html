@@ -200,112 +200,8 @@
         <article role="main">
           <section id="xeye-tools">
 <h1>xeye.tools<a class="headerlink" href="#xeye-tools" title="Link to this heading">#</a></h1>
-<section id="module-xeye.tools.build_dataset">
-<span id="builddataset"></span><h2>BuildDataset<a class="headerlink" href="#module-xeye.tools.build_dataset" title="Link to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xeye.tools.build_dataset.</span></span><span class="sig-name descname"><span class="pre">BuildDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xeye/tools/build_dataset.html#BuildDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Builds a dataset by merging multiple datasets with the given parameters.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.path">
-<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.path" title="Link to this definition">#</a></dt>
-<dd><p>List of paths to the numpy files containing the datasets.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.label">
-<span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.label" title="Link to this definition">#</a></dt>
-<dd><p>List of labels corresponding to each dataset.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[int]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.size">
-<span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.size" title="Link to this definition">#</a></dt>
-<dd><p>Tuple specifying the size of the images in the dataset. Defaults to None.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.color">
-<span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.color" title="Link to this definition">#</a></dt>
-<dd><p>Whether the images are in color or grayscale. Defaults to True.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.split">
-<span class="sig-name descname"><span class="pre">split</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.split" title="Link to this definition">#</a></dt>
-<dd><p>Whether to split the dataset into train and test sets. Defaults to True.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.perc">
-<span class="sig-name descname"><span class="pre">perc</span></span><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.perc" title="Link to this definition">#</a></dt>
-<dd><p>The percentage of data to use for the test set. Defaults to 0.1.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xeye</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># list of directory (paths for the .npz files)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch_1.npz&#39;</span><span class="p">,</span><span class="s1">&#39;batch_2.npz&#39;</span><span class="p">,</span> <span class="s1">&#39;batch_3.npz&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># list of labels associated with the images inside the .npz files</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">xeye</span><span class="o">.</span><span class="n">BuildDataset</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">perc</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="xeye.tools.build_dataset.BuildDataset.build">
-<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/xeye/tools/build_dataset.html#BuildDataset.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xeye.tools.build_dataset.BuildDataset.build" title="Link to this definition">#</a></dt>
-<dd><p>Builds a new dataset by merging the datasets with the parameters indicated by the instance variables.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ValueError</strong> – If the path and label lists do not have the same length.</p></li>
-<li><p><strong>ValueError</strong> – If the datasets being merged have different color spaces.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The method calls the <cite>_control</cite> method to check if the datasets being merged have the same color space. The resulting merged dataset is stored as a numpy array in <cite>_tensor[‘X’]</cite> and <cite>_tensor[‘y’]</cite>. If the <cite>split</cite> instance variable is set to <cite>True</cite>, the merged dataset is split into training and testing sets using the <cite>train_test_split</cite> method from scikit-learn and saved as a numpy array in the file ‘dataset.npz’. Otherwise, the merged dataset is saved as a numpy array in the file ‘datasetall.npz’.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
+<section id="builddataset">
+<h2>BuildDataset<a class="headerlink" href="#builddataset" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -357,19 +253,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">xeye.tools</a><ul>
-<li><a class="reference internal" href="#module-xeye.tools.build_dataset">BuildDataset</a><ul>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset"><code class="docutils literal notranslate"><span class="pre">BuildDataset</span></code></a><ul>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.path"><code class="docutils literal notranslate"><span class="pre">BuildDataset.path</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.label"><code class="docutils literal notranslate"><span class="pre">BuildDataset.label</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.size"><code class="docutils literal notranslate"><span class="pre">BuildDataset.size</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.color"><code class="docutils literal notranslate"><span class="pre">BuildDataset.color</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.split"><code class="docutils literal notranslate"><span class="pre">BuildDataset.split</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.perc"><code class="docutils literal notranslate"><span class="pre">BuildDataset.perc</span></code></a></li>
-<li><a class="reference internal" href="#xeye.tools.build_dataset.BuildDataset.build"><code class="docutils literal notranslate"><span class="pre">BuildDataset.build()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#builddataset">BuildDataset</a></li>
 </ul>
 </li>
 </ul>

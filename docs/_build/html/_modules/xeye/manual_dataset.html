@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>xeye.manual_dataset - Xeye 1.5 documentation</title>
+        <title>xeye.manual_dataset - Xeye 1.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">Xeye 1.5 documentation</div></a>
+      <a href="../../index.html"><div class="brand">Xeye 1.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
     <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Xeye 1.5 documentation</span>
+  <span class="sidebar-brand-text">Xeye 1.6 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -158,11 +158,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">xeye</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of xeye</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../xeye.html">BuildDataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../xeye.html#dataset">Dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../xeye.html#module-xeye.fast_dataset">FastDataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../xeye.html#module-xeye.manual_dataset">ManualDataset</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">xeye</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of xeye</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -201,18 +197,18 @@
           <h1>Source code for xeye.manual_dataset</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">cv2</span> 
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">.fast_dataset</span> <span class="kn">import</span> <span class="n">FastDataset</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">.dataset</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
 
 
 <div class="viewcode-block" id="ManualDataset">
-<a class="viewcode-back" href="../../xeye.html#xeye.manual_dataset.ManualDataset">[docs]</a>
-<span class="k">class</span> <span class="nc">ManualDataset</span><span class="p">(</span><span class="n">FastDataset</span><span class="p">):</span>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.manual_dataset.ManualDataset">[docs]</a>
+<span class="k">class</span> <span class="nc">ManualDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class that enables manual capturing of images in grayscale or RGB using OpenCV.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        index (int): Camera index.</span>
+<span class="sd">        source (int, str): Camera source.</span>
 <span class="sd">        img_types (int): Number of image types.</span>
 <span class="sd">        label (List[str]): List of image labels.</span>
 <span class="sd">        num (int): Number of images to be taken per image type.</span>
@@ -222,25 +218,25 @@
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; import xeye</span>
 <span class="sd">        &gt;&gt;&gt; # define parameters values</span>
-<span class="sd">        &gt;&gt;&gt; index = 0</span>
+<span class="sd">        &gt;&gt;&gt; source = 0</span>
 <span class="sd">        &gt;&gt;&gt; img_types = 2</span>
 <span class="sd">        &gt;&gt;&gt; label = [&#39;keyboard&#39;, &#39;mouse&#39;]</span>
 <span class="sd">        &gt;&gt;&gt; num = 20</span>
 <span class="sd">        &gt;&gt;&gt; height = 100</span>
 <span class="sd">        &gt;&gt;&gt; width = 100</span>
-<span class="sd">        &gt;&gt;&gt; data = xeye.ManualDataset(index = index, img_types = img_types, label = label, num = num, height = height, width = width)</span>
+<span class="sd">        &gt;&gt;&gt; data = xeye.ManualDataset(source = source, img_types = img_types, label = label, num = num, height = height, width = width)</span>
 <span class="sd">        &gt;&gt;&gt; data.preview()</span>
 <span class="sd">        &gt;&gt;&gt; data.rgb() # or data.gray()</span>
 <span class="sd">        &gt;&gt;&gt; data.compress_train_test(perc=0.2)</span>
 <span class="sd">        &gt;&gt;&gt; data.compress_all()</span>
 <span class="sd">        &gt;&gt;&gt; data.just_compress(name=&quot;batch_test&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">img_types</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_stand_by_time</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">img_types</span><span class="o">=</span><span class="n">img_types</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">num</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">stand_by_time</span><span class="o">=</span><span class="n">_stand_by_time</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">img_types</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_stand_by_time</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">img_types</span><span class="o">=</span><span class="n">img_types</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">num</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">stand_by_time</span><span class="o">=</span><span class="n">_stand_by_time</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="ManualDataset.gray">
-<a class="viewcode-back" href="../../xeye.html#xeye.manual_dataset.ManualDataset.gray">[docs]</a>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.manual_dataset.ManualDataset.gray">[docs]</a>
     <span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for manually shooting images in grayscale.</span>
@@ -250,8 +246,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- START TAKING PHOTOS ---&#39;</span><span class="p">)</span>
-        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-        <span class="c1"># Index for files name </span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+        <span class="c1"># source for files name </span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>
             <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -287,7 +283,7 @@
 
 
 <div class="viewcode-block" id="ManualDataset.rgb">
-<a class="viewcode-back" href="../../xeye.html#xeye.manual_dataset.ManualDataset.rgb">[docs]</a>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.manual_dataset.ManualDataset.rgb">[docs]</a>
     <span class="k">def</span> <span class="nf">rgb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for manually shooting images in RGB.</span>
@@ -297,8 +293,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- START TAKING PHOTOS ---&#39;</span><span class="p">)</span>
-        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-        <span class="c1"># Index for files name </span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+        <span class="c1"># source for files name </span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>
             <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -364,7 +360,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=aaadad1f"></script>
+</div><script src="../../_static/documentation_options.js?v=9d552775"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>

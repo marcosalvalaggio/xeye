@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>xeye.dataset - Xeye 1.5 documentation</title>
+        <title>xeye.dataset - Xeye 1.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">Xeye 1.5 documentation</div></a>
+      <a href="../../index.html"><div class="brand">Xeye 1.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
     <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Xeye 1.5 documentation</span>
+  <span class="sidebar-brand-text">Xeye 1.6 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -158,11 +158,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">xeye</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of xeye</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../xeye.html">BuildDataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../xeye.html#dataset">Dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../xeye.html#module-xeye.fast_dataset">FastDataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../xeye.html#module-xeye.manual_dataset">ManualDataset</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">xeye</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of xeye</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -204,82 +200,88 @@
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
 
 
 <div class="viewcode-block" id="Dataset">
-<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset">[docs]</a>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset">[docs]</a>
 <span class="k">class</span> <span class="nc">Dataset</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A class for collecting a dataset of images using OpenCV.</span>
+<span class="sd">    A class for shooting and saving images in grayscale or RGB using OpenCV.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        source (int, str): the source of the camera to use, index of usb device or rtsp string (e.g source = 0 internal camera, </span>
+<span class="sd">                           or rtsp://admin:hik12345@192.168.10.6/ISAPI/Streaming/channels/101).</span>
+<span class="sd">        img_types (int): the number of types of images to collect.</span>
+<span class="sd">        label (List[str]): a list of strings that represent the name of the directories where the images will be saved.</span>
+<span class="sd">        num (int): the number of frames to capture for each image type.</span>
+<span class="sd">        height (int): the height of the frames to capture.</span>
+<span class="sd">        width (int): the width of the frames to capture.</span>
+<span class="sd">        standby_time (float): the time to wait before capturing each frame. </span>
 <span class="sd">    </span>
-<span class="sd">    Examples:</span>
+<span class="sd">    Examples: </span>
 <span class="sd">        &gt;&gt;&gt; import xeye</span>
-<span class="sd">        &gt;&gt;&gt; data = xeye.Dataset()</span>
-<span class="sd">        &gt;&gt;&gt; data.var_control()</span>
+<span class="sd">        &gt;&gt;&gt; # define parameters values</span>
+<span class="sd">        &gt;&gt;&gt; source = 0</span>
+<span class="sd">        &gt;&gt;&gt; img_types = 2</span>
+<span class="sd">        &gt;&gt;&gt; label = [&#39;keyboard&#39;, &#39;mouse&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; num = 20</span>
+<span class="sd">        &gt;&gt;&gt; height = 100</span>
+<span class="sd">        &gt;&gt;&gt; width = 100</span>
+<span class="sd">        &gt;&gt;&gt; standby_time = 0</span>
+<span class="sd">        &gt;&gt;&gt; data = xeye.ExpDataset(source = source, img_types = img_types, label = label, num = num, height = height, width = width, stand_by_time = standby_time)</span>
 <span class="sd">        &gt;&gt;&gt; data.preview()</span>
 <span class="sd">        &gt;&gt;&gt; data.rgb() # or data.gray()</span>
-<span class="sd">        &gt;&gt;&gt; data.compress_train_test()</span>
+<span class="sd">        &gt;&gt;&gt; data.compress_train_test(perc=0.2)</span>
 <span class="sd">        &gt;&gt;&gt; data.compress_all()</span>
-<span class="sd">        &gt;&gt;&gt; data.just.compress()</span>
+<span class="sd">        &gt;&gt;&gt; data.just_compress(name=&quot;batch_test&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Starts the terminal interface for setting up the parameters of the dataset.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">img_types</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">stand_by_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_types</span> <span class="o">=</span> <span class="n">img_types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="n">num</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_class_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">standby_time</span> <span class="o">=</span> <span class="n">stand_by_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statusGray</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statusRGB</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c1"># clear terminal </span>
-        <span class="k">if</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span><span class="p">):</span> <span class="c1">#unix</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span><span class="p">):</span> <span class="c1"># unix</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;clear&#39;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span> <span class="c1">#windows</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># windows</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;cls&#39;</span><span class="p">)</span>
-        <span class="c1"># camera setting control </span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- CAMERA SETTING ---&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Select the index of the camera that you want to use for creating the dataset: &#39;</span><span class="p">))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Insert valid camera index...&#39;</span><span class="p">)</span>
-        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">camera</span><span class="o">.</span><span class="n">isOpened</span><span class="p">()</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Insert valid camera index...&#39;</span><span class="p">)</span>
-        <span class="n">camera</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
-        <span class="c1"># set how many type of images do you want to collect</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- IMAGE SETTINGS ---&#39;</span><span class="p">)</span>
-        <span class="n">img_types</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Num. of types of images to scan: &#39;</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">img_types</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Number of images types must be greather than 0&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">img_types</span><span class="p">):</span>
-            <span class="n">l</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Name of image type (</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">): &quot;</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_types</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;(img_types) Number of images types must be greather than 0&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_types</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;(img_types) passed a string, not an integer&#39;</span><span class="p">)</span>
         <span class="c1"># folder building</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;(label) Not valid names for images types...&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_types</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;(label) You must have a number of labels equal to the number of images types selected...&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">lab</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">lab</span><span class="p">):</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">lab</span><span class="p">)</span>
         <span class="c1"># number of frames </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Num. of frames to shoot for every image type: &#39;</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You cant inizialize frames number equal or below zero...&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;(num) You cant inizialize frames number equal or below zero...&#39;</span><span class="p">)</span>
         <span class="c1"># Image shaping phase</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Single frame HEIGHT: &#39;</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Frame HEIGHT must be greather than 0&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Single frame WIDTH: &#39;</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;(height) Frame HEIGHT must be greather than 0&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Frame WIDTH must be greather than 0&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;(width) Frame WIDTH must be greather than 0&#39;</span><span class="p">)</span>
         <span class="c1"># Waiting time in shooting loop</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">standby_time</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;num. of waiting time (in sec.) between every frame: &#39;</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">standby_time</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;waiting time must be grater than 0...&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">perc</span><span class="o">=</span><span class="mf">0.25</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_class_dict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;(standby_time) waiting time must be grater than 0...&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Dataset.preview">
-<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.preview">[docs]</a>
-    <span class="k">def</span> <span class="nf">preview</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.preview">[docs]</a>
+    <span class="k">def</span> <span class="nf">preview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">Tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1280</span><span class="p">,</span> <span class="mi">720</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Opens the camera stream on a window for checking the framing of the image.</span>
 
@@ -288,17 +290,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- PREVIEW ---&#39;</span><span class="p">)</span>
-        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
         <span class="k">while</span><span class="p">(</span><span class="kc">True</span><span class="p">):</span>
             <span class="n">status</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">status</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frame doesn&#39;t been captured&quot;</span><span class="p">)</span>
                 <span class="k">break</span>
-            <span class="n">font</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_COMPLEX</span>
-            <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;click on the image window and then press [q] on the keyboard to quit preview&#39;</span>
-            <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span><span class="n">text</span><span class="p">,(</span><span class="mi">5</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span><span class="n">font</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,(</span><span class="mi">124</span><span class="p">,</span><span class="mi">252</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>  <span class="c1">#text,coordinate,font,size of text,color,thickness of font</span>
+            <span class="c1">#font = cv2.FONT_HERSHEY_COMPLEX</span>
+            <span class="c1">#text = &#39;click on the image window and then press [q] on the keyboard to quit preview&#39;</span>
+            <span class="c1">#cv2.putText(frame,text,(5,50),font,0.8,(124,252,0),2)  #text,coordinate,font,size of text,color,thickness of font</span>
             <span class="n">cv2</span><span class="o">.</span><span class="n">startWindowThread</span><span class="p">()</span>
-            <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;Camera PreView&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;Camera Preview, clicl q to quit preview&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;preview closed&#39;</span><span class="p">)</span>
                 <span class="n">camera</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -309,7 +312,7 @@
 
 
 <div class="viewcode-block" id="Dataset.gray">
-<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.gray">[docs]</a>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.gray">[docs]</a>
     <span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for shooting images in grayscale.</span>
@@ -319,8 +322,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- START TAKING PHOTOS ---&#39;</span><span class="p">)</span>
-        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-        <span class="c1"># Index for files name </span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+        <span class="c1"># source for files name </span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>
             <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -335,7 +338,7 @@
                     <span class="k">break</span>
                 <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">startWindowThread</span><span class="p">()</span>
-                <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Camera View for image type [</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">gray</span><span class="p">)</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Camera View for image type [</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span><span class="n">gray</span><span class="p">)</span>
                 <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">folder</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">,</span> <span class="n">gray</span><span class="p">)</span>
                 <span class="n">count</span><span class="o">=</span><span class="n">count</span><span class="o">+</span><span class="mi">1</span>
@@ -353,7 +356,7 @@
 
 
 <div class="viewcode-block" id="Dataset.rgb">
-<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.rgb">[docs]</a>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.rgb">[docs]</a>
     <span class="k">def</span> <span class="nf">rgb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for shooting images in RGB.</span>
@@ -363,8 +366,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- START TAKING PHOTOS ---&#39;</span><span class="p">)</span>
-        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-        <span class="c1"># Index for files name </span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+        <span class="c1"># source for files name </span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>
             <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -394,14 +397,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_statusGray</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_statusRGB</span> <span class="o">=</span> <span class="mi">1</span></div>
 
-    
+
 
 <div class="viewcode-block" id="Dataset.compress_train_test">
-<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.compress_train_test">[docs]</a>
-    <span class="k">def</span> <span class="nf">compress_train_test</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.compress_train_test">[docs]</a>
+    <span class="k">def</span> <span class="nf">compress_train_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perc</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the images shot in datasets divided by train and test like the mnist dataset.</span>
 <span class="sd">    </span>
+<span class="sd">        Args:</span>
+<span class="sd">            perc (float): The percentage of images to assign to the test dataset.</span>
+
 <span class="sd">        Raises:</span>
 <span class="sd">            ValueError: If both rgb and gray functions have not been called before compressing a dataset.</span>
 <span class="sd">            ValueError: If the percentage value for images in the test set is less than or equal to 0.</span>
@@ -409,15 +415,13 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># percentage control </span>
+        <span class="k">if</span> <span class="n">perc</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;(perc) Percentage value must be greater than 0...&#39;</span><span class="p">)</span>
         <span class="c1"># data control</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statusRGB</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statusGray</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You have to call rgb or gray function before compress a dataset...&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- DATASET SETTING ---&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">perc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;percentage of images in the test set (0,1): &#39;</span><span class="p">))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">perc</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;percentage value must be greater than 0...&#39;</span><span class="p">)</span>
-        <span class="c1"># index for image type </span>
+        <span class="c1"># source for image type </span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c1"># X</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statusGray</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -440,7 +444,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">lab</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">file</span><span class="p">)</span>
                     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
-                <span class="c1"># save</span>
+                <span class="c1"># save in _tensor class </span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_class_dict</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">img</span>
                 <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="c1"># unique final _tensors </span>
@@ -450,13 +454,13 @@
         <span class="c1"># create dataset (mnist style)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">perc</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="n">perc</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s1">&#39;dataset.npz&#39;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="Dataset.compress_all">
-<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.compress_all">[docs]</a>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.compress_all">[docs]</a>
     <span class="k">def</span> <span class="nf">compress_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the images shot in a unique dataset.</span>
@@ -470,7 +474,7 @@
         <span class="c1"># data control</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statusRGB</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statusGray</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You have to call rgb or gray function before compress a dataset...&#39;</span><span class="p">)</span>
-        <span class="c1"># index for image type </span>
+        <span class="c1"># source for image type </span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c1"># X</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statusGray</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -493,7 +497,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">lab</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">file</span><span class="p">)</span>
                     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
-                <span class="c1"># save </span>
+                <span class="c1"># save in _tensor class </span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_class_dict</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">img</span>
                 <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="c1"># unique final _tensors </span>
@@ -508,10 +512,13 @@
 
 
 <div class="viewcode-block" id="Dataset.just_compress">
-<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.just_compress">[docs]</a>
-    <span class="k">def</span> <span class="nf">just_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.just_compress">[docs]</a>
+    <span class="k">def</span> <span class="nf">just_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;dataset_raw&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the images shot in a unique dataset without saving the y variable containing the type of the single image.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): The name of the dataset (npz) to be saved.</span>
 <span class="sd">    </span>
 <span class="sd">        Raises:</span>
 <span class="sd">            ValueError: If both rgb and gray functions have not been called before compressing a dataset.</span>
@@ -522,18 +529,10 @@
         <span class="c1"># data control</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statusRGB</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statusGray</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You have to call rgb or gray function before compress a dataset...&#39;</span><span class="p">)</span>
-        <span class="c1"># insert name for the compress file </span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- DATASET SETTING ---&#39;</span><span class="p">)</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Select a name for the compressed file: &#39;</span><span class="p">)</span>
         <span class="c1"># check the name for the dataset </span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Insert a valide name for the compress file...&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
-            <span class="k">pass</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> 
-        <span class="c1"># index for image type </span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;name: Insert a valide name for the compressed file...&quot;</span><span class="p">)</span>
+        <span class="c1"># source for image type </span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c1"># X</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statusGray</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -554,7 +553,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">lab</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">file</span><span class="p">)</span>
                     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
-                <span class="c1"># save</span>
+                <span class="c1"># save in _tensor class </span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_class_dict</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">img</span>
                 <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="c1"># unique final _tensors</span>
@@ -562,21 +561,21 @@
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="c1"># create dataset (mnist style)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">.npz&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">])</span></div>
+        <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.npz&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tensor</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">])</span></div>
 
 
 
 <div class="viewcode-block" id="Dataset.var_control">
-<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.var_control">[docs]</a>
+<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.var_control">[docs]</a>
     <span class="k">def</span> <span class="nf">var_control</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Print the parameters specified in the setup method about the dataset to create.</span>
+<span class="sd">        Print the parameters specified in the init method about the dataset to create.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- PARAMETERS CONTROL ---&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Camera index: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Camera source: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Labels of images types: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Num. of images for types: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Num. of images for type: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Single frame HEIGHT: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Single frame WIDTH: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
 </div>
@@ -613,7 +612,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=aaadad1f"></script>
+</div><script src="../../_static/documentation_options.js?v=9d552775"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
