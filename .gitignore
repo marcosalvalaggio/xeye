@@ -9,6 +9,6 @@ lab.py
 grimorio.md
 log.md
 tests/*.npz
-tests/a/
-tests/b/
+a/
+b/
 archive/
