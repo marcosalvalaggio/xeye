@@ -203,7 +203,7 @@
 <h1>Xeye<a class="headerlink" href="#xeye" title="Link to this heading">#</a></h1>
 <p>Xeye is a package for data collection to build computer vision applications based on inferential results of deep learning models. The main reasons to use Xeye are:</p>
 <ul class="simple">
-<li><p>Create a dataset using only a laptop and its integrated camera (or alternatively an external USB camera).</p></li>
+<li><p>Create a dataset using either a laptop with its integrated camera, a USB camera, or by utilizing an RTSP stream.</p></li>
 <li><p>Create a dataset already structured like the <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/mnist">mnist</a>.</p></li>
 <li><p>Create a dataset that can be used for building models with <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a> or <a class="reference external" href="https://pytorch.org/">Pytorch</a>.</p></li>
 </ul>
@@ -214,8 +214,17 @@
 </pre></div>
 </div>
 </section>
-<section id="xeye-datasets-for-deep-learning">
-<h2>Xeye datasets for deep learning<a class="headerlink" href="#xeye-datasets-for-deep-learning" title="Link to this heading">#</a></h2>
+<section id="functionalities">
+<h2>Functionalities<a class="headerlink" href="#functionalities" title="Link to this heading">#</a></h2>
+<p>The Xeye package includes two major approaches for creating a dataset from scratch: Dataset, and ManualDataset.</p>
+<ul class="simple">
+<li><p><strong>Dataset</strong>: Uses the constructor with all the specifications of the dataset.</p></li>
+<li><p><strong>ManualDataset</strong>: Same as Dataset, but every image is shot manually one at a time.</p></li>
+</ul>
+<p>Additionally, the package provides a method for combining datasets created with the <strong>BuildDataset</strong> class.</p>
+</section>
+<section id="datasets-for-deep-learning">
+<h2>Datasets for deep learning<a class="headerlink" href="#datasets-for-deep-learning" title="Link to this heading">#</a></h2>
 <p>In the <a class="reference external" href="https://github.com/marcosalvalaggio/xeye/tree/main/examples">examples</a> folder of the repository, you can find examples of deep learning model implementations based on datasets produced by the Xeye package (made with <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a> or <a class="reference external" href="https://pytorch.org/">Pytorch</a>).</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://drive.google.com/drive/folders/1qvoFa4SRWirXj7kdWhhcqrQ8mTIHpkuJ?usp=sharing">Binary dataset</a>: containing two types of grayscale images (with labels: 0=keyboard, 1=mouse).</p></li>
@@ -223,259 +232,52 @@
 </ul>
 <p>Additionally, the <a class="reference external" href="https://github.com/marcosalvalaggio/xeye/tree/main/examples">examples</a> folder of the repository contains scripts that use the Xeye package to build datasets (<a class="reference external" href="https://github.com/marcosalvalaggio/xeye/tree/main/examples/xeye-example">link</a>).</p>
 </section>
-<section id="functionalities">
-<h2>Functionalities<a class="headerlink" href="#functionalities" title="Link to this heading">#</a></h2>
-<p>The Xeye package includes three major approaches (classes) for creating a dataset from scratch: Dataset, FastDataset, and ManualDataset.</p>
-<ul class="simple">
-<li><p><strong>Dataset</strong>: Uses the full terminal UI.</p></li>
-<li><p><strong>FastDataset</strong>: Uses the constructor with all the specifications of the dataset.</p></li>
-<li><p><strong>ManualDataset</strong>: Same as FastDataset, but every image is shot manually one at a time.</p></li>
-</ul>
-<p>Additionally, the package provides a method for combining datasets created with the <strong>BuildDataset</strong> class.</p>
-</section>
-<section id="create-a-dataset-with-full-terminal-ui-dataset">
-<h2>Create a dataset with full terminal UI (Dataset)<a class="headerlink" href="#create-a-dataset-with-full-terminal-ui-dataset" title="Link to this heading">#</a></h2>
-<p>First of all, load the module datapipe from the package:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xeye</span>
-</pre></div>
-</div>
-<p>then initialize the instance like this</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">xeye</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>the execution of this method causes the starting of the user interface in the <strong>terminal</strong></p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--- CAMERA SETTING ---</span>
-<span class="go">Select the index of the camera that you want to use for creating the dataset: 1</span>
-</pre></div>
-</div>
-<p>The initialization method raises multiple questions regarding the setting of parameter values.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--- IMAGE SETTINGS ---</span>
-<span class="go">Num. of types of images to scan: 2</span>
-<span class="go">Name of image type (1): keyboard</span>
-<span class="go">Name of image type (2): mouse</span>
-<span class="go">Num. of frames to shoot for every image type: 10</span>
-<span class="go">Single frame HEIGHT: 720</span>
-<span class="go">Single frame WIDTH:  720</span>
-<span class="go">num. of waiting time (in sec.) between every frame: 0</span>
-</pre></div>
-</div>
-<p>Precisely the questions refer to:</p>
-<ul class="simple">
-<li><p><strong>Select the index of the camera that you want to use for creating the dataset</strong>: Generally 0 for integrated camera, 1 for USB external camera.</p></li>
-<li><p><strong>Num. of types of images to scan</strong>: Answer 2 if you want to create a dataset with two objects (e.g. keyboard and mouse). In general, answer with the number of object types to include in your dataset.</p></li>
-<li><p><strong>Name of image type</strong>: Insert the name of every specific object you want to include in the dataset. The <strong>setup</strong> method creates a named folder for every image type.</p></li>
-<li><p><strong>Num. of frames to shoot for every image type</strong>: Select the number of images you want to shoot and save them in every object folder.</p></li>
-<li><p><strong>Single frame HEIGHT</strong>: Frame height values.</p></li>
-<li><p><strong>Single frame WIDTH</strong>: Frame width values.</p></li>
-<li><p><strong>Num. of waiting time (in sec.) between every frame</strong>: e.g 0.2 causes a waiting time of 0.2 seconds between every shoot.</p></li>
-</ul>
-<p>After the parameters setting, you can invoke the method to start shooting images. Datapipe module provides two different formats of images:</p>
-<ul class="simple">
-<li><p>Grayscale image with the <strong>gray</strong> method;</p></li>
-<li><p>Color image with the <strong>rgb</strong> method.</p></li>
-</ul>
-<p>Let’s produce a dataset based on RGB images with the <strong>rgb</strong> method:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">rgb</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>In the terminal keypress [b], to make photos for the image types passed to the <strong>setup</strong> method.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--- START TAKING PHOTOS ---</span>
-<span class="go">Press [b] on the keyboard to start data collection of image type [keyboard]</span>
-<span class="go">b</span>
-<span class="go">Press [b] on the keyboard to start data collection of image type [mouse]</span>
-<span class="go">b</span>
-</pre></div>
-</div>
-<p>On the directory of the script, you can find the folders that contain the images produced by the <strong>rbg</strong> method (e.g. keyboard folder and mouse folder).</p>
-<p>Images collected in the folders can be used for building datasets like the <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/mnist">mnist</a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">compress_train_test</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>That produces the following output in the terminal window</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--- DATASET SETTING ---</span>
-<span class="go">percentage of images in the test set: 0.2</span>
-</pre></div>
-</div>
-<p>In which you can select the portion of images to use in the train and test datasets (write a value between (0,1)). By doing so, the method produces a <strong>.npz</strong> file formed by these specific tensors:</p>
-<ul class="simple">
-<li><p>Train set:</p>
-<ul>
-<li><p><strong>X_train</strong>: Matrices/tensors of every single image in the train dataset;</p></li>
-<li><p><strong>y_train</strong>: Classes (ordinal values) are associated with every image in the train dataset.</p></li>
-</ul>
-</li>
-<li><p>Test set:</p>
-<ul>
-<li><p><strong>X_test</strong>: matrices/tensors of every single image in the test dataset;</p></li>
-<li><p><strong>y_test</strong>: classes (ordinal values) are associated with every image in the test dataset.</p></li>
-</ul>
-</li>
-</ul>
-<p>(Matrices for grayscale images are represented by <span class="math notranslate nohighlight">\(Height \times Width \times 1\)</span> matrices, while tensors for RGB images are represented by <span class="math notranslate nohighlight">\(Height \times Width \times 3\)</span> tensors.)</p>
-<p>An alternative approach is represented by the use of the <strong>compress_all</strong> method</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">compress_all</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>In this case, the images are united in a unique tensor that contains all the frames produced previously.</p>
-<ul class="simple">
-<li><p>Unique tensor:</p>
-<ul>
-<li><p><strong>X</strong>: Matricies/tensors of every single image produced;</p></li>
-<li><p><strong>y</strong>: Classes (ordinal values) are associated with every image produced.</p></li>
-</ul>
-</li>
-</ul>
-<p>Finally, you can use the <strong>just_compress</strong> method to create a unique tensor with all the images produced.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">just_compress</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>In the terminal, you have to insert the dataset’s name</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--- DATASET SETTING ---</span>
-<span class="go">Select a name for the compressed file: batch_test</span>
-</pre></div>
-</div>
-<p>If you pass 0, by default the dataset will be save with the name <strong>dataset_raw.npz</strong>. The dataset produced by this method can be used by the class <strong>BuildDataset</strong> to put together more .npz files and create a dataset like the <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/mnist">mnist</a>.</p>
-<section id="other-useful-methods">
-<h3>Other useful methods<a class="headerlink" href="#other-useful-methods" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>preview</strong>: Open the camera stream to check the framing.</p></li>
-<li><p><strong>var_control</strong>: Print the values of the parameters set with the <strong>setup</strong> method.</p></li>
-</ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--- PARAMETERS CONTROL ---</span>
-<span class="go">camera index: 1</span>
-<span class="go">num. of images types: 2</span>
-<span class="go">labels of images types: [&#39;keyboard&#39;, &#39;mouse&#39;]</span>
-<span class="go">num. of images for types: 20</span>
-<span class="go">Single frame HEIGHT: 720</span>
-<span class="go">Single frame WIDTH:  720</span>
-<span class="go">waiting time between frames: 0.0</span>
-<span class="go">percentage of images in train dataset: 0.2</span>
-</pre></div>
-</div>
-</section>
-<section id="script-example">
-<h3>Script example<a class="headerlink" href="#script-example" title="Link to this heading">#</a></h3>
-<p>Example of a script to use the <strong>Dataset</strong> class:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xeye</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">xeye</span><span class="o">.</span><span class="n">dataset</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">preview</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rgb</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">compress_train_test</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">compress_all</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">just_compress</span><span class="p">()</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="create-a-dataset-with-fast-ui-fastdataset">
-<h2>Create a dataset with fast UI (FastDataset)<a class="headerlink" href="#create-a-dataset-with-fast-ui-fastdataset" title="Link to this heading">#</a></h2>
-<p>The <strong>FastDataset</strong> class provides a faster way to use the datapipe module. Unlike the <strong>Dataset</strong> class, it does not have a complete terminal UI to guide you through the dataset construction process. Instead, you simply pass the parameters to the class and call the necessary methods.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xeye</span>
-<span class="c1"># define parameters values</span>
-<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">img_types</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;keyboard&#39;</span><span class="p">,</span> <span class="s1">&#39;mouse&#39;</span><span class="p">]</span>
-<span class="n">num</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">height</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">width</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">standby_time</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="c1"># percentage of images in the test set</span>
-<span class="n">perc</span> <span class="o">=</span> <span class="mf">0.2</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">xeye</span><span class="o">.</span><span class="n">FastDataset</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">,</span> <span class="n">img_types</span> <span class="o">=</span> <span class="n">img_types</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">width</span><span class="p">,</span> <span class="n">stand_by_time</span> <span class="o">=</span> <span class="n">standby_time</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">preview</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rgb</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">compress_train_test</span><span class="p">(</span><span class="n">perc</span> <span class="o">=</span> <span class="n">perc</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">compress_all</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">just_compress</span><span class="p">(</span><span class="s2">&quot;batch_test&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The parameters passed to the class <strong>FastDataset</strong>:</p>
-<p>The parameters passed to the class <strong>FastDataset</strong>:</p>
-<ul class="simple">
-<li><p><strong>index</strong>: Generally 0 for integrated camera, 1 for USB external camera.</p></li>
-<li><p><strong>img_types</strong>: Numbers of object types that you want to include in your dataset.</p></li>
-<li><p><strong>label</strong>: List of object names to include in the dataset. The constructor method creates a named folder for every image type.</p></li>
-<li><p><strong>num</strong>: Select the number of images you want to shoot and save them in every object folder.</p></li>
-<li><p><strong>height</strong>: Frame height values.</p></li>
-<li><p><strong>width</strong>: Frame width values.</p></li>
-<li><p><strong>standby_time</strong>: e.g 0.2 cause a waiting time of 0.2 seconds between every shoot.</p></li>
-</ul>
-<p>For split images in the train and test dataset, pass a value between (0,1) to the perc parameter of the <strong>compress_train_test</strong> method</p>
-<ul class="simple">
-<li><p><strong>perc</strong>: the portion of images to use in the test dataset, write a value between (0,1).</p></li>
-</ul>
-<p>If you don’t pass any value to the <strong>just_compress</strong> method, the dataset will be saved with the name <strong>dataset_raw.npz</strong>.</p>
-</section>
-<section id="create-a-dataset-with-manual-ui-manualdataset">
-<h2>Create a dataset with manual UI (ManualDataset)<a class="headerlink" href="#create-a-dataset-with-manual-ui-manualdataset" title="Link to this heading">#</a></h2>
-<p>The <strong>ManualDataset</strong> class is how you can build a dataset by taking pictures manually.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xeye</span>
-<span class="c1"># define parameters values</span>
-<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">img_types</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;keyboard&#39;</span><span class="p">,</span> <span class="s1">&#39;mouse&#39;</span><span class="p">]</span>
-<span class="n">num</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">height</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">width</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">standby_time</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="c1"># percentage of images in the test set</span>
-<span class="n">perc</span> <span class="o">=</span> <span class="mf">0.2</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">xeye</span><span class="o">.</span><span class="n">ManualDataset</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">,</span> <span class="n">img_types</span> <span class="o">=</span> <span class="n">img_types</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">width</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">preview</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">rgb</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">compress_train_test</span><span class="p">(</span><span class="n">perc</span> <span class="o">=</span> <span class="n">perc</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">compress_all</span><span class="p">()</span>
-<span class="n">data</span><span class="o">.</span><span class="n">just_compress</span><span class="p">(</span><span class="s2">&quot;batch_test&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>As you can see in the code snippet, the <strong>ManualDataset</strong> class works like the <strong>FastDataset</strong> class. The only difference is the absence of the <strong>standby_time option</strong>, which is no more necessary in this case.</p>
-<p>The parameters passed to the class <strong>ManualDataset</strong>:</p>
-<ul class="simple">
-<li><p><strong>index</strong>: Generally 0 for integrated camera, 1 for USB external camera.</p></li>
-<li><p><strong>img_types</strong>: Numbers of object types that you want to include in your dataset.</p></li>
-<li><p><strong>label</strong>: List of object names to include in the dataset. The constructor creates a named folder for every image type.</p></li>
-<li><p><strong>num</strong>: Select the number of images you want to shoot and save them in every object folder.</p></li>
-<li><p><strong>height</strong>: Frame height values.</p></li>
-<li><p><strong>width</strong>: Frame width values.</p></li>
-</ul>
-<section id="how-to-take-pictures-manually">
-<h3>How to take pictures manually<a class="headerlink" href="#how-to-take-pictures-manually" title="Link to this heading">#</a></h3>
-<p>In the title bar of the image window, after the caption identifying the image type, there are instructions for manually taking pictures using the ManualDataset. These instructions will be displayed as follows:</p>
-<ul class="simple">
-<li><p>Camera view for image type &lt;name-of-image-type&gt;. Press [s] on the keyboard to save image number: &lt;nr-of-image&gt;.</p></li>
-</ul>
-</section>
-</section>
-<section id="build-datasets-from-different-npz-files-builddataset">
-<h2>Build datasets from different npz files (BuildDataset)<a class="headerlink" href="#build-datasets-from-different-npz-files-builddataset" title="Link to this heading">#</a></h2>
-<p>If you want to create a dataset that includes different types of images, but cannot shoot all image types at once (e.g., due to time constraints or location differences), you can use the <strong>BuildDataset</strong> class.</p>
-<ul class="simple">
-<li><p>Create datasets with the <strong>just_compress</strong> method;</p></li>
-<li><p>Create different .npz files for every type of images that composes the dataset (use the same colour spaces in all datasets, RGB or grayscale);</p></li>
-<li><p>Create a new script and call the <strong>BuildDataset</strong> class that merges all the .npz files created before.</p></li>
-</ul>
 <section id="id2">
-<h3>Script example<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xeye</span>
-<span class="c1"># list of directory (paths for the .npz files)</span>
-<span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;batch_2.npz&#39;</span><span class="p">,</span> <span class="s1">&#39;batch_3.npz&#39;</span><span class="p">]</span>
-<span class="c1"># list of labels associated with the images inside the .npz files</span>
-<span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">xeye</span><span class="o">.</span><span class="n">BuildDataset</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">perc</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<h2>Examples<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="hikvision-device">
+<h3>Hikvision Device<a class="headerlink" href="#hikvision-device" title="Link to this heading">#</a></h3>
+<p>With <em>xeye</em>, you can build a dataset using all <a class="reference external" href="https://www.hikvision.com/en/">Hikvision</a> IP cameras updated to the ISAPI firmware.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xeye</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;rtsp://admin:password@ip:port/ISAPI/Streaming/channels/101&#39;</span><span class="p">,</span>
+               <span class="n">img_types</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">stand_by_time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">preview</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">compress_train_test</span><span class="p">(</span><span class="n">perc</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">compress_all</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">just_compress</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;batch_test&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The parameters passed to the class <strong>BuildDataset</strong>:</p>
+<p>The RTSP stream uses, by default, port 554. If you change it in the device configuration, you need to use the port specified for the RTSP connection.</p>
 <ul class="simple">
-<li><p><strong>path</strong>: List of files (.npz) path you want to include in the new dataset</p></li>
-<li><p><strong>label</strong>: List of ordinal integer values representing the class type of the images inside a .npz file contained in the new dataset. In the example script, the first .npz file images are associated with class 0, while the second .npz file images are associated with class 1. Remember: always start with 0.</p></li>
-<li><p><strong>size</strong>: Tuple (height, width) for the images in the new dataset created. The default value (None) indicates that new images have the maximum height and width found in the datasets listed as dimensions</p></li>
-<li><p><strong>color</strong>: Defines if the images contained in the .npz files are RGB or grayscale. A boolean value, by default, is set to True (meaning RGB images).</p></li>
-<li><p><strong>split</strong>: Defines if you want to build a dataset split in train-test or not. A boolean value, by default, is set to True.</p></li>
-<li><p><strong>perc</strong>: Defines the percentage of images assigned to the test dataset. A floating value between (0,1). It’s set to 0.1 by default.</p></li>
+<li><p>channels/101 = main stream.</p></li>
+<li><p>channels/102 = sub stream.</p></li>
 </ul>
-<p>When you want to use the <strong>BuildDataset</strong> class, you need to have .npz files containing images with the same types of colour spaces (all grayscale images or RGB).</p>
+<p>If you want to obtain the RTSP stream from a camera connected to an Hikvision NVR, the number at the end of the RTSP stream indicates:</p>
+<ul class="simple">
+<li><p>channels/101 = main stream of the first camera.</p></li>
+<li><p>channels/102 = sub stream of the first camera.</p></li>
+<li><p>channels/201 = main stream of the second camera.</p></li>
+<li><p>channels/202 = sub stream of the second camera.</p></li>
+</ul>
+</section>
+<section id="integrated-or-usb-connected-camera">
+<h3>Integrated or USB connected camera<a class="headerlink" href="#integrated-or-usb-connected-camera" title="Link to this heading">#</a></h3>
+<p>Here is an example of the minimal amount of code to create a dataset using <em>xeye</em> with the laptop’s integrated camera:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xeye</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">img_types</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">stand_by_time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">preview</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">rgb</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">compress_train_test</span><span class="p">(</span><span class="n">perc</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">compress_all</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">just_compress</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;batch_test&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>source = 0 -&gt; integrated camera.</p></li>
+<li><p>source = 1 -&gt; USB connected camera.</p></li>
+</ul>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -546,20 +348,11 @@
             <ul>
 <li><a class="reference internal" href="#">Xeye</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#xeye-datasets-for-deep-learning">Xeye datasets for deep learning</a></li>
 <li><a class="reference internal" href="#functionalities">Functionalities</a></li>
-<li><a class="reference internal" href="#create-a-dataset-with-full-terminal-ui-dataset">Create a dataset with full terminal UI (Dataset)</a><ul>
-<li><a class="reference internal" href="#other-useful-methods">Other useful methods</a></li>
-<li><a class="reference internal" href="#script-example">Script example</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#create-a-dataset-with-fast-ui-fastdataset">Create a dataset with fast UI (FastDataset)</a></li>
-<li><a class="reference internal" href="#create-a-dataset-with-manual-ui-manualdataset">Create a dataset with manual UI (ManualDataset)</a><ul>
-<li><a class="reference internal" href="#how-to-take-pictures-manually">How to take pictures manually</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#build-datasets-from-different-npz-files-builddataset">Build datasets from different npz files (BuildDataset)</a><ul>
-<li><a class="reference internal" href="#id2">Script example</a></li>
+<li><a class="reference internal" href="#datasets-for-deep-learning">Datasets for deep learning</a></li>
+<li><a class="reference internal" href="#id2">Examples</a><ul>
+<li><a class="reference internal" href="#hikvision-device">Hikvision Device</a></li>
+<li><a class="reference internal" href="#integrated-or-usb-connected-camera">Integrated or USB connected camera</a></li>
 </ul>
 </li>
 </ul>
@@ -578,6 +371,5 @@
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>
