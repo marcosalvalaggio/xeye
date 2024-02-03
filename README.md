@@ -32,7 +32,7 @@ pip install xeye
 The Xeye package includes two major approaches for creating a dataset from scratch: Dataset, and ManualDataset.
 
 * **FastDataset**: Uses the constructor with all the specifications of the dataset.
-* **ManualDataset**: Same as FastDataset, but every image is shot manually one at a time.
+* **ManualDataset**: Same as Dataset, but every image is shot manually one at a time.
   
 Additionally, the package provides a method for combining datasets created with the **BuildDataset** class.
 
