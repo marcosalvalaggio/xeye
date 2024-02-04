@@ -13,7 +13,7 @@ class Dataset:
 
     Attributes:
         source (int, str): the source of the camera to use, index of usb device or rtsp string (e.g source = 0 internal camera, 
-                           or rtsp://admin:hik12345@192.168.10.6/ISAPI/Streaming/channels/101).
+                           or rtsp://admin:pass@IP:port/ISAPI/Streaming/channels/101).
         img_types (int): the number of types of images to collect.
         label (List[str]): a list of strings that represent the name of the directories where the images will be saved.
         num (int): the number of frames to capture for each image type.
