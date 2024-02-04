@@ -158,7 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">xeye</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of xeye</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">xeye</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of xeye</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../xeye.html">Dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../xeye.html#module-xeye.manual_dataset">ManualDataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../xeye.html#module-xeye.build_dataset">BuildDataset</a></li>
 </ul>
 </li>
 </ul>
@@ -205,14 +208,14 @@
 
 
 <div class="viewcode-block" id="Dataset">
-<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset">[docs]</a>
+<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset">[docs]</a>
 <span class="k">class</span> <span class="nc">Dataset</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class for shooting and saving images in grayscale or RGB using OpenCV.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        source (int, str): the source of the camera to use, index of usb device or rtsp string (e.g source = 0 internal camera, </span>
-<span class="sd">                           or rtsp://admin:hik12345@192.168.10.6/ISAPI/Streaming/channels/101).</span>
+<span class="sd">                           or rtsp://admin:pass@IP:port/ISAPI/Streaming/channels/101).</span>
 <span class="sd">        img_types (int): the number of types of images to collect.</span>
 <span class="sd">        label (List[str]): a list of strings that represent the name of the directories where the images will be saved.</span>
 <span class="sd">        num (int): the number of frames to capture for each image type.</span>
@@ -280,7 +283,7 @@
 
 
 <div class="viewcode-block" id="Dataset.preview">
-<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.preview">[docs]</a>
+<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.preview">[docs]</a>
     <span class="k">def</span> <span class="nf">preview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">Tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1280</span><span class="p">,</span> <span class="mi">720</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Opens the camera stream on a window for checking the framing of the image.</span>
@@ -312,7 +315,7 @@
 
 
 <div class="viewcode-block" id="Dataset.gray">
-<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.gray">[docs]</a>
+<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.gray">[docs]</a>
     <span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for shooting images in grayscale.</span>
@@ -356,7 +359,7 @@
 
 
 <div class="viewcode-block" id="Dataset.rgb">
-<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.rgb">[docs]</a>
+<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.rgb">[docs]</a>
     <span class="k">def</span> <span class="nf">rgb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for shooting images in RGB.</span>
@@ -400,7 +403,7 @@
 
 
 <div class="viewcode-block" id="Dataset.compress_train_test">
-<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.compress_train_test">[docs]</a>
+<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.compress_train_test">[docs]</a>
     <span class="k">def</span> <span class="nf">compress_train_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perc</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the images shot in datasets divided by train and test like the mnist dataset.</span>
@@ -460,7 +463,7 @@
 
 
 <div class="viewcode-block" id="Dataset.compress_all">
-<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.compress_all">[docs]</a>
+<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.compress_all">[docs]</a>
     <span class="k">def</span> <span class="nf">compress_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the images shot in a unique dataset.</span>
@@ -512,7 +515,7 @@
 
 
 <div class="viewcode-block" id="Dataset.just_compress">
-<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.just_compress">[docs]</a>
+<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.just_compress">[docs]</a>
     <span class="k">def</span> <span class="nf">just_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;dataset_raw&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves the images shot in a unique dataset without saving the y variable containing the type of the single image.</span>
@@ -566,7 +569,7 @@
 
 
 <div class="viewcode-block" id="Dataset.var_control">
-<a class="viewcode-back" href="../../xeye.usb.html#xeye.dataset.Dataset.var_control">[docs]</a>
+<a class="viewcode-back" href="../../xeye.html#xeye.dataset.Dataset.var_control">[docs]</a>
     <span class="k">def</span> <span class="nf">var_control</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the parameters specified in the init method about the dataset to create.</span>
