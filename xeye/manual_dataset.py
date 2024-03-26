@@ -9,7 +9,8 @@ class ManualDataset(Dataset):
     A class that enables manual capturing of images in grayscale or RGB using OpenCV.
 
     Attributes:
-        source (int, str): Camera source.
+        source (int, str): the source of the camera to use, index of usb device or rtsp string (e.g source = 0 internal camera, 
+                           or rtsp://admin:pass@IP:port/ISAPI/Streaming/channels/101).
         img_types (int): Number of image types.
         label (List[str]): List of image labels.
         num (int): Number of images to be taken per image type.
